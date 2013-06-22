@@ -28,6 +28,19 @@ class Talks_Model extends CI_Model {
 		return ($talk->num_rows() > 0) ? $talk->row() : false;
 	}
 
+	public function getRecentTalks($numTalks) {
+		$numTalks = $this->db->escape($numTalks);
+		$talks = $this->db->query("SELECT id, title, summary, date FROM talks ORDER BY date DESC LIMIT ".$numTalks);
+		if ($talks->num_rows() > 0 ) {
+			foreach($talks->result() as $talk){
+				$talkarray[] = $talk;
+			}
+			return $talkarray;
+		} else {
+			return false;
+		}
+	}
+
 	public function addTalk($array) {
 		$talk = $this->db->query("INSERT INTO talks SET title = ".$array['title'].", speaker = ".$array['speaker'].", seriesid = ".$array['seriesId'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);
 		return $this->db->insert_id();

@@ -17,11 +17,11 @@
   <div class="navbar navbar-inverse navbar-static-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand" href="index.html">DICCU Talks System</a>
+        <a class="brand" href="/">DICCU Talks System</a>
         <ul class="nav">
           <li class="active"><a href="/">Home</a></li>
           <li><a href="/series">Series'</a></li>
-          <li><a href="/series/1">Series</a></li>
+          <li><a href="/series/seriesdetail/1">Series</a></li>
           <li><a href="/talks/talk/1">Talk</a></li>
         </ul>
         <form class="navbar-search pull-right">

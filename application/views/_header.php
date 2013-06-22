@@ -8,15 +8,8 @@
     <meta name="description" content="">
     <meta name="author" content="DICCU">
 
-    <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
-    <style>
-      body>div.container{
-        padding-top:20px;
-      }
-      div.category{
-        margin-bottom:20px;
-      }
-    </style>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -26,10 +19,10 @@
       <div class="container">
         <a class="brand" href="index.html">DICCU Talks System</a>
         <ul class="nav">
-          <li><a href="index.html">Home</a></li>
-          <li class="active"><a href="categories.html">Categories</a></li>
-          <li><a href="category.html">Category</a></li>
-          <li><a href="talk_detail.html">Talk</a></li>
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/series">Series'</a></li>
+          <li><a href="/series/1">Series</a></li>
+          <li><a href="/talks/talk/1">Talk</a></li>
         </ul>
         <form class="navbar-search pull-right">
           <input type="text" class="search-query" placeholder="Search...">

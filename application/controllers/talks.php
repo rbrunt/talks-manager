@@ -6,12 +6,12 @@ class Talks extends CI_Controller {
 	{
 		$this->load->model("talks_model");
 		$talks = $this->talks_model->getAll();
-
-		
-
 		$this->load->view('all_talks', array("talks"=>$talks));
 	}
-}
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+	public function talk($talkId) {
+		$this->load->model("talks_model");
+		$talk = $this->talks_model->getTalkById($talkId);
+		$this->load->view('talk_details', array("talk"=>$talk));
+	}
+}

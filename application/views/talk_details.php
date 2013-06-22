@@ -19,6 +19,7 @@
 					<h1><?php echo $talk[0]->title ?> <small>SpeakerID: <?php echo $talk[0]->speakerid ?></small></h1>
 					<p class="muted"><?php echo $talk[0]->date ?></p>
 				</div>
+				<p>Passage: <a href=<?php echo "\"http://www.biblegateway.com/passage/?search=".$talk[0]->passage."\">";?><?php echo $talk[0]->passage; ?></a></p>
 				<p><?php echo $talk[0]->summary ?></p>
 				<p><a href="#">download</a></p>
 			</div>

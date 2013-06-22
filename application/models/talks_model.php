@@ -24,8 +24,16 @@ class Talks_Model extends CI_Model {
 
 	public function getTalksBySeries($seriesId) {
 		$seriesId = $this->db->escape($seriesId);
-		$talks = $this->db->get_where('talks', 'seriesid ='.$seriesId);
-		return ($talk->num_rows() > 0) ? $talk->row() : false;
+		// $talks = $this->db->get_where('talks', 'seriesid ='.$seriesId);
+		$talks = $this->db->query("SELECT * FROM talks WHERE seriesid = $seriesId ORDER BY date ASC");
+		if ($talks->num_rows() > 0 ) {
+			foreach($talks->result() as $talk){
+				$talkarray[] = $talk;
+			}
+			return $talkarray;
+		} else {
+			return false;
+		}
 	}
 
 	public function getRecentTalks($numTalks) {

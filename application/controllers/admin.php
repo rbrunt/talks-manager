@@ -9,11 +9,13 @@ class Admin extends CI_Controller {
 	}
 
 	public function index()	{
-		// $this->load->view('template', array("content"=>"");
+		$this->load->view('includes/template', array("content"=>"admin_home"));
 	}
 
 	public function talks() {
-
+		$this->load->model("talks_model");
+		$talks = $this->talks_model->getAll();
+		$this->load->view("includes/template", array("content"=>"all_talks", "talks"=>$talks));
 	}
 
 	public function series() {

@@ -10,6 +10,7 @@
 
 	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/bootstrap/css/style.css" rel="stylesheet">
+	<link href="/bootstrap/css/datepicker.css" rel="stylesheet">
 	<!-- <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"> -->
 </head>
 <body>
@@ -23,7 +24,7 @@
 					<li><a href="/series/seriesdetail/1">Series</a></li>
 					<li><a href="/talks/talk/1">Talk</a></li>
 				</ul>
-				<form class="navbar-search pull-right">
+				<form class="form-search navbar-search pull-right">
 					<input type="text" class="search-query input-small" placeholder="Search...">
 				</form>
 			</div>

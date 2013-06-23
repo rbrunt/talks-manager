@@ -14,6 +14,7 @@
 			<div class="span9">
 				<div class="page-header">
 					<h1><?php echo $talk[0]->title ?> <small>SpeakerID: <?php echo $talk[0]->speakerid ?></small></h1>
+					<a class="btn btn-primary pull-right" href="/admin/edittalk/<?php echo $talk[0]->id;?>">Edit</a>
 					<p class="muted"><?php echo $talk[0]->date ?></p>
 				</div>
 				<p>Passage: <a href=<?php echo "\"http://www.biblegateway.com/passage/?search=".$talk[0]->passage."\">";?><?php echo $talk[0]->passage; ?></a></p>

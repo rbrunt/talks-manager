@@ -24,7 +24,7 @@
 					<li><a href="/talks/talk/1">Talk</a></li>
 				</ul>
 				<form class="navbar-search pull-right">
-					<input type="text" class="search-query" placeholder="Search...">
+					<input type="text" class="search-query input-small" placeholder="Search...">
 				</form>
 			</div>
 		</div>

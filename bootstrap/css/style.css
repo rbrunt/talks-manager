@@ -69,3 +69,17 @@ input.h1 {
 		padding-right:20px;
 	}
 }
+
+/*
+The follwing makes the search bar grow when focused and adds transition to this
+*/
+.navbar-inverse .navbar-search .search-query { 
+	-webkit-transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
+	-moz-transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
+	-o-transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
+	transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.navbar-inverse .navbar-search .search-query:focus{
+	width:206px;
+}

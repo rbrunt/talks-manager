@@ -2,7 +2,7 @@
 			<div class="span12">
 				<ul class="breadcrumb">
 					<li><a href="/">Home</a> <span class="divider">/</span></li>
-					<li><a href="category.html">Some Category</a> <span class="divider">/</span></li>
+					<li><a href="/series/series/1">Some Series</a> <span class="divider">/</span></li>
 					<li class="active"><?php echo $talk[0]->title ?></li>
 				</ul>
 			</div>

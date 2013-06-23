@@ -2,6 +2,7 @@
 		<div class="span12">
 		<ul class="breadcrumb">
 			<li><a href="/">Home</a> <span class="divider">/</span></li>
+			<li><a href="/series/">Browse Series</a> <span class="divider">/</span></li>
 			<li class="active"><?php echo $series[0]->title ?></li>
 		</ul>
 		</div>

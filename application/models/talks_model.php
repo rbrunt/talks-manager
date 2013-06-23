@@ -50,12 +50,13 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function addTalk($array) {
-		$talk = $this->db->query("INSERT INTO talks SET title = ".$array['title'].", speaker = ".$array['speaker'].", seriesid = ".$array['seriesId'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);
+		$talk = $this->db->query("INSERT INTO talks SET title = ".$array['title'].", speakerid = ".$array['speakerid'].", seriesid = ".$array['seriesid'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);
 		return $this->db->insert_id();
 	}
 
-	public function editTalk($array) {
-		$talk = $this->db->query("UPDATE talks SET title = ".$array['title'].", speaker = ".$array['speaker'].", seriesid = ".$array['seriesId'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);
+	public function editTalk($array, $id) {
+		// $talk = $this->db->query("UPDATE talks SET title = ".$array['title'].", speakerid = ".$array['speakerid'].", seriesid = ".$array['seriesid'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage']);
+		$talk = $this->db->where("id", $id)->update("talks", $array);
 		return $this->db->affected_rows();
 	}
 

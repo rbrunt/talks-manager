@@ -1,7 +1,3 @@
-<?php
-	$this->load->view("_header");
-?>
-
 	<div class="row">
 		<div class="span12">
 		<ul class="breadcrumb">
@@ -38,12 +34,5 @@
 				<?php endforeach;?>
 				</tbody>
 			</table>
-
-
-
 		</div>
 	</div>
-
-<?php
-	$this->load->view("_footer");
-?>

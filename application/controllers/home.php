@@ -5,7 +5,7 @@ class Home extends CI_Controller {
     public function index() {
         $this->load->model("talks_model");
         $talks = $this->talks_model->getRecentTalks(3);
-        $this->load->view("_homepage", array("talks"=>$talks));
+        $this->load->view("includes/template", array("talks"=>$talks, "content"=>"_homepage"));
     }
 
 }

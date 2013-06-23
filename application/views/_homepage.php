@@ -1,7 +1,3 @@
-<?php
-	$this->load->view("_header");
-?>
-
 		<div class="well">
 			<h1>Welcome to the DICCU Talks system!</h1>
 			<p>Here are some of the most recent talks:</p>
@@ -24,7 +20,3 @@
 		</div>
 		
 <?php endforeach; ?>
-
-<?php
-	$this->load->view("_footer");
-?>

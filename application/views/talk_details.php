@@ -1,6 +1,3 @@
-<?php
-	$this->load->view("_header");
-?>
 <div class="row">
 			<div class="span12">
 				<ul class="breadcrumb">
@@ -20,11 +17,7 @@
 					<p class="muted"><?php echo $talk[0]->date ?></p>
 				</div>
 				<p>Passage: <a href=<?php echo "\"http://www.biblegateway.com/passage/?search=".$talk[0]->passage."\">";?><?php echo $talk[0]->passage; ?></a></p>
-				<p><?php echo $talk[0]->summary ?></p>
+				<p id="summary"><?php echo $talk[0]->summary ?></p>
 				<p><a href="#">download</a></p>
 			</div>
 		</div>
-
-<?php
-	$this->load->view("_footer");
-?>

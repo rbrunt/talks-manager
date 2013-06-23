@@ -6,7 +6,7 @@ class Series extends CI_Controller {
 	{
 		$this->load->model("series_model");
 		$series = $this->series_model->getAll();
-		$this->load->view('all_series', array("series"=>$series));
+		$this->load->view('includes/template', array("series"=>$series, "content"=>"all_series"));
 	}
 
 	public function seriesdetail($seriesId) {
@@ -14,6 +14,6 @@ class Series extends CI_Controller {
 		$this->load->model("talks_model");
 		$series = $this->series_model->getSeriesById($seriesId);
 		$talks = $this->talks_model->getTalksBySeries($seriesId);
-		$this->load->view('series_details', array("series"=>$series, "talks"=>$talks));
+		$this->load->view('includes/template', array("series"=>$series, "talks"=>$talks, "content"=>"series_details"));
 	}
 }

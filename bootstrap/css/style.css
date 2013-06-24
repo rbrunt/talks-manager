@@ -55,11 +55,6 @@ input.h1 {
 	text-rendering: optimizelegibility;
 	font-weight:bold;
 }
-#editform>textarea {
-	width:100%;
-}
-
-
 
 @media (max-width: 767px) {
 	#footer {
@@ -82,4 +77,13 @@ The follwing makes the search bar grow when focused and adds transition to this
 
 .navbar-inverse .navbar-search .search-query:focus{
 	width:206px;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+p#summary {
+	white-space: pre-line;
+	text-align:justify;
 }

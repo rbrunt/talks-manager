@@ -12,6 +12,7 @@
 		<table class="table table-hover">
 				<thead>
 					<th>Title</th>
+					<th>Series</th>
 					<th>Date</th>
 					<th>Speaker</th>
 					<th>Passage</th>		
@@ -20,6 +21,7 @@
 <?php foreach($talks as $talk): ?>
 					<tr>
 						<td><a href=<?php echo "\"/talks/talk/".$talk->id."\"";?>><?php echo $talk->title;?></a></td>
+						<td>Big Question 2012 <?php echo $talk->seriesid;?></td>
 						<td><?php echo $talk->date;?></td>
 						<td>TODO</td>
 						<td><a href=<?php echo "\"http://www.biblegateway.com/passage/?search=".$talk->passage."\">";?><?php echo $talk->passage;?></td>

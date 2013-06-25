@@ -1,7 +1,7 @@
 		<div class="row">
 			<div class="span12">
 				<ul class="breadcrumb">
-					<li><a href="<?php echo base_url()?>">Home</a> <span class="divider">/</span></li>
+					<li><a href="<?php echo base_url(); ?>">Home</a> <span class="divider">/</span></li>
 					<li class="active">Browse Series</li>
 				</ul>
 			</div>
@@ -14,7 +14,7 @@
 					<img src="http://placehold.it/500">
 				</div>
 				<div class="span9">
-					<h1><a href="<?php echo base_url('/series/seriesdetail/'.$single->id)?>"><?php echo $single->title; ?></a></h1>
+					<h1><a href="<?php echo base_url('/series/seriesdetail/'.$single->id); ?>"><?php echo $single->title; ?></a></h1>
 					<div id="categorydescription">
 						<p><?php echo $single->summary; ?></p>
 					</div>

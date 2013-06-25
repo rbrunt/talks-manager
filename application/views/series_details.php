@@ -1,8 +1,8 @@
 	<div class="row">
 		<div class="span12">
 		<ul class="breadcrumb">
-			<li><a href="/">Home</a> <span class="divider">/</span></li>
-			<li><a href="/series/">Browse Series</a> <span class="divider">/</span></li>
+			<li><a href="<?php echo base_url()?>">Home</a> <span class="divider">/</span></li>
+			<li><a href="<?php echo base_url('/series/')?>">Browse Series</a> <span class="divider">/</span></li>
 			<li class="active"><?php echo $series[0]->title ?></li>
 		</ul>
 		</div>
@@ -27,10 +27,10 @@
 				<tbody>
 					<?php foreach($talks as $talk): ?>
 					<tr>
-						<td><a href=<?php echo "\"/talks/talk/".$talk->id."\"";?>><?php echo $talk->title;?></a></td>
+						<td><a href="<?php echo base_url('/talks/talk/'.$talk->id);?>"><?php echo $talk->title;?></a></td>
 						<td><?php echo $talk->date;?></td>
 						<td>TODO</td>
-						<td><a href=<?php echo "\"http://www.biblegateway.com/passage/?search=".$talk->passage."\">";?><?php echo $talk->passage;?></td>
+						<td><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td>
 					</tr>
 				<?php endforeach;?>
 				</tbody>

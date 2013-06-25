@@ -10,7 +10,7 @@
 					<img src="http://placehold.it/500">
 				</div>
 				<div class="span9">
-					<h1><a href=<?php echo "/talks/talk/".$talk->id; ?>><?php echo $talk->title; ?></a> <small><?php echo $talk->date; ?></small></h1>
+					<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small><?php echo $talk->date; ?></small></h1>
 					<div id="categorydescription">
 						<p><?php echo $talk->summary; ?></p>
 						<p>TODO: Add speaker here too!</p>

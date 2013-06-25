@@ -9,8 +9,8 @@
 </div>
 <div class="row">
 	<div class="span9 offset2">
-		<p><a href="/admin/talks/">Edit Talks</a><p>
-		<p><a href="/admin/edittalk/1">Edit a talk</a><p>
+		<p><a href="<?php echo base_url('/admin/talks/')?>">Edit Talks</a><p>
+		<p><a href="<?php echo base_url('/admin/edittalk/1')?>">Edit a talk</a><p>
 
 	</div>
 </div>

@@ -21,7 +21,7 @@
 		</div>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<!-- // <script src="/bootstrap/js/bootstrap.min.js"></script> -->
-		<script src="/bootstrap/js/bootstrap-datepicker.js"></script>
+		<script src="<?php echo base_url('/bootstrap/js/bootstrap-datepicker.js')?>"></script>
 		<script>
 			$('#datepicker').datepicker({format:"yyyy-mm-dd"})
 		</script>

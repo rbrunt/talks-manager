@@ -4,9 +4,10 @@ class Talks extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->model("talks_model");
-		$talks = $this->talks_model->getAll();
-		$this->load->view('includes/template', array("talks"=>$talks, "content"=>"all_talks"));
+		// $this->load->model("talks_model");
+		// $talks = $this->talks_model->getAll();
+		// $this->load->view('includes/template', array("talks"=>$talks, "content"=>"all_talks"));
+		redirect("/series/");
 	}
 
 	public function talk($talkId) {

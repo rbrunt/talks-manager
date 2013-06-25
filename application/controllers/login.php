@@ -4,6 +4,6 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('includes/template', array('content'=>'login_page'));
+		$this->load->view('includes/template', array('content'=>'login/login_page'));
 	}
 }

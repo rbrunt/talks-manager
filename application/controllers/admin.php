@@ -9,7 +9,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function index()	{
-		$this->load->view('includes/template', array("content"=>"admin_home"));
+		$this->load->view('includes/template', array("content"=>"admin/home"));
 	}
 
 	public function talks() {
@@ -22,7 +22,7 @@ class Admin extends CI_Controller {
 		$this->load->helper("text");
 		$this->load->model("series_model");
 		$series = $this->series_model->getAll();
-		$this->load->view("includes/template", array("content"=>"all_series_admin", "series"=>$series));
+		$this->load->view("includes/template", array("content"=>"admin/all_series_table", "series"=>$series));
 	}
 
 	public function users() {
@@ -43,14 +43,14 @@ class Admin extends CI_Controller {
 			foreach($series as $single) {
 				$seriesarray[$single->id] = $single->title;
 			}
-			$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "content"=>"edit_talk"));
+			$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "content"=>"admin/edit_talk"));
 		} elseif ($this->input->post()) {
 			$this->load->model("talks_model");
 			$talk = $this->talks_model->editTalk($this->input->post(), $this->input->post("id"));
 			// $this->load->view("includes/template", array("talk"=>$this->input->post("id"), "content"=>"talk_details"));
-			redirect("talks/talk/".$this->input->post("id"));
+			redirect("/talks/talk/".$this->input->post("id"));
 		} else {
-			redirect("talks");
+			redirect("/talks/");
 		}
 	}
 
@@ -63,13 +63,13 @@ class Admin extends CI_Controller {
 		if (isset($seriesId)) {
 			$this->load->model("series_model");
 			$series = $this->series_model->getSeriesById($seriesId);
-			$this->load->view("includes/template", array("series"=>$series, "content"=>"edit_series"));
+			$this->load->view("includes/template", array("series"=>$series, "content"=>"admin/edit_series"));
 		} elseif ($this->input->post()) {
 			$this->load->model("series_model");
 			$series = $this->series_model->editSeries($this->input->post(), $this->input->post("id"));
-			redirect(base_url("/series/seriesdetail/".$this->input->post("id")));
+			redirect("/series/seriesdetail/".$this->input->post("id"));
 		} else {
-			redirect("series");
+			redirect("/series/");
 		}
 		
 

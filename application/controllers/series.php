@@ -4,8 +4,18 @@ class Series extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->library("pagination");
 		$this->load->model("series_model");
-		$series = $this->series_model->getAll();
+
+		// Config for pagination
+		$config["base_url"] = base_url("/series/");
+		$config["total_rows"] = $this->series_model->countSeries();
+		$segment = $config["uri_segment"] = 2;
+		$limit = $config["per_page"] = 5;
+
+		$this->pagination->initialize($config);
+
+		$series = $this->series_model->getSeriesPage($limit, $this->uri->segment($segment));
 		$this->load->view('includes/template', array("series"=>$series, "content"=>"all_series"));
 	}
 

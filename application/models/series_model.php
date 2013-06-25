@@ -5,15 +5,30 @@ class Series_Model extends CI_Model {
 	public function getAll() {
 		$series = $this->db->get('series');
 		if ($series->num_rows() > 0 ) {
-			foreach($series->result() as $single){
-				$seriesarray[] = $single;
+			foreach($series->result() as $single_series){
+				$seriesarray[] = $single_series;
 			}
 			return $seriesarray;
 		} else {
 			return false;
 		}
+	}
 
-		// return ($talks->num_rows() > 0) ? $talks : false;
+	public function countSeries() {
+		$talks = $this->db->select('id')->get('series');
+		return $talks->num_rows();
+	}
+
+	public function getSeriesPage($number, $offset) {
+		$series = $this->db->get('series', $number, $offset);
+		if ($series->num_rows() > 0 ) {
+			foreach($series->result() as $single_series){
+				$seriesarray[] = $single_series;
+			}
+			return $seriesarray;
+		} else {
+			return false;
+		}
 	}
 
 	public function getSeriesById($seriesId) {

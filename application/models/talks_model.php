@@ -16,6 +16,25 @@ class Talks_Model extends CI_Model {
 		// return ($talks->num_rows() > 0) ? $talks : false;
 	}
 
+	public function countTalks() {
+		$talks = $this->db->select('id')->get('talks');
+		return $talks->num_rows();
+	}
+
+	public function getTalkPage($number, $offset) {
+		$talks = $this->db->order_by("date", "DESC")->get('talks', $number, $offset);
+		if ($talks->num_rows() > 0 ) {
+			foreach($talks->result() as $talk){
+				$talkarray[] = $talk;
+			}
+			return $talkarray;
+		} else {
+			return false;
+		}
+
+		// return ($talks->num_rows() > 0) ? $talks : false;
+	}
+
 	public function getTalkById($talkId) {
 		$talkId = $this->db->escape($talkId);
 		$talk = $this->db->get_where('talks', 'id = '.$talkId);

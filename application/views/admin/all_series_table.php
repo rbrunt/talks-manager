@@ -25,4 +25,5 @@
 				</tbody>
 			</table>
 	</div>
+<?php echo $this->pagination->create_links(); ?>
 </div>

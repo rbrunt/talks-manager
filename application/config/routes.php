@@ -41,6 +41,9 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
+// Begin custom routing:
+$route['series/:num'] = 'series';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -13,15 +13,31 @@ class Admin extends CI_Controller {
 	}
 
 	public function talks() {
+		$this->load->library("pagination"); // We want to paginate so we don't get a really really long list if there are lots of talks on the system...
 		$this->load->model("talks_model");
-		$talks = $this->talks_model->getAll();
+
+		// Config for pagination
+		$config["base_url"] = base_url("/admin/talks/");
+		$config["total_rows"] = $this->talks_model->countTalks();
+		$limit = $config["per_page"] = 5;
+
+		$this->pagination->initialize($config);
+		$talks = $this->talks_model->getTalkPage($limit, $this->uri->segment(3));
 		$this->load->view("includes/template", array("content"=>"all_talks", "talks"=>$talks));
 	}
 
 	public function series() {
+		$this->load->library("pagination");
 		$this->load->helper("text");
 		$this->load->model("series_model");
-		$series = $this->series_model->getAll();
+
+		// Config for pagination
+		$config["base_url"] = base_url("/admin/series/");
+		$config["total_rows"] = $this->series_model->countSeries();
+		$limit = $config["per_page"] = 5;
+
+		$this->pagination->initialize($config);
+		$series = $this->series_model->getSeriesPage($limit, $this->uri->segment(3));
 		$this->load->view("includes/template", array("content"=>"admin/all_series_table", "series"=>$series));
 	}
 

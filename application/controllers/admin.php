@@ -38,12 +38,15 @@ class Admin extends CI_Controller {
 		if (isset($talkId)){
 			$this->load->model("talks_model");
 			$this->load->model("series_model");
-			$talk = $this->talks_model->getTalkById($talkId);
 			$series = $this->series_model->getAllSeriesTitles();
-			foreach($series as $single) {
-				$seriesarray[$single->id] = $single->title;
+			if ($talk = $this->talks_model->getTalkById($talkId)) {
+				foreach($series as $single) {
+					$seriesarray[$single->id] = $single->title;
+				}
+				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "content"=>"admin/edit_talk"));
+			} else {
+				show_404();
 			}
-			$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "content"=>"admin/edit_talk"));
 		} elseif ($this->input->post()) {
 			$this->load->model("talks_model");
 			$talk = $this->talks_model->editTalk($this->input->post(), $this->input->post("id"));
@@ -62,8 +65,11 @@ class Admin extends CI_Controller {
 		// TODO: Sanitise variables
 		if (isset($seriesId)) {
 			$this->load->model("series_model");
-			$series = $this->series_model->getSeriesById($seriesId);
-			$this->load->view("includes/template", array("series"=>$series, "content"=>"admin/edit_series"));
+			if ($series = $this->series_model->getSeriesById($seriesId)) {
+				$this->load->view("includes/template", array("series"=>$series, "content"=>"admin/edit_series"));
+			} else {
+				show_404();
+			}
 		} elseif ($this->input->post()) {
 			$this->load->model("series_model");
 			$series = $this->series_model->editSeries($this->input->post(), $this->input->post("id"));

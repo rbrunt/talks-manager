@@ -34,6 +34,11 @@ class Series_Model extends CI_Model {
 		}
 	}
 
+	public function editSeries($array, $id) {
+		$series = $this->db->where("id", $id)->update("series", $array);
+		return $this->db->affected_rows();
+	}
+
 	// public function addTalk($array) {
 	// 	$talk = $this->db->query("INSERT INTO talks SET title = ".$array['title'].", speaker = ".$array['speaker'].", seriesid = ".$array['seriesId'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);
 	// 	return $this->db->insert_id();

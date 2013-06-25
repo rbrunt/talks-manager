@@ -10,6 +10,6 @@
 <div class="row">
 	<div class="span9 offset2">
 		<p><a href="<?php echo base_url('/admin/talks/'); ?>">Edit Talks</a><p>
-
+		<p><a href="<?php echo base_url('/admin/editseries/1'); ?>">Edit A Series</a><p>
 	</div>
 </div>

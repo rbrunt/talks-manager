@@ -16,7 +16,7 @@
 				<div class="span9">
 					<h1><a href="<?php echo base_url('/series/seriesdetail/'.$single->id); ?>"><?php echo $single->title; ?></a></h1>
 					<div id="categorydescription">
-						<p><?php echo $single->summary; ?></p>
+						<p id="summary"><?php echo $single->summary; ?></p>
 					</div>
 				</div>
 			</div>

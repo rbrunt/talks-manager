@@ -19,7 +19,10 @@ class Admin extends CI_Controller {
 	}
 
 	public function series() {
-
+		$this->load->helper("text");
+		$this->load->model("series_model");
+		$series = $this->series_model->getAll();
+		$this->load->view("includes/template", array("content"=>"all_series_admin", "series"=>$series));
 	}
 
 	public function users() {
@@ -55,7 +58,20 @@ class Admin extends CI_Controller {
 
 	}
 
-	public function editseries() {
+	public function editseries($seriesId) {
+		// TODO: Sanitise variables
+		if (isset($seriesId)) {
+			$this->load->model("series_model");
+			$series = $this->series_model->getSeriesById($seriesId);
+			$this->load->view("includes/template", array("series"=>$series, "content"=>"edit_series"));
+		} elseif ($this->input->post()) {
+			$this->load->model("series_model");
+			$series = $this->series_model->editSeries($this->input->post(), $this->input->post("id"));
+			redirect(base_url("/series/seriesdetail/".$this->input->post("id")));
+		} else {
+			redirect("series");
+		}
+		
 
 	}
 

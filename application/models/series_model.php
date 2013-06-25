@@ -22,6 +22,17 @@ class Series_Model extends CI_Model {
 		return ($series->num_rows() > 0) ? array($series->row()) : false;
 	}
 
+	public function getAllSeriesTitles() {
+		$series = $this->db->select('id, title')->from('series')->get();
+		if ($series->num_rows() > 0 ) {
+			foreach($series->result() as $single){
+				$seriesarray[] = $single;
+			}
+			return $seriesarray;
+		} else {
+			return false;
+		}
+	}
 
 	// public function addTalk($array) {
 	// 	$talk = $this->db->query("INSERT INTO talks SET title = ".$array['title'].", speaker = ".$array['speaker'].", seriesid = ".$array['seriesId'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);

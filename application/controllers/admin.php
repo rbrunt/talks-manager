@@ -34,8 +34,13 @@ class Admin extends CI_Controller {
 
 		if (isset($talkId)){
 			$this->load->model("talks_model");
+			$this->load->model("series_model");
 			$talk = $this->talks_model->getTalkById($talkId);
-			$this->load->view("includes/template", array("talk"=>$talk, "content"=>"edit_talk"));
+			$series = $this->series_model->getAllSeriesTitles();
+			foreach($series as $single) {
+				$seriesarray[$single->id] = $single->title;
+			}
+			$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "content"=>"edit_talk"));
 		} elseif ($this->input->post()) {
 			$this->load->model("talks_model");
 			$talk = $this->talks_model->editTalk($this->input->post(), $this->input->post("id"));

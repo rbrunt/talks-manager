@@ -19,8 +19,33 @@ class Series_Model extends CI_Model {
 		return $talks;
 	}
 
+	public function getAllWithTalkCount() { // Talks to the talks table, but makes more sense to have it in this model...
+		$series = $this->db->query('SELECT  series.*, (SELECT COUNT(*) FROM talks WHERE talks.seriesid = series.id) AS "numtalks" FROM series');
+		if ($series->num_rows() > 0 ) {
+			foreach($series->result() as $single_series){
+				$seriesarray[] = $single_series;
+			}
+			return $seriesarray;
+		} else {
+			return false;
+		}
+	}
+
 	public function getSeriesPage($number, $offset) {
 		$series = $this->db->get('series', $number, $offset);
+		if ($series->num_rows() > 0 ) {
+			foreach($series->result() as $single_series){
+				$seriesarray[] = $single_series;
+			}
+			return $seriesarray;
+		} else {
+			return false;
+		}
+	}
+
+	public function getSeriesPageWithTalkCount($number, $offset) {
+		$offset = (!is_numeric($offset)  ? 0 : $offset);
+		$series = $this->db->query('SELECT  series.*, (SELECT COUNT(*) FROM talks WHERE talks.seriesid = series.id) AS "numtalks" FROM series LIMIT ' . $offset . ', ' . $number);
 		if ($series->num_rows() > 0 ) {
 			foreach($series->result() as $single_series){
 				$seriesarray[] = $single_series;

@@ -37,7 +37,8 @@ class Admin extends CI_Controller {
 		$limit = $config["per_page"] = 5;
 
 		$this->pagination->initialize($config);
-		$series = $this->series_model->getSeriesPage($limit, $this->uri->segment(3));
+		//$series = $this->series_model->getSeriesPage($limit, $this->uri->segment(3));
+		$series = $this->series_model->getSeriesPageWithTalkCount($limit, $this->uri->segment(3));
 		$this->load->view("includes/template", array("content"=>"admin/all_series_table", "series"=>$series));
 	}
 

@@ -17,8 +17,8 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function countTalks() {
-		$talks = $this->db->select('id')->get('talks');
-		return $talks->num_rows();
+		$talks = $this->db->count_all('talks');
+		return $talks;
 	}
 
 	public function getTalkPage($number, $offset) {

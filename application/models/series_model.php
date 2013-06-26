@@ -15,8 +15,8 @@ class Series_Model extends CI_Model {
 	}
 
 	public function countSeries() {
-		$talks = $this->db->select('id')->get('series');
-		return $talks->num_rows();
+		$talks = $this->db->count_all('series');
+		return $talks;
 	}
 
 	public function getSeriesPage($number, $offset) {

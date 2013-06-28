@@ -38,12 +38,12 @@ class Speakers_Model extends CI_Model {
 	}
 
 	public function editSpeaker($array, $id) {
-		$series = $this->db->where("id", $id)->update("series", $array);
+		$speaker = $this->db->where("id", $id)->update("speakers", $array);
 		return $this->db->affected_rows();
 	}
 
 	public function addSpeaker($array) {
-		//$talk = $this->db->query("INSERT INTO talks SET title = ".$array['title'].", speaker = ".$array['speaker'].", seriesid = ".$array['seriesId'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);
+		$speakers = $this->db->insert("speakers", $array);
 		return $this->db->insert_id();
 	}
 

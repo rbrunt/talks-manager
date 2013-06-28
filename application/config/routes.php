@@ -43,6 +43,7 @@ $route['404_override'] = '';
 
 // Begin custom routing:
 $route['series/:num'] = 'series';
+$route['search/(:any)'] = 'search/index/$1';
 
 
 /* End of file routes.php */

@@ -25,7 +25,7 @@
 					<li><a href="<?php echo base_url('/talks/talk/1')?>">Talk</a></li>
 				</ul>
 				<form class="form-search navbar-search pull-right">
-					<input type="text" class="search-query input-small" placeholder="Search...">
+					<input type="text" class="search-query input-small" placeholder="Search..." id="searchbox">
 				</form>
 			</div>
 		</div>

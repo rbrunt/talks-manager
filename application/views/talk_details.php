@@ -1,5 +1,6 @@
 <div class="row">
 			<div class="span12">
+				<?php //$this->load->view("includes/_info_messages"); ?>
 				<ul class="breadcrumb">
 					<li><a href="<?php echo base_url()?>">Home</a> <span class="divider">/</span></li>
 					<li><a href="<?php echo base_url('/series/seriesdetail/'.$series[0]->id)?>"><?php echo $series[0]->title; ?></a> <span class="divider">/</span></li>

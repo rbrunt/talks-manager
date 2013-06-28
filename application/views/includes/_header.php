@@ -32,3 +32,6 @@
 	</div>
 
 	<div class="container">
+		<div id="alertscontainer">	
+			<?php $this->load->view("includes/_info_messages.php"); ?>
+		</div>

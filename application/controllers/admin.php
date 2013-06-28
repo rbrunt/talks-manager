@@ -100,9 +100,39 @@ class Admin extends CI_Controller {
 
 	public function addtalk() {
 
+		if ($this->input->post()) {
+			$this->load->model("talks_model");
+			$insertId = $this->talks_model->addTalk($this->input->post());
+			redirect("/talks/talk/".$insertId);
+		}
+		else {
+			$this->load->model("series_model");
+			$this->load->model("speakers_model");
+			
+			$series = $this->series_model->getAllSeriesTitles();
+			$speakers = $this->speakers_model->getAll();
+			foreach($series as $single) {
+				$seriesarray[$single->id] = $single->title;
+			}
+			foreach($speakers as $speaker) {
+				$speakersarray[$speaker->id] = $speaker->name;
+			}
+
+			$this->load->view("includes/template", array("content"=>"admin/add_talk", "seriesarray"=>$seriesarray, "speakersarray"=>$speakersarray));
+		}
 	}
 
 	public function addseries() {
-
+		if ($this->input->post()) {
+			$this->load->model("series_model");
+			$insertId = $this->series_model->addSeries($this->input->post());
+			$alert["success"] = "Succesfully created the Series <strong>".$this->input->post("title")."</strong>"; //TODO: find a way of passing this through the redirect...
+			$this->session->set_flashdata("alert", $alert); // Set this as a session parameter: will only last till the next page load...
+			redirect("/series/seriesdetail/".$insertId);
+		}
+		else {
+			$this->load->view("includes/template", array("content"=>"admin/add_series", "alert"=>array("warning"=>"Add image upload ability")));
+		}
 	}
+	
 }

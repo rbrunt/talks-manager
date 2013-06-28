@@ -63,7 +63,7 @@ class Series_Model extends CI_Model {
 	}
 
 	public function getAllSeriesTitles() {
-		$series = $this->db->select('id, title')->from('series')->get();
+		$series = $this->db->select('id, title')->from('series')->order_by("id", "ASC")->get();
 		if ($series->num_rows() > 0 ) {
 			foreach($series->result() as $single){
 				$seriesarray[] = $single;
@@ -79,10 +79,10 @@ class Series_Model extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
-	// public function addTalk($array) {
-	// 	$talk = $this->db->query("INSERT INTO talks SET title = ".$array['title'].", speaker = ".$array['speaker'].", seriesid = ".$array['seriesId'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);
-	// 	return $this->db->insert_id();
-	// }
+	public function addSeries($array) {
+		$series = $this->db->insert("series", $array);
+		return $this->db->insert_id();
+	}
 
 	// public function editTalk($array) {
 	// 	$talk = $this->db->query("UPDATE talks SET title = ".$array['title'].", speaker = ".$array['speaker'].", seriesid = ".$array['seriesId'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);

@@ -3,7 +3,7 @@
 				<?php //$this->load->view("includes/_info_messages"); ?>
 				<ul class="breadcrumb">
 					<li><a href="<?php echo base_url()?>">Home</a> <span class="divider">/</span></li>
-					<li><a href="<?php echo base_url('/series/seriesdetail/'.$series[0]->id)?>"><?php echo $series[0]->title; ?></a> <span class="divider">/</span></li>
+					<li><a href="<?php echo base_url('/series/seriesdetail/'.$talk[0]->seriesid)?>"><?php echo $talk[0]->seriestitle; ?></a> <span class="divider">/</span></li>
 					<li class="active"><?php echo $talk[0]->title ?></li>
 				</ul>
 			</div>
@@ -11,11 +11,11 @@
 		<div class="row">
 			<div class="span3">
 				<img src="http://placehold.it/500">
-				<h4><?php echo $series[0]->title; ?></h4>
+				<h4><?php echo $talk[0]->seriestitle; ?></h4>
 			</div>
 			<div class="span9">
 				<div class="page-header">
-					<h1><?php echo $talk[0]->title ?> <small>SpeakerID: <?php echo $talk[0]->speakerid ?></small></h1>
+					<h1><?php echo $talk[0]->title ?> <small><?php echo $talk[0]->speakername ?></small></h1>
 					<a class="btn btn-primary pull-right" href="<?php echo base_url('/admin/edittalk/'.$talk[0]->id);?>">Edit</a>
 					<p class="muted"><?php echo $talk[0]->date ?></p>
 				</div>

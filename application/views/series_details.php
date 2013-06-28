@@ -17,7 +17,7 @@
 							<a class="btn btn-primary pull-right" href="<?php echo base_url('/admin/editseries/'.$series[0]->id);?>">Edit</a>
 			</div>
 			<p id="summary"><?php echo $series[0]->summary ?></p>
-			
+			<?php if($talks) : ?>
 			<table class="table table-hover">
 				<thead>
 					<th>Title</th>
@@ -36,5 +36,8 @@
 				<?php endforeach;?>
 				</tbody>
 			</table>
+			<?php else : ?>
+			<p><strong>No talks yet!</strong> Click <a href="<?php echo base_url('admin/addtalk'); ?>">here</a> to add a talk</p>
+			<?php endif; ?>
 		</div>
 	</div>

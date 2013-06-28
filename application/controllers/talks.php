@@ -12,10 +12,8 @@ class Talks extends CI_Controller {
 
 	public function talk($talkId) {
 		$this->load->model("talks_model");
-		$this->load->model("series_model");
-		if ($talk = $this->talks_model->getTalkById($talkId)) {
-			$series = $this->series_model->getSeriesById($talk[0]->seriesid);
-			$this->load->view('includes/template', array("talk"=>$talk, "series"=>$series, "content"=>"talk_details"));
+		if ($talk = $this->talks_model->getTalkDetailsById($talkId)) {
+			$this->load->view('includes/template', array("talk"=>$talk, "content"=>"talk_details"));
 		} else {
 			show_404();
 		}

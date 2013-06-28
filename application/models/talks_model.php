@@ -22,7 +22,7 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function getTalkPage($number, $offset) {
-		$talks = $this->db->order_by("date", "DESC")->get('talks', $number, $offset);
+		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.passage, talks.seriesid, speakers.name AS speakername, series.title as seriestitle")->join("speakers", "speakers.id = talks.speakerid")->join("series", "talks.seriesid = series.id")->order_by("date", "DESC")->get('talks', $number, $offset);
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;
@@ -50,8 +50,7 @@ class Talks_Model extends CI_Model {
 
 	public function getTalksBySeries($seriesId) {
 		$seriesId = $this->db->escape($seriesId);
-		// $talks = $this->db->get_where('talks', 'seriesid ='.$seriesId);
-		$talks = $this->db->query("SELECT * FROM talks WHERE seriesid = $seriesId ORDER BY date ASC");
+		$talks = $this->db->select("talks.*, speakers.name AS speakername")->from("talks")->where("seriesid = $seriesId")->join("speakers", "talks.speakerid = speakers.id")->order_by("date", "ASC")->get();
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;

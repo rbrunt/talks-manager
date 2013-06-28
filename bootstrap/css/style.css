@@ -91,3 +91,7 @@ p#summary {
 div.category small {
 	white-space:nowrap;
 }
+
+#talkstable{
+    margin-top:2em;
+}

@@ -17,27 +17,29 @@
 							<a class="btn btn-primary pull-right" href="<?php echo base_url('/admin/editseries/'.$series[0]->id);?>">Edit</a>
 			</div>
 			<p id="summary"><?php echo $series[0]->summary ?></p>
-			<?php if($talks) : ?>
-			<table class="table table-hover">
-				<thead>
-					<th>Title</th>
-					<th>Date</th>
-					<th>Speaker</th>
-					<th>Passage</th>
-				</thead>
-				<tbody>
-					<?php foreach($talks as $talk): ?>
-					<tr>
-						<td><a href="<?php echo base_url('/talks/talk/'.$talk->id);?>"><?php echo $talk->title;?></a></td>
-						<td><?php echo $talk->date;?></td>
-						<td>TODO</td>
-						<td><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td>
-					</tr>
-				<?php endforeach;?>
-				</tbody>
-			</table>
-			<?php else : ?>
-			<p><strong>No talks yet!</strong> Click <a href="<?php echo base_url('admin/addtalk'); ?>">here</a> to add a talk</p>
-			<?php endif; ?>
+			<div id="talkstable">
+				<?php if($talks) : ?>
+				<table class="table table-hover">
+					<thead>
+						<th>Title</th>
+						<th>Date</th>
+						<th>Speaker</th>
+						<th>Passage</th>
+					</thead>
+					<tbody>
+						<?php foreach($talks as $talk): ?>
+						<tr>
+							<td><a href="<?php echo base_url('/talks/talk/'.$talk->id);?>"><?php echo $talk->title;?></a></td>
+							<td><?php echo $talk->date;?></td>
+							<td><?php echo $talk->speakername; ?></td>
+							<td><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td>
+						</tr>
+					<?php endforeach;?>
+					</tbody>
+				</table>
+				<?php else : ?>
+				<p><strong>No talks yet!</strong> Click <a href="<?php echo base_url('admin/addtalk'); ?>">here</a> to add a talk</p>
+				<?php endif; ?>
+			</div>
 		</div>
 	</div>

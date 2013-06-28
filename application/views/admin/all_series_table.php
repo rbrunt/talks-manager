@@ -18,10 +18,10 @@
 				<tbody>
 <?php foreach($series as $single_series): ?>
 					<tr>
-						<td><a href="<?php echo base_url('/series/seriesdetail/'.$single_series->id)?>"><?php echo $single_series->title;?></a></td>
+						<td><strong><a href="<?php echo base_url('/series/seriesdetail/'.$single_series->id)?>"><?php echo $single_series->title;?></a></strong></td>
 						<td><?php echo character_limiter($single_series->summary, 100) ;?></td>
 						<td><?php echo $single_series->numtalks; ?></td>
-						<td><a href="<?php echo base_url('/admin/editseries/'.$single_series->id)?>">Edit</a></td>
+						<td><a href="<?php echo base_url('/admin/editseries/'.$single_series->id)?>" class="btn btn-mini btn-primary">Edit</a></td>
 					</tr>
 <?php endforeach;?>
 				</tbody>

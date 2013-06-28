@@ -11,6 +11,7 @@
 		<table class="table table-hover">
 				<thead>
 					<th>Name</th>
+					<th><a href="<?php echo base_url("admin/addspeaker"); ?>" class="btn btn-mini" title="Add a Speaker"><i class="icon-plus"></i></a></th>
 				</thead>
 				<tbody>
 <?php foreach($speakers as $speaker): ?>

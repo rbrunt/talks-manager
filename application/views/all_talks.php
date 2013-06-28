@@ -15,7 +15,8 @@
 					<th>Series</th>
 					<th>Date</th>
 					<th>Speaker</th>
-					<th>Passage</th>		
+					<th>Passage</th>
+					<th><a href="<?php echo base_url("admin/addtalk"); ?>" class="btn btn-mini" title="Add a Talk"><i class="icon-plus"></i></a></th>		
 				</thead>
 				<tbody>
 <?php foreach($talks as $talk): ?>

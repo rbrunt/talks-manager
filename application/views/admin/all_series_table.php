@@ -14,6 +14,7 @@
 					<th>Title</th>
 					<th>Summary</th>
 					<th>#&nbspTalks</th>
+					<th><a href="<?php echo base_url("admin/addseries"); ?>" class="btn btn-mini" title="Add a Series"><i class="icon-plus"></i></a></th>
 				</thead>
 				<tbody>
 <?php foreach($series as $single_series): ?>

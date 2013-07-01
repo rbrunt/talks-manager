@@ -60,6 +60,63 @@ class Admin extends CI_Controller {
 
 	}
 
+	public function login() {
+
+		if ($this->input->post()) {
+			$this->load->model("users_model");
+			$email = $this->input->post("email");
+			$password = $this->input->post("password");
+
+			$validated = $this->users_model->validatePassword($email, $password);
+
+			if($validated) {
+				echo "validated successfully";
+			} else {
+				echo "not validated sucessfully";
+			}
+
+		} else {
+			$this->load->view("includes/template", array("content"=>"login/login_page"));
+		}
+	}
+
+	public function addUser() {
+
+		if ($email = $this->input->post("email")) {
+			$this->load->model("users_model");
+			if ($insertId = $this->users_model->addUser($email)) {
+				$this->session->set_flashdata("alert", array("success"=>"successfully added user ".$email." with userId:".$insertId["insertId"]." and token: ".$insertId["token"]));
+				redirect(base_url());
+			} else {
+				$this->load->view("includes/template", array("content"=>"login/add_user", "alert"=>array("error"=>"a user with that email already exists!")));
+			}
+		} else {
+			$this->load->view("includes/template", array("content"=>"login/add_user"));
+		}
+	}
+
+	public function setpassword($token) {
+		
+		if ($this->input->post()){
+			$password = ($this->input->post("password1") == $this->input->post("password2")) ? $this->input->post("password1") : false;
+			if ($password) {
+				$email = $this->input->post("email");
+				$this->load->model("users_model");
+				$affectedRows = $this->users_model->setPassword($token, $email, $password);
+				if ($affectedRows == 1) {
+					$this->session->set_flashdata("alert", array("success"=>"successfully set a password, now try loggin in!"));
+					redirect(base_url());
+				} else {
+					$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"email not in the system, invalid token, or other random error :(")));					
+				}
+			} else {
+				$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"passwords didn't match")));
+			}
+		} else {
+			$this->load->view("includes/template", array("content"=>"login/set_password"));
+		}
+	}
+
 	public function editusers() {
 
 	}

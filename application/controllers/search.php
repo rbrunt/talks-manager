@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Search extends CI_Controller {
+class Search extends Talks_Controller {
 
 	public function index($searchTerm)	{
 		if(isset($searchTerm)) {

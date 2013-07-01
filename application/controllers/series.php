@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Series extends CI_Controller {
+class Series extends Talks_Controller {
 
 	public function index()
 	{

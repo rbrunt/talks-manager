@@ -14,7 +14,9 @@
 		<div class="span9">
 			<div class="page-header">
 				<h1><?php echo $series[0]->title ?></h1>
+<?php if($isLoggedIn) : ?>
 							<a class="btn btn-primary pull-right" href="<?php echo base_url('/admin/editseries/'.$series[0]->id);?>">Edit</a>
+<?php endif; ?>
 			</div>
 			<p id="summary"><?php echo $series[0]->summary ?></p>
 			<div id="talkstable">

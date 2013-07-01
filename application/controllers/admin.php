@@ -1,18 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Admin extends Talks_Controller {
 
 	public function __construct() {
  		parent::__construct();
 		$this->load->helper("form");
-		$this->load->helper("url");
 	}
 
 	public function index()	{
+		$this->checkLogin();
 		$this->load->view('includes/template', array("content"=>"admin/home"));
 	}
 
 	public function talks() {
+		$this->checkLogin();
 		$this->load->library("pagination"); // We want to paginate so we don't get a really really long list if there are lots of talks on the system...
 		$this->load->model("talks_model");
 
@@ -27,6 +28,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function series() {
+		$this->checkLogin();		
 		$this->load->library("pagination");
 		$this->load->helper("text");
 		$this->load->model("series_model");
@@ -43,6 +45,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function speakers() {
+		$this->checkLogin();		
 		$this->load->library("pagination"); // We want to paginate so we don't get a really really long list if there are lots of talks on the system...
 		$this->load->model("speakers_model");
 
@@ -61,18 +64,19 @@ class Admin extends CI_Controller {
 	}
 
 	public function login() {
-
+		if ($this->isLoggedIn) redirect("admin");
 		if ($this->input->post()) {
 			$this->load->model("users_model");
 			$email = $this->input->post("email");
 			$password = $this->input->post("password");
 
-			$validated = $this->users_model->validatePassword($email, $password);
+			$validated = $this->users_model->login($email, $password);
 
 			if($validated) {
-				echo "validated successfully";
+				$this->session->set_flashdata("alert",array("success"=>"Logged in!"));
+				redirect("admin");
 			} else {
-				echo "not validated sucessfully";
+				$this->load->view("includes/template", array("content"=>"login/login_page", "alert"=>array("error"=>"wrong username or password")));
 			}
 
 		} else {
@@ -80,8 +84,19 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function addUser() {
+	public function logout() {
+		if ($this->isLoggedIn){
+			$this->load->model("users_model");
+			$this->users_model->logout();
+			$this->session->set_flashdata("alert",array("success"=>"You've been logged out!"));
+		} else {
+			$this->session->set_flashdata("alert",array("error"=>"You need to be logged in to do that!"));
+		}
+		redirect("admin/login");
+	}
 
+	public function addUser() {
+		$this->checkLogin();		
 		if ($email = $this->input->post("email")) {
 			$this->load->model("users_model");
 			if ($insertId = $this->users_model->addUser($email)) {
@@ -122,7 +137,8 @@ class Admin extends CI_Controller {
 	}
 
 	public function edittalk($talkId) {
-
+		$this->checkLogin();		
+		if (!$this->isLoggedIn) $this->sendHome();
 		if (isset($talkId)){
 			$this->load->model("talks_model");
 			$this->load->model("series_model");
@@ -153,6 +169,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function editspeaker($speakerId) {
+		$this->checkLogin();		
 		if (isset($speakerId))	{
 			$this->load->model("speakers_model");
 			if ($speaker = $this->speakers_model->getSpeakerById($speakerId)) {
@@ -174,6 +191,7 @@ class Admin extends CI_Controller {
 
 	public function editseries($seriesId) {
 		// TODO: Sanitise variables
+		$this->checkLogin();
 		if (isset($seriesId)) {
 			$this->load->model("series_model");
 			if ($series = $this->series_model->getSeriesById($seriesId)) {
@@ -193,7 +211,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function addtalk() {
-
+		$this->checkLogin();
 		if ($this->input->post()) {
 			$this->load->model("talks_model");
 			$insertId = $this->talks_model->addTalk($this->input->post());
@@ -218,6 +236,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function addseries() {
+		$this->checkLogin();
 		if ($this->input->post()) {
 			$this->load->model("series_model");
 			$insertId = $this->series_model->addSeries($this->input->post());
@@ -230,6 +249,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function addspeaker() {
+		$this->checkLogin();		
 		if ($this->input->post()) {
 			$this->load->model("speakers_model");
 			$insertId = $this->speakers_model->addSpeaker($this->input->post());

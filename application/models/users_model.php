@@ -14,47 +14,41 @@ class Users_Model extends CI_Model {
 	// 	}
 	// }
 
-	public function addUser($email) {
-		if ($this->db->where("email",$email)->from("users")->count_all_results() == 0) {
-			$token = bin2hex(mcrypt_create_iv(16)); // Generate a 32 character hex token which we'll send in an email
-
-			$insertArray = array(
-				"email" => $email,
-				"token" => $token
-				);
-
-			$this->db->insert("users", $insertArray); // Insert the new user and their token into the DB
-
-			return array("token"=>$token, "insertId"=>$this->db->insert_id());
-		} else {
-			return false;
-		}
-
+	public function getUserById($userId) {
+		$user = $this->db->where("id", $userId)->get("users");
+		return ($user->num_rows() > 0) ? $user->row() : false;
 	}
 
-	public function validatePassword($email, $password) {
-		$query = $this->db->select("salt, password")->where("email", $email)->get("users"); // Get the sat and hash from DB
+	public function getUserByEmail($email) {
+		$user = $this->db->where("email", $email)->get("users");
+		return ($user->num_rows() > 0) ? $user->row() : false;
+	}
 
-		if ($query->num_rows() == 1) {
-			$row = $query->row();
+	public function addUser($email) {
+		if ($this->getUserByEmail($email)) return false;
+		$token = bin2hex(mcrypt_create_iv(16)); // Generate a 32 character hex token which we'll send in an email
 
-			$salt = $row->salt;
-			$db_hash = $row->password;
+		$insertArray = array(
+			"email" => $email,
+			"token" => $token
+			);
 
-			$hash = hash("SHA512", $password.$salt); // Generate hash from provided Password
+		$this->db->insert("users", $insertArray); // Insert the new user and their token into the DB
 
-			if ($hash == $db_hash) {
-				// Passwords match!
-				return TRUE;
-				echo "suces";
-			} else {
-				// Wrong Password...
-				return FALSE;
-			}
-		} else {
-			// User doesn't exist
-			return FALSE;
-		}
+		return array("token"=>$token, "insertId"=>$this->db->insert_id());
+	}
+
+	public function login($email, $password) {
+		$user = $this->getUserByEmail($email);
+		
+		if ($user == false) return false;
+		if ($user->password != hash("SHA512", $password.$user->salt)) return false;
+		$this->session->set_userdata("userid", $user->id);
+		return true;
+	}
+
+	public function logout() {
+		$this->session->unset_userdata("userid");
 	}
 
 	public function setPassword($token, $email, $password) {		

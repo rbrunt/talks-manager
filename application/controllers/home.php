@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home extends Talks_Controller {
 
     public function index() {
         $this->load->model("talks_model");

@@ -37,6 +37,19 @@ class Speakers_Model extends CI_Model {
 		return ($speaker->num_rows() > 0) ? array($speaker->row()) : false;
 	}
 
+	public function getAllSpeakerNames() {
+		$speakers = $this->db->select('id, name')->from('speakers')->order_by("id", "ASC")->get();
+		if ($speakers->num_rows() > 0 ) {
+			foreach($speakers->result() as $speaker){
+				$speakersarray[] = $speaker;
+			}
+			return $speakersarray;
+			// return $speakers->result_array();
+		} else {
+			return false;
+		}
+	}
+
 	public function editSpeaker($array, $id) {
 		$speaker = $this->db->where("id", $id)->update("speakers", $array);
 		return $this->db->affected_rows();

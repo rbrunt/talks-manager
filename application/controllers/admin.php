@@ -69,19 +69,26 @@ class Admin extends CI_Controller {
 		if (isset($talkId)){
 			$this->load->model("talks_model");
 			$this->load->model("series_model");
+			$this->load->model("speakers_model");
+
 			$series = $this->series_model->getAllSeriesTitles();
+			$speakers = $this->speakers_model->getAllSpeakerNames();
+
 			if ($talk = $this->talks_model->getTalkById($talkId)) {
 				foreach($series as $single) {
 					$seriesarray[$single->id] = $single->title;
 				}
-				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "content"=>"admin/edit_talk"));
+				foreach($speakers as $speaker) {
+					$speakerarray[$speaker->id] = $speaker->name;
+				}
+				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "speakerarray"=>$speakerarray, "content"=>"admin/edit_talk"));
 			} else {
 				show_404();
 			}
 		} elseif ($this->input->post()) {
 			$this->load->model("talks_model");
 			$talk = $this->talks_model->editTalk($this->input->post(), $this->input->post("id"));
-			// $this->load->view("includes/template", array("talk"=>$this->input->post("id"), "content"=>"talk_details"));
+			$this->session->set_flashdata("alert",array("success"=>"Talk details updated successfully"));
 			redirect("/talks/talk/".$this->input->post("id"));
 		} else {
 			redirect("/talks/");

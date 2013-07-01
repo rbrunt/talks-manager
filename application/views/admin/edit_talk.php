@@ -13,6 +13,7 @@
 						<span class="add-on"><i class="icon-calendar"></i></span>
 						<?php echo form_input( array("name"=>"date", "value"=>$talk[0]->date, "class"=>"span2", "id"=>"datepicker", "placeholder"=>"yyyy-mm-dd")); ?>
 					</div>
+					<?php echo form_dropdown("speakerid", $speakerarray, $talk[0]->speakerid, 'class="span3"'); ?>
 				</div>
 				<div class="input-prepend">
 						<span class="add-on"><i class="icon-book"></i></span>
@@ -20,7 +21,7 @@
 					</div>
 				<?php echo form_textarea(array("name"=>"summary", "value"=>$talk[0]->summary, "class"=>"span9", "maxlength"=>"1000", "placeholder"=>"Talk Summary")); ?>
 				<?php echo form_submit(array("value"=>"Submit Edits", "class"=>"btn btn-primary")); ?>
-				<?php echo form_hidden(array("id"=>$talk[0]->id, "speakerid"=>$talk[0]->speakerid)); ?>
+				<?php echo form_hidden(array("id"=>$talk[0]->id)); ?>
 			<?php echo form_close(); ?>
 			</div>
 		</div>

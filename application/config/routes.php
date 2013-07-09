@@ -39,7 +39,7 @@
 */
 
 $route['default_controller'] = "home";
-$route['404_override'] = '';
+$route['404_override'] = 'errors/error_404';
 
 // Begin custom routing:
 $route['series/:num'] = 'series';

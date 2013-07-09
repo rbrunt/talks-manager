@@ -1,10 +1,13 @@
 	<div class="row">
 
+<?php echo form_open_multipart(); ?>
 		<div class="span3">
-			<img src="http://placehold.it/500">
+			<!-- <img src="http://placehold.it/500"> -->
+			<img src="<?php echo base_url("files/covers/".$series[0]->id.".jpg"); ?>">
+			<p><small>You can optionally upload a new cover artwork. Files must be of jpg or png format, and smaller than 500x500px.</small></p>
+			<?php echo form_upload(array("name"=>"userfile")); ?>
 		</div>
 		<div class="span9">
-			<?php echo form_open("admin/editseries"); ?>
 			<div class="page-header">
 				<?php echo form_input(array("name"=>"title", "value"=>$series[0]->title, "class"=>"h1 span9", "maxlength"=>"100", "placeholder"=>"Series Title")); ?></h1>
 			</div>

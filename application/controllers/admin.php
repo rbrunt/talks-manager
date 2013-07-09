@@ -192,17 +192,37 @@ class Admin extends Talks_Controller {
 	public function editseries($seriesId) {
 		// TODO: Sanitise variables
 		$this->checkLogin();
+		// Configure the upload helper...
+		$config["upload_path"] = "./files/covers/";
+		$config['allowed_types'] = 'jpg|jpeg|png';
+		$config["overwrite"] = TRUE;
+		$config['max_size']	= '500';
+		$config['max_width']  = '1000';
+		$config['max_height']  = '1000';	
+
+
+		$this->load->library("upload", $config);
 		if (isset($seriesId)) {
-			$this->load->model("series_model");
-			if ($series = $this->series_model->getSeriesById($seriesId)) {
-				$this->load->view("includes/template", array("series"=>$series, "content"=>"admin/edit_series"));
+			if ($this->input->post()) {
+				$config["file_name"] = $seriesId;
+				$this->upload->initialize($config);
+				if ($this->upload->do_upload()) {
+					$data = $this->upload->data();
+				} else {
+					$this->session->set_flashdata("alert",array("error"=>$this->upload->display_errors()));
+				}
+				print_r($this->input->post());
+				$this->load->model("series_model");
+				$series = $this->series_model->editSeries($this->input->post(), $this->input->post("id"));
+				redirect("/series/seriesdetail/".$this->input->post("id"));
 			} else {
-				show_404();
+				$this->load->model("series_model");
+				if ($series = $this->series_model->getSeriesById($seriesId)) {
+					$this->load->view("includes/template", array("series"=>$series, "content"=>"admin/edit_series"));
+				} else {
+					show_404();
+				}
 			}
-		} elseif ($this->input->post()) {
-			$this->load->model("series_model");
-			$series = $this->series_model->editSeries($this->input->post(), $this->input->post("id"));
-			redirect("/series/seriesdetail/".$this->input->post("id"));
 		} else {
 			redirect("/series/");
 		}

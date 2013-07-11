@@ -41,6 +41,11 @@ class Talks_Model extends CI_Model {
 		return ($talk->num_rows() > 0) ? array($talk->row()) : false;
 	}
 
+	public function checkValidTalkId($talkId) {
+		$talk = $this->db->get_where("talks", "id = $talkId");
+		return ($talk->num_rows() > 0) ? true : false;
+	}
+
 	public function getTalkDetailsById($talkId) {
 		$talkId = $this->db->escape($talkId);
 		$talk = $this->db->select("talks.*, speakers.name AS speakername, series.title AS seriestitle")->from("talks")->where("talks.id = ".$talkId)->join("speakers", "talks.speakerid = speakers.id")->join("series", "talks.seriesid = series.id")->get();
@@ -61,7 +66,7 @@ class Talks_Model extends CI_Model {
 		}
 	}
 
-	public function getRecentTalks($numTalks) {
+	public function getRecentTalks($numTalks = 5) {
 		$numTalks = $this->db->escape($numTalks);
 		$talks = $this->db->query("SELECT id, title, summary, date FROM talks ORDER BY date DESC LIMIT ".$numTalks);
 		if ($talks->num_rows() > 0 ) {

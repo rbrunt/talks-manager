@@ -211,7 +211,6 @@ class Admin extends Talks_Controller {
 				} else {
 					$this->session->set_flashdata("alert",array("error"=>$this->upload->display_errors()));
 				}
-				print_r($this->input->post());
 				$this->load->model("series_model");
 				$series = $this->series_model->editSeries($this->input->post(), $this->input->post("id"));
 				redirect("/series/seriesdetail/".$this->input->post("id"));
@@ -235,8 +234,10 @@ class Admin extends Talks_Controller {
 		if ($this->input->post()) {
 			$this->load->model("talks_model");
 			$insertId = $this->talks_model->addTalk($this->input->post());
-			$this->session->set_flashdata("alert", array("success"=>"Successfully added the talk <strong>".$this->input->post(title)."</strong>. Click <a href=\"".base_url("admin/addtalk")."\">here</a> to add another."));
-			redirect("/talks/talk/".$insertId);
+			// $this->session->set_flashdata("alert", array("success"=>"Successfully added the talk <strong>".$this->input->post(title)."</strong>. Click <a href=\"".base_url("admin/addtalk")."\">here</a> to add another."));
+			$this->session->set_flashdata("alert", array("success"=>"Successfully added the talk <strong>".$this->input->post(title)."</strong>. Now you just need to upload the mp3!"));
+			//redirect("/talks/talk/".$insertId);
+			redirect("/admin/uploadtalk/".$insertId);
 		}
 		else {
 			$this->load->model("series_model");
@@ -253,6 +254,49 @@ class Admin extends Talks_Controller {
 
 			$this->load->view("includes/template", array("content"=>"admin/add_talk", "seriesarray"=>$seriesarray, "speakersarray"=>$speakersarray));
 		}
+	}
+
+	public function uploadtalk($talkId) {
+		// Check that the user is logged in:
+		$this->checkLogin();
+
+		// Check that a talkId has been specified:
+		if (!isset($talkId)) redirect("admin/addtalk");
+		$this->load->model("talks_model");
+		
+		// Check that the supplied talkId is a valid talk:
+		if (!$this->talks_model->checkValidTalkId($talkId)) show_404(); // Shows a 404 error if it isnt
+
+		// Configure the upload helper...
+		$config["upload_path"] = "./files/talks/";
+		$config['allowed_types'] = 'mp3';
+		$config["overwrite"] = TRUE;
+		//$config['max_size']	= '100000';
+		$config["file_name"] = $talkId;
+
+		// Load the upload helper
+		$this->load->library("upload", $config);
+		$this->upload->initialize($config);
+
+
+
+		if ($this->upload->do_upload()) {  // They've submitted the form, so we've got a file to process...
+			$data = $this->upload->data();
+			// Add flag in DB that talk has been uploaded if file passes all the checks
+
+			// Add success message and redirect to talk details page:
+			$this->session->set_flashdata("alert", array("success"=>"File upload succesful. Please try listening to it below to check that it was the right one!"));
+			redirect("/talks/talk/$talkId");
+			// } else {
+			// 	$this->session->set_flashdata("alert",array("error"=>$this->upload->display_errors()));	
+			// }			
+		} else {
+
+			$this->load->model("talks_model");
+			$talk = $this->talks_model->getTalkDetailsById($talkId);
+			$this->load->view("includes/template", array("content"=>"admin/upload_talk", "talk"=>$talk, "alert"=>array("error"=>$this->upload->display_errors())));
+		}
+
 	}
 
 	public function addseries() {

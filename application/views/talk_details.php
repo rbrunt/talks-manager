@@ -23,6 +23,9 @@
 				</div>
 				<p>Passage: <a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk[0]->passage;?>" target="_blank"><?php echo $talk[0]->passage; ?></a></p>
 				<p id="summary"><?php echo $talk[0]->summary ?></p>
+				<audio controls preload="none" src="<?php echo base_url("files/talks/".$talk[0]->id); ?>.mp3" type="audio/mpeg">
+					<!-- Add flash fallback here... -->
+				</audio>
 				<p><a href="#">download</a></p>
 			</div>
 		</div>

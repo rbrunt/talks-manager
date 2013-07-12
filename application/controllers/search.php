@@ -6,6 +6,7 @@ class Search extends Talks_Controller {
 		if(isset($searchTerm)) {
 			$searchTerm = rawurldecode($searchTerm);
 			$this->load->model("search_model");
+			$this->load->helper("text");
 
 			$talks = $this->search_model->searchTalkNames($searchTerm);
 			$series = $this->search_model->searchSeriesByName($searchTerm);

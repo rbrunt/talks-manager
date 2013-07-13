@@ -43,10 +43,9 @@
 <?php foreach($series as $single_series): ?>
 			<li class="span4">
 				<div class="thumbnail">
-					<a class="" href="<?php echo base_url('/series/seriesdetail/'.$single_series->id)?>"><img src="http://placehold.it/500"></a>
+					<a class="" href="<?php echo base_url('/series/seriesdetail/'.$single_series->id)?>"><img src="<?php echo $artwork[$single_series->id]; ?>"></a>
 					<div class="caption">
 					<h4><a href="<?php echo base_url('/series/seriesdetail/'.$single_series->id)?>"><?php echo $single_series->title;?></a></h4>
-					<!--<h4><?php echo $single_series->title ;?></h4>-->
 					<p id=""><?php echo character_limiter($single_series->summary, 150) ;?></p>
 					</div>
 				</div>

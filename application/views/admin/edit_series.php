@@ -3,7 +3,7 @@
 <?php echo form_open_multipart(); ?>
 		<div class="span3">
 			<!-- <img src="http://placehold.it/500"> -->
-			<img src="<?php echo base_url("files/covers/".$series[0]->id.".jpg"); ?>">
+			<img src="<?php echo $artwork; ?>">
 			<p><small>You can optionally upload a new cover artwork. Files must be of jpg or png format, and smaller than 500x500px.</small></p>
 			<?php echo form_upload(array("name"=>"userfile")); ?>
 		</div>

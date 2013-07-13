@@ -68,7 +68,8 @@ class Talks_Model extends CI_Model {
 
 	public function getRecentTalks($numTalks = 5) {
 		$numTalks = $this->db->escape($numTalks);
-		$talks = $this->db->query("SELECT id, title, summary, date FROM talks ORDER BY date DESC LIMIT ".$numTalks);
+		//$talks = $this->db->query("SELECT id, title, summary, date FROM talks ORDER BY date DESC LIMIT ".$numTalks);
+		$talks = $this->db->select("id, title, summary, seriesid, date")->from("talks")->order_by("date", "DESC")->limit($numTalks)->get();
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;

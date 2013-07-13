@@ -143,18 +143,20 @@ class Admin extends Talks_Controller {
 			$this->load->model("talks_model");
 			$this->load->model("series_model");
 			$this->load->model("speakers_model");
+			$this->load->model("files_model");
 
 			$series = $this->series_model->getAllSeriesTitles();
 			$speakers = $this->speakers_model->getAllSpeakerNames();
 
 			if ($talk = $this->talks_model->getTalkById($talkId)) {
+				$artwork = $this->files_model->getSeriesArtworkFileName($talk[0]->seriesid);
 				foreach($series as $single) {
 					$seriesarray[$single->id] = $single->title;
 				}
 				foreach($speakers as $speaker) {
 					$speakerarray[$speaker->id] = $speaker->name;
 				}
-				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "speakerarray"=>$speakerarray, "content"=>"admin/edit_talk"));
+				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "speakerarray"=>$speakerarray, "content"=>"admin/edit_talk", "artwork"=>$artwork));
 			} else {
 				show_404();
 			}
@@ -217,7 +219,9 @@ class Admin extends Talks_Controller {
 			} else {
 				$this->load->model("series_model");
 				if ($series = $this->series_model->getSeriesById($seriesId)) {
-					$this->load->view("includes/template", array("series"=>$series, "content"=>"admin/edit_series"));
+					$this->load->model("files_model");
+					$artwork = $this->files_model->getSeriesArtworkFileName($seriesId);
+					$this->load->view("includes/template", array("series"=>$series, "content"=>"admin/edit_series", "artwork"=>$artwork));
 				} else {
 					show_404();
 				}

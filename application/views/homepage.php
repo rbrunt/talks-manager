@@ -7,7 +7,7 @@
 		<div class="category">
 			<div class="row">
 				<div class="span3">
-					<img src="http://placehold.it/500">
+					<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>"></a>
 				</div>
 				<div class="span9">
 					<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small><?php echo $talk->date; ?></small></h1>

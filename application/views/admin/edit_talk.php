@@ -2,7 +2,7 @@
 		<div class="row">
 			
 			<div class="span3">
-				<img src="http://placehold.it/500">
+				<img src="<?php echo $artwork; ?>">
 			</div>
 			<div class="span9">
 				<?php echo form_open("admin/edittalk"); ?>

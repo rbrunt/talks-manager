@@ -19,6 +19,8 @@
 		 	}
 		 	});
 
+		$(".activate-tooltip").tooltip();
+
 		function checkEnter(e) {
 		    var charCode;
  

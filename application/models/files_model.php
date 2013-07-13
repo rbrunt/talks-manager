@@ -6,5 +6,9 @@ class Files_Model extends CI_Model {
 		return base_url("files/covers/" . ((file_exists("files/covers/$seriesId.jpg")) ? "$seriesId.jpg" : "default.gif"));
 	}
 
+	public function checkTalkExists($talkId) {
+		return (file_exists("files/talks/$talkId.mp3")) ? true : false ;
+	}
+
 }
 

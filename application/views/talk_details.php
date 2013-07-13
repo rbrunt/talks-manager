@@ -26,6 +26,6 @@
 				<audio controls preload="none" src="<?php echo base_url("files/talks/".$talk[0]->id); ?>.mp3" type="audio/mpeg">
 					<!-- Add flash fallback here... -->
 				</audio>
-				<p><a href="#">download</a></p>
+				<p><a href="<?php echo base_url("download/talk/".$talk[0]->id); ?>">download</a></p>
 			</div>
 		</div>

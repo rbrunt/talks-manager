@@ -103,3 +103,19 @@ div.thumbnail:hover{
      -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
           box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 }
+
+.popover {
+	min-width:200px;
+    max-width: 600px;
+}
+
+.popover-content {
+    max-height:500px;
+    overflow-y: auto;
+}
+
+.img-center {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}

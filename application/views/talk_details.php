@@ -29,3 +29,8 @@
 				<p><a href="<?php echo base_url("download/talk/".$talk[0]->id); ?>">download</a></p>
 			</div>
 		</div>
+		<div class="row">
+			<div class="span12">
+				<p class="muted" id="copyright-notice"><small>Scripture quotations marked &quot;ESV&quot; are taken from The Holy Bible, English Standard Version. Copyright &copy;2001 by <a href="http://www.crosswaybibles.org">Crossway Bibles</a>, a publishing ministry of Good News Publishers. Used by permission. All rights reserved. Text provided by the <a href="http://www.gnpcb.org/esv/share/services/">Crossway Bibles Web Service</a></small></p>
+			</div>
+		</div>

@@ -26,7 +26,7 @@
 						<td><?php echo $talk->date;?></td>
 						<td><?php echo $talk->speakername; ?></td>
 						<td><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td>
-						<td><a href="<?php echo base_url('/admin/edittalk/'.$talk->id)?>" class="btn btn-mini btn-primary">Edit</a></td>
+						<td><a href="<?php echo base_url('/admin/edittalk/'.$talk->id)?>" title="Edit" class="btn btn-mini btn-primary">Edit</a></td>
 					</tr>
 <?php endforeach;?>
 				</tbody>

@@ -11,9 +11,9 @@
 				</div>
 				<div class="span9">
 					<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small><?php echo $talk->date; ?></small></h1>
+					<p class="muted"><i class="icon-user"></i> <?php echo $talk->speakername; ?></p>
 					<div id="categorydescription">
 						<p><?php echo $talk->summary; ?></p>
-						<p>TODO: Add speaker here too!</p>
 					</div>
 				</div>
 			</div>

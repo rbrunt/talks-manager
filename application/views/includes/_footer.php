@@ -37,6 +37,32 @@
 				return false;	
 			}
 		}
+
+		var passagecontent = "";
+
+		$("#passagelink").popover({
+			html: true,
+			trigger: "hover focus",
+			title: function (){
+				return "<strong>"+$("#passagelink").html()+"</strong>";
+			},
+			content: function() {
+				if (passagecontent == "") {
+					getPassage($("#passagelink").html());
+					return "<div id=\"popoverinner\">Loading...</div>";
+				} else {
+					return passagecontent;
+				}
+			}
+			//delay: {hide:500}
+		});
+
+		function getPassage(passage) {
+			$.post("<?php echo base_url("/ajax/esvlookup"); ?>", {passage: passage}, function (data) {
+				passagecontent = data;
+				$("#popoverinner").html(data);
+			});
+		}
 	</script>
 </body>
 </html>

@@ -119,3 +119,49 @@ div.thumbnail:hover{
 	margin-left:auto;
 	margin-right:auto;
 }
+
+
+
+/*
+	Styling for bible texts
+*/
+
+
+/* Font and colours to look a bit like a bible (serif and sepia) */
+
+/*@import url(http://fonts.googleapis.com/css?family=Sorts+Mill+Goudy:400,400italic);*/
+
+/*.esv-text {
+  	font-family: "Sorts Mill Goudy", serif;
+    background:#FBF0D9;
+    color:#5F4B32;
+    margin: -9px -14px;
+    padding: 9px 14px;
+}*/
+
+.esv-text p {
+    margin-bottom:5px; /* Reduce padding so that less scrolling is required*/
+}
+
+.esv-text h3 {
+    margin:0;
+    font-size:1.1em;
+}
+
+.verse-num, .chapter-num {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+  top: -0.5em;
+}
+
+/*.popover.right .arrow:after {
+    border-right-color:#FBF0D9;
+}*/
+
+/*.popover-content {
+    background:#FBF0D9;
+    margin-left:-1px;
+    margin-right:-1px;
+}*/

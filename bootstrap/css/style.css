@@ -165,3 +165,32 @@ div.thumbnail:hover{
     margin-left:-1px;
     margin-right:-1px;
 }*/
+
+.img-drop {
+    position: relative;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+    width:100%;
+    top:-220px;
+    height: 220px;
+	background: rgba(255,255,255,0.75);
+	text-align:center;
+	margin-bottom:-100%;
+	box-shadow: 0 0 15px #555 inset;
+    opacity: 0;
+}
+
+.droptargetactive {
+    opacity: 1 !important;
+}
+
+#progress {
+    position:absolute;
+    background:  blue;
+    width:0%;
+    height:100%;
+   	background-repeat: no-repeat;
+	/*background-size: 100%;*/
+	background-size:220px;
+}

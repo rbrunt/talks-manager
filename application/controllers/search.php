@@ -11,8 +11,12 @@ class Search extends Talks_Controller {
 
 			$talks = $this->search_model->searchTalkNames($searchTerm);
 			$series = $this->search_model->searchSeriesByName($searchTerm);
-			foreach($series as $single_series) {
-				$artwork[$single_series->id] = $this->files_model->getSeriesArtworkFileName($single_series->id);
+			if ($series) {
+				foreach($series as $single_series) {
+					$artwork[$single_series->id] = $this->files_model->getSeriesArtworkFileName($single_series->id);
+				}
+			} else {
+				$artwork = false;
 			}
 
 			$this->load->view('includes/template', array("content"=>"search_results", "talks"=>$talks, "series"=>$series, "searchTerm"=>$searchTerm, "artwork"=>$artwork));

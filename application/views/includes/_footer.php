@@ -47,6 +47,9 @@
 			title: function (){
 				return "<strong>"+$("#passagelink").html()+" <a href=\"http://www.esv.org\" class=\"muted pull-right\">ESV</a></strong>";
 			},
+			delay: {
+				hide: 500
+			},
 			content: function() {
 				if (passagecontent == "") {
 					getPassage($("#passagelink").html());

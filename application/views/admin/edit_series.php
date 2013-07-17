@@ -6,7 +6,8 @@
 			<img id="cover" src="<?php echo $artwork; ?>">
 			<div id="dragtarget" class="img-drop"><div id="progress"></div>Drop the image here!</div>
 			<p><small>You can optionally upload a new cover artwork. Files must be of jpg or png format, and smaller than 500x500px.</small></p>
-			<?php echo form_upload(array("name"=>"userfile")); ?>
+			<?php echo form_upload(array("name"=>"userfile", "id"=>"fileselector")); ?>
+			<a href="#" id="uploadlink">Upload</a>
 		</div>
 		<div class="span9">
 			<div class="page-header">

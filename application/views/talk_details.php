@@ -29,7 +29,7 @@
 				</audio>
 				<p><a href="<?php echo base_url("download/talk/".$talk[0]->id); ?>">download</a></p>
 <?php else : ?>
-				<p class="text-warning"><i class="icon-volume-off"></i>There's no audio uploaded yet, but it should be added soon!</p>
+				<p class="text-warning"><i class="icon-warning-sign"></i> There's no audio uploaded yet, but it should be added soon!</p>
 <?php endif; ?>				
 			</div>
 		</div>

@@ -27,7 +27,7 @@
 						<td><?php echo $talk->date;?></td>
 						<td><?php echo $talk->speakername; ?></td>
 						<td><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td>
-						<td><i class="<?php echo ($talk->exists ? "icon-ok" : "icon-remove"); ?>"></i></td>
+						<td><i class="activate-tooltip <?php echo ($talk->exists ? "icon-ok text-success" : "icon-warning-sign text-error"); ?>" title="<?php echo ($talk->exists ? "There is a file uploaded for this talk" : "No file uploaded - you'll need to upload one!"); ?>" data-placement="bottom"></i></td>
 						<td><a href="<?php echo base_url('/admin/edittalk/'.$talk->id)?>" title="Edit" class="btn btn-mini btn-primary">Edit</a></td>
 					</tr>
 <?php endforeach;?>

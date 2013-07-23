@@ -8,9 +8,10 @@
 	<meta name="description" content="">
 	<meta name="author" content="DICCU">
 
-	<link href="<?php echo base_url('/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet">
-	<link href="<?php echo base_url('/bootstrap/css/style.css')?>" rel="stylesheet">
-	<link href="<?php echo base_url('/bootstrap/css/datepicker.css')?>" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('/bootstrap/css/bootstrap.min.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('/bootstrap/css/style.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('/bootstrap/css/datepicker.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('/static/font-awesome/css/font-awesome.min.css'); ?>">
 	<!-- <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"> -->
 </head>
 <body>
@@ -25,7 +26,7 @@
 					<li><a href="<?php echo base_url('/talks/talk/1')?>">Talk</a></li>
 				</ul>
 				<ul class="nav pull-right">
-					<li><a class="activate-tooltip" data-placement="bottom" data-toggle="tooltip" title="Edit and upload talks and series. (You'll need to have a login)" href="<?php echo base_url("admin") ;?>"><i class="icon-cog icon-white"></i></a></li>
+					<li><a class="activate-tooltip" data-container="body" data-placement="bottom" data-toggle="tooltip" title="Edit and upload talks and series. (You'll need to have a login)" href="<?php echo base_url("admin") ;?>"><i class="icon-cog icon-white"></i></a></li>
 				</ul>
 				<form class="form-search navbar-search pull-right">
 					<input type="text" class="search-query input-small" placeholder="Search..." id="searchbox">

@@ -16,6 +16,7 @@ class Admin extends Talks_Controller {
 		$this->checkLogin();
 		$this->load->library("pagination"); // We want to paginate so we don't get a really really long list if there are lots of talks on the system...
 		$this->load->model("talks_model");
+		$this->load->model("files_model");
 
 		// Config for pagination
 		$config["base_url"] = base_url("/admin/talks/");
@@ -24,6 +25,11 @@ class Admin extends Talks_Controller {
 
 		$this->pagination->initialize($config);
 		$talks = $this->talks_model->getTalkPage($limit, $this->uri->segment(3));
+
+		foreach ($talks as $talk) {
+			$talk->exists = $this->files_model->checkTalkExists($talk->id);
+		}
+
 		$this->load->view("includes/template", array("content"=>"all_talks", "talks"=>$talks));
 	}
 

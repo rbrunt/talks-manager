@@ -16,6 +16,7 @@
 					<th>Date</th>
 					<th>Speaker</th>
 					<th>Passage</th>
+					<th><i class="icon-headphones"></i></th>
 					<th><a href="<?php echo base_url("admin/addtalk"); ?>" class="btn btn-mini" title="Add a Talk"><i class="icon-plus"></i></a></th>
 				</thead>
 				<tbody>
@@ -26,6 +27,7 @@
 						<td><?php echo $talk->date;?></td>
 						<td><?php echo $talk->speakername; ?></td>
 						<td><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td>
+						<td><i class="<?php echo ($talk->exists ? "icon-ok" : "icon-remove"); ?>"></i></td>
 						<td><a href="<?php echo base_url('/admin/edittalk/'.$talk->id)?>" title="Edit" class="btn btn-mini btn-primary">Edit</a></td>
 					</tr>
 <?php endforeach;?>

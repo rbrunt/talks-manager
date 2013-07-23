@@ -23,10 +23,14 @@
 				</div>
 				<p>Passage: <a id="passagelink" href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk[0]->passage;?>" target="_blank"><?php echo $talk[0]->passage; ?></a></p>
 				<p id="summary"><?php echo $talk[0]->summary ?></p>
+<?php if($talk_exists) : ?>
 				<audio controls preload="none" src="<?php echo base_url("files/talks/".$talk[0]->id); ?>.mp3" type="audio/mpeg">
 					<!-- Add flash fallback here... -->
 				</audio>
 				<p><a href="<?php echo base_url("download/talk/".$talk[0]->id); ?>">download</a></p>
+<?php else : ?>
+				<p class="text-warning"><i class="icon-volume-off"></i>There's no audio uploaded yet, but it should be added soon!</p>
+<?php endif; ?>				
 			</div>
 		</div>
 		<div class="row">

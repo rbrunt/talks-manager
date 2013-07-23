@@ -1,8 +1,8 @@
 <div class="row">
 	<div class="span12">
 	<div class="page-header">
-		<h1><i class="icon-cog"></i> Admin Page <small>That's Administration to you!</small></h1>
-		<a class="btn btn-danger pull-right" href="<?php echo base_url("/admin/logout/"); ?>">Logout</a>
+		<h1><i class="icon-cog"></i> Admin Page <small>This is where the fun happens!</small></h1>
+		<a class="btn btn-danger pull-right" href="<?php echo base_url("/admin/logout/"); ?>"><i class="icon-signout icon-white"></i> Logout</a>
 		<p>Select an option below:</p>
 	</div>
 </div>

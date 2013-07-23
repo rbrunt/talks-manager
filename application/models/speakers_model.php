@@ -15,8 +15,8 @@ class Speakers_Model extends CI_Model {
 	}
 
 	public function countSpeakers() {
-		$talks = $this->db->count_all('speakers');
-		return $talks;
+		$speakers = $this->db->count_all('speakers');
+		return $speakers;
 	}
 
 	public function getSpeakersPage($number, $offset) {

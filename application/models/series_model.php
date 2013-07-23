@@ -15,8 +15,8 @@ class Series_Model extends CI_Model {
 	}
 
 	public function countSeries() {
-		$talks = $this->db->count_all('series');
-		return $talks;
+		$series = $this->db->count_all('series');
+		return $series;
 	}
 
 	public function getAllWithTalkCount() { // Talks to the talks table, but makes more sense to have it in this model...

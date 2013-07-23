@@ -14,6 +14,11 @@ class Users_Model extends CI_Model {
 	// 	}
 	// }
 
+	public function countUsers() {
+		$users = $this->db->count_all('users');
+		return $users;
+	}
+
 	public function getUserById($userId) {
 		$user = $this->db->where("id", $userId)->get("users");
 		return ($user->num_rows() > 0) ? $user->row() : false;

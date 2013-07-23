@@ -9,7 +9,15 @@ class Admin extends Talks_Controller {
 
 	public function index()	{
 		$this->checkLogin();
-		$this->load->view('includes/template', array("content"=>"admin/home"));
+		$this->load->model("talks_model");
+		$this->load->model("series_model");
+		$this->load->model("speakers_model");
+		$this->load->model("users_model");
+		$num_talks = $this->talks_model->countTalks();
+		$num_series = $this->series_model->countSeries();
+		$num_speakers = $this->speakers_model->countSpeakers();
+		$num_users = $this->users_model->countUsers();
+		$this->load->view('includes/template', array("content"=>"admin/home", "num_talks"=>$num_talks, "num_series"=>$num_series, "num_speakers"=>$num_speakers, "num_users"=>$num_users));
 	}
 
 	public function talks() {

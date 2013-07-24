@@ -20,7 +20,9 @@
 		 	}
 		 	});
 
-		$(".activate-tooltip").tooltip();
+		$(document).ready(function(){
+  			$(".activate-tooltip").tooltip();
+		});
 
 		function checkEnter(e) {
 		    var charCode;

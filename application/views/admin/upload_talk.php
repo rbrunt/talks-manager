@@ -9,25 +9,28 @@
 		</div>
 		<div class="row">
 			<div class="span12">
-				<p>The talk has been added to the database, now you just need to upload the recording!</p>
-				<p>Only mp3s will be accepted, we recommend that you export the mp3 from audacity with the following settings:</p>
-				<table class="table">
-					<tbody>
-						<tr>
-							<th>Audio Chanels</th>
-							<td>Use mono audio</td>
-						</tr>
-						<tr>
-							<th>Codec Settings</th>
-							<td>Use the LAME codec in Audacity, using 32kbps variable bitrate</td>
-						</tr>
-						<tr>
-							<th>File Size</th>
-							<td>You can upload files up to 100MB onto this website, but try to keep the file to about 15-20MB for an hour long talk.</td>
-						</tr>
-					</tbody>
-				</table>
-				<p>Once you've done that, just choose the file in the form below, then hit upload!</p>
+				<a class="btn btn-block" data-toggle="collapse" data-target="#mp3help"><i class="icon-caret-down"></i> Click to show mp3 File Requirements <i class="icon-caret-down"></i></a>
+				<div id="mp3help" class="collapse">
+					<p>The talk has been added to the database, now you just need to upload the recording!</p>
+					<p>Only mp3s will be accepted, we recommend that you export the mp3 from audacity with the following settings:</p>
+					<table class="table">
+						<tbody>
+							<tr>
+								<th>Audio Chanels</th>
+								<td>Use mono audio</td>
+							</tr>
+							<tr>
+								<th>Codec Settings</th>
+								<td>Use the LAME codec in Audacity, using 32kbps variable bitrate</td>
+							</tr>
+							<tr>
+								<th>File Size</th>
+								<td>You can upload files up to 100MB onto this website, but try to keep the file to about 15-20MB for an hour long talk.</td>
+							</tr>
+						</tbody>
+					</table>
+					<p>Once you've done that, just choose the file in the form below, then hit upload!</p>
+				</div>
 			</div>
 		</div>
 		<div class="row">

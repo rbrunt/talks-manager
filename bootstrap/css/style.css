@@ -1,3 +1,6 @@
+.hide {
+	display:none;
+}
 
 body>div.container{
 	padding-top:20px;

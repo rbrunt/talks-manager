@@ -11,8 +11,10 @@
 		</div>
 		<div class="span9">
 			<div class="page-header">
+				<!-- <?php echo form_open_multipart(); ?>-->
 				<?php echo form_input(array("name"=>"title", "value"=>$series[0]->title, "class"=>"h1 span9", "maxlength"=>"100", "placeholder"=>"Series Title")); ?></h1>
 			</div>
+			<?php echo form_open(); ?>
 			<?php echo form_textarea(array("name"=>"summary", "value"=>$series[0]->summary,  "class"=>"span9", "maxlength"=>"1000", "placeholder"=>"Series Summary")); ?></p>
 			<?php echo form_submit(array("value"=>"Submit Edits", "class"=>"btn btn-primary")); ?>
 			<?php echo form_hidden(array("id"=>$series[0]->id)); ?>

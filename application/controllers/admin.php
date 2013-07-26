@@ -235,7 +235,7 @@ class Admin extends Talks_Controller {
 				if ($series = $this->series_model->getSeriesById($seriesId)) {
 					$this->load->model("files_model");
 					$artwork = $this->files_model->getSeriesArtworkFileName($seriesId);
-					$this->load->view("includes/template", array("series"=>$series, "content"=>"admin/edit_series", "artwork"=>$artwork));
+					$this->load->view("includes/template", array("series"=>$series, "content"=>"admin/edit_series", "artwork"=>$artwork, "page"=>"editseries"));
 				} else {
 					show_404();
 				}
@@ -312,7 +312,7 @@ class Admin extends Talks_Controller {
 
 			$this->load->model("talks_model");
 			$talk = $this->talks_model->getTalkDetailsById($talkId);
-			$this->load->view("includes/template", array("content"=>"admin/upload_talk", "talk"=>$talk, "alert"=>array("error"=>$this->upload->display_errors())));
+			$this->load->view("includes/template", array("content"=>"admin/upload_talk", "talk"=>$talk, "page"=>"uploadtalk", "alert"=>array("error"=>$this->upload->display_errors())));
 		}
 
 	}

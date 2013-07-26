@@ -37,4 +37,23 @@ class Ajax extends Talks_Controller {
         }
     }
 
+
+    public function mp3upload($talkId) {
+        if ($this->session->userdata("userid")) {
+            
+            $config["allowedExtensions"] = array("mp3");
+            $config["sizeLimit"] = 8 * 1024 * 1024;
+            $config["fileName"] = $talkId;
+
+            $this->load->library("Qqfileuploader", $config);
+            $result = $this->qqfileuploader->handleUpload("./files/talks/", true);
+
+            $result["message"] = "sucessfully uploaded your file!";
+            echo json_encode($result);
+            //echo json_encode(array("success"=>true, "message"=>"New cover artwork has been successfully uploaded. " . $this->input->post("qqfilename")));
+        } else {
+            echo json_encode(array("success"=>false, "error"=>"you need to be logged in to upload anything. Try refreshing the page"));
+        }
+    }
+
 }

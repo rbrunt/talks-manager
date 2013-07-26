@@ -36,10 +36,14 @@
 		<div class="row">
 			<div class="span12">
 			<hr>
-				<?php echo form_open_multipart(); ?>
-				<?php echo form_upload(array("name"=>"userfile")); ?>
-				<?php echo form_submit(array("value"=>"Upload", "class"=>"btn btn-primary")); ?>
-				<?php echo form_close(); ?>
+				<p><span class="btn btn-file"><i class="icon-file"></i> <span id="filename">Select MP3 File to upload...</span><?php echo form_upload(array("name"=>"userfile", "id"=>"mp3selector", "accept"=>".mp3")); ?></span>
+				<a href="#" id="uploadlink" class="btn btn-small btn-success disabled"><i class="icon-upload-alt icon-white"></i> Upload</a> <a href="#" class="text-error" id="cancelbutton">Cancel</a>
+				<!-- <span class="label pull-right" id="progresstext"></span> -->
+				</p>
+				<strong id="progressdescription">Upload Progress:</strong><span class="pull-right" id="progresstext"></span>
+				<div class="progress hide" style="position: relative;">
+					<div class="bar" style=""></div>
+				</div>
 			<hr>
 			</div>
 		</div>

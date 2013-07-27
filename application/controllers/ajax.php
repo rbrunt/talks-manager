@@ -42,7 +42,7 @@ class Ajax extends Talks_Controller {
         if ($this->session->userdata("userid")) {
             
             $config["allowedExtensions"] = array("mp3");
-            $config["sizeLimit"] = 8 * 1024 * 1024;
+            $config["sizeLimit"] = 100 * 1024 * 1024;
             $config["fileName"] = $talkId;
 
             $this->load->library("Qqfileuploader", $config);

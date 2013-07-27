@@ -226,3 +226,30 @@ div.thumbnail:hover{
   transform: translate(-300px, 0) scale(4);
   direction: ltr;
 }
+
+
+#dropzone {
+	position: absolute;
+	width:100%;
+	height:100%;
+	box-sizing: border-box;
+	z-index:2;
+	background: #5bc0de;
+	background: rgba(91, 192, 222, 0.75);
+	border-radius:10px;
+	border: 3px #2f96b4 dashed;
+}
+
+#dropzone>h3 {
+	color: #fff;
+	text-align:center;
+}
+
+#dropzone.dropactive {
+	background: #5bc0de !important;
+}
+
+#dropzone.processing {
+	background: #62c462;
+	border-color: #51a351;
+}

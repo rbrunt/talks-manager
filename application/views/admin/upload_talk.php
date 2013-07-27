@@ -34,7 +34,8 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="span12">
+			<div class="span12" style="position:relative;">
+			<div id="dropzone" style="display:none;"><h3>Drop file here to begin upload</h3></div>
 			<hr>
 				<p><span class="btn btn-file"><i class="icon-file"></i> <span id="filename">Select MP3 File to upload...</span><?php echo form_upload(array("name"=>"userfile", "id"=>"mp3selector", "accept"=>".mp3")); ?></span>
 				<a href="#" id="uploadlink" class="btn btn-small btn-success disabled"><i class="icon-upload-alt icon-white"></i> Upload</a> <a href="#" class="text-error" id="cancelbutton">Cancel</a>

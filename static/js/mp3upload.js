@@ -94,13 +94,6 @@ $("#mp3selector").on("change", function (e) {
 	$(".progress").removeClass("hide");
 });
 
-function bytesToSizeDecimal(bytes) {
-	var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-	if (bytes == 0) return 'n/a';
-	var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-	return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
-};
-
 $("#uploadlink").on("click", function(e) {
  	e.preventDefault();
  	fineUploaderBasicInstance.addFiles(document.getElementById("mp3selector").files);

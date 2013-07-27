@@ -13,6 +13,9 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('/bootstrap/css/datepicker.css')?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('/static/font-awesome/css/font-awesome.min.css'); ?>">
 	<!-- <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"> -->
+	<script>
+		var base_url = "<?php echo base_url(); ?>";
+	</script>
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-static-top">

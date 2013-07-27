@@ -50,7 +50,7 @@
 		</div>
 		<div class="row">
 			<div class="span3">
-				<img src="http://placehold.it/500">
+				<img src="<?php echo $artwork; ?>">
 				<h4><?php echo $talk[0]->seriestitle; ?></h4>
 			</div>
 			<div class="span9">

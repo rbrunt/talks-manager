@@ -1,13 +1,15 @@
 	<div class="row">
 
 <?php echo form_open_multipart(); ?>
-		<div class="span3">
-			<!-- <img src="http://placehold.it/500"> -->
+		<div class="span3" style="position:relative;">
+			<div id="progress"></div>
+			<!-- <div id="dragtarget" class="img-drop"><div id="progress"></div><h3>Drop file here to begin upload</h3></div> -->
+			<div id="dropzone" class="img-drop"><h3>Drop file here to begin upload</h3></div>
 			<img id="cover" src="<?php echo $artwork; ?>">
-			<div id="dragtarget" class="img-drop"><div id="progress"></div>Drop the image here!</div>
 			<p><small>You can optionally upload a new cover artwork. Files must be of jpg or png format, and smaller than 500x500px.</small></p>
 			<span class="btn btn-small btn-file"><i class="icon-picture"></i> Select Cover...<?php echo form_upload(array("name"=>"userfile", "id"=>"fileselector")); ?></span>
-			<a href="#" id="uploadlink" class="btn btn-small btn-success"><i class="icon-upload-alt icon-white"></i> Upload</a>
+			<a href="#" id="uploadlink" class="btn btn-small btn-success disabled"><i class="icon-upload-alt icon-white"></i> Upload</a>
+			<p><span id="filename"></span></p>
 		</div>
 		<div class="span9">
 			<div class="page-header">

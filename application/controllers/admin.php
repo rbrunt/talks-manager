@@ -214,7 +214,7 @@ class Admin extends Talks_Controller {
 		$config["overwrite"] = TRUE;
 		$config['max_size']	= '500';
 		$config['max_width']  = '1000';
-		$config['max_height']  = '1000';	
+		$config['max_height']  = '1000';
 
 
 		$this->load->library("upload", $config);
@@ -309,10 +309,11 @@ class Admin extends Talks_Controller {
 			// 	$this->session->set_flashdata("alert",array("error"=>$this->upload->display_errors()));	
 			// }			
 		} else {
-
 			$this->load->model("talks_model");
+			$this->load->model("files_model");
 			$talk = $this->talks_model->getTalkDetailsById($talkId);
-			$this->load->view("includes/template", array("content"=>"admin/upload_talk", "talk"=>$talk, "page"=>"uploadtalk", "alert"=>array("error"=>$this->upload->display_errors())));
+			$artwork = $this->files_model->getSeriesArtworkFileName($talk[0]->seriesid);
+			$this->load->view("includes/template", array("content"=>"admin/upload_talk", "talk"=>$talk, "page"=>"uploadtalk", "alert"=>array("error"=>$this->upload->display_errors()), "artwork"=>$artwork));
 		}
 
 	}

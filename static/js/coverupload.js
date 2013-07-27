@@ -9,15 +9,31 @@ document.getElementById("uploadlink").addEventListener("click", function(e) {
 }, false);
 
 var dragAndDropModule = new qq.DragAndDrop({
-	dropZoneElements: [document.getElementById("dragtarget")],
+	dropZoneElements: [document.getElementById("dropzone")],
 	classes: {
-		dropActive: "droptargetactive"
+		dropActive: "dropactive"
 	},
+	allowMultipleItems: false,
+	hideDropZonesBeforeEnter: true,
 	callbacks: {
 		processingDroppedFiles: function () {
-			qq(document.getElementById("dragtarget")).addClass("droptargetactive");
+			$("#dropzone").css("display: block;");
+			$("#dropzone").addClass("processing");
+			$("#dropzone>h3").html('<i class="icon-refresh icon-spin"></i> Processing...');
 		},
 		processingDroppedFilesComplete: function (files) {
+			console.log("All files processed");
+
+			$("span#filename").html("<strong>" + files[0].name + " (" + bytesToSizeDecimal(files[0].size) + ")</strong>");
+			$("#uploadlink").removeClass("disabled");
+			$(".progress").removeClass("hide");
+
+			$("#dropzone").removeClass("processing dropactive");
+			$("#dropzone>h3").html('Drop file here to begin upload');
+
+
+
+
 			var reader = new FileReader();
 			reader.onload = function(e){
 				$("#progress").css("background-image", "url(" + e.target.result +")");
@@ -34,9 +50,6 @@ fineUploaderBasicInstance = new qq.FineUploaderBasic({
 	request: {
 		// endpoint: '<?php echo base_url("ajax/coverupload/".$this->uri->segment(3)); ?>'
 		endpoint: base_url + "/ajax/coverupload/" + document.URL.substr(document.URL.lastIndexOf('/') + 1) // This is set by PHP in the footer
-	},
-	paste: {
-		targetElement: function(){return document.querySelctor("textarea");}
 	},
 	multiple: false,
 	callbacks: {
@@ -55,7 +68,6 @@ fineUploaderBasicInstance = new qq.FineUploaderBasic({
 					var data = e.target.result;
 
 					$("#cover").attr("src", data);
-					qq(document.getElementById("dragtarget")).removeClass("droptargetactive");
 					$("#progress").width(0);
 					$("#progress").css("background-image", "");
 				}
@@ -67,31 +79,22 @@ fineUploaderBasicInstance = new qq.FineUploaderBasic({
 		onError: function (id, name, errorReason, xhr) {
 			var html = '<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Error: </strong>' + errorReason + '</div>';
 			$("#alertscontainer").append(html);
-			qq(document.getElementById("dragtarget")).removeClass("droptargetactive");
 			$("#progress").width(0);
 			$("#progress").css("background-image", "");
 		}
 	}
 });
 
-var dragAndDropModule = new qq.DragAndDrop({
- 	dropZoneElements: [document.getElementById("dragtarget")],
- 	classes: {
-		dropActive: "droptargetactive"
-	},
-	callbacks: {
-		processingDroppedFiles: function () {
-			qq(document.getElementById("dragtarget")).addClass("droptargetactive");
-		},
-		processingDroppedFilesComplete: function (files) {
-			var reader = new FileReader();
-			reader.onload = function(e){
-				$("#progress").css("background-image", "url(" + e.target.result +")");
-			}
-			reader.readAsDataURL(files[0]);
-
-
-			fineUploaderBasicInstance.addFiles(files);
-		}
-	}
+$("#fileselector").on("change", function (e) {
+	file = e.target.files[0];
+	$("#uploadlink").removeClass("disabled");
+	$("span#filename").html("<strong>" + file.name + " (" + bytesToSizeDecimal(file.size) + ")</strong>");
+	//$(".progress").removeClass("hide");
 });
+
+function bytesToSizeDecimal(bytes) {
+	var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+	if (bytes == 0) return 'n/a';
+	var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+	return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
+};

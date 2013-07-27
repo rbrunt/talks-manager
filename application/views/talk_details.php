@@ -15,7 +15,7 @@
 			</div>
 			<div class="span9">
 				<div class="page-header">
-					<h1><?php echo $talk[0]->title ?> <small><?php echo $talk[0]->speakername ?></small></h1>
+					<h1><?php echo $talk[0]->title ?> <small class="nowrap"><?php echo $talk[0]->speakername ?></small></h1>
 <?php if($isLoggedIn) : ?>					
 					<a class="btn btn-primary pull-right" title="Edit this talk" href="<?php echo base_url('/admin/edittalk/'.$talk[0]->id);?>">Edit</a>
 <?php endif; ?>					

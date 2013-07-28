@@ -253,7 +253,7 @@ class Admin extends Talks_Controller {
 			$this->load->model("talks_model");
 			$insertId = $this->talks_model->addTalk($this->input->post());
 			// $this->session->set_flashdata("alert", array("success"=>"Successfully added the talk <strong>".$this->input->post(title)."</strong>. Click <a href=\"".base_url("admin/addtalk")."\">here</a> to add another."));
-			$this->session->set_flashdata("alert", array("success"=>"Successfully added the talk <strong>".$this->input->post(title)."</strong>. Now you just need to upload the mp3!"));
+			$this->session->set_flashdata("alert", array("success"=>"Successfully added the talk <strong>".$this->input->post("title")."</strong>. Now you just need to upload the mp3!"));
 			//redirect("/talks/talk/".$insertId);
 			redirect("/admin/uploadtalk/".$insertId);
 		}

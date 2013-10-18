@@ -74,5 +74,6 @@ function getPassage(passage) {
 	$.post(base_url + "ajax/esvlookup", {passage: passage}, function (data) {
 		passagecontent = data;
 		$("#popoverinner").html(data);
+		$("#passagelink").popover("show");
 	});
 }

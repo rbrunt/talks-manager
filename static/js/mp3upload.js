@@ -32,13 +32,13 @@ var dragAndDropModule = new qq.DragAndDrop({
 
 
 			/* plays dropped file automatically */
-			var reader = new FileReader();
+			/*var reader = new FileReader();
 			reader.onload = function(e){
 				var audioElement = document.createElement('audio');
 				audioElement.setAttribute('src', e.target.result);
 				audioElement.play();
 			}
-			reader.readAsDataURL(files[0]);
+			reader.readAsDataURL(files[0]);*/
 			fineUploaderBasicInstance.addFiles(files);
 		}
 	}
@@ -76,6 +76,7 @@ fineUploaderBasicInstance = new qq.FineUploaderBasic({
 				$(".progress").removeClass("active");
 				$(".progress").removeClass("progress-striped");
 				$(".bar").html("<strong>Success!</strong>");
+				$("#alertscontainer").append("<div class=\"alert alert-success fade in\"><button class=\"close\" data-dismiss=\"alert\" type=\"button\">&times;</button><strong>Success!</strong><p>mp3 file successfully uploaded! Click <a href="+base_url+"talks/talk/"+document.URL.substr(document.URL.lastIndexOf('/') + 1)+">here</a> to go to the talk page and listen to the track back again.</p></div>");
 			}
 		},
 		onError: function (id, name, errorReason, xhr) {

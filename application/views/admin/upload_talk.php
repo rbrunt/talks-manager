@@ -60,6 +60,5 @@
 				</div>
 				<p>Passage: <a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk[0]->passage;?>" target="_blank"><?php echo $talk[0]->passage; ?></a></p>
 				<p id="summary"><?php echo $talk[0]->summary ?></p>
-				<p><a href="#">download</a></p>
 			</div>
 		</div>

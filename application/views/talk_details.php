@@ -21,7 +21,9 @@
 <?php endif; ?>					
 					<p class="muted"><?php echo $talk[0]->date ?></p>
 				</div>
+<?php if($talk[0]->passage != ""): ?>
 				<p>Passage: <a id="passagelink" href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk[0]->passage;?>" target="_blank"><?php echo $talk[0]->passage; ?></a></p>
+<?php endif; ?>
 				<p id="summary"><?php echo $talk[0]->summary ?></p>
 <?php if($talk_exists) : ?>
 				<audio controls preload="none" src="<?php echo base_url("files/talks/".$talk[0]->id); ?>.mp3" type="audio/mpeg">
@@ -33,8 +35,10 @@
 <?php endif; ?>				
 			</div>
 		</div>
+<?php if($talk[0]->passage != ""): ?>		
 		<div class="row">
 			<div class="span12">
 				<p class="muted" id="copyright-notice"><small>Scripture quotations marked &quot;ESV&quot; are taken from The Holy Bible, English Standard Version. Copyright &copy;2001 by <a href="http://www.crosswaybibles.org">Crossway Bibles</a>, a publishing ministry of Good News Publishers. Used by permission. All rights reserved. Text provided by the <a href="http://www.gnpcb.org/esv/share/services/">Crossway Bibles Web Service</a></small></p>
 			</div>
+<?php endif; ?>
 		</div>

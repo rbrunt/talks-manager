@@ -15,12 +15,18 @@
 					</div>
 					<?php echo form_dropdown("speakerid", $speakerarray, $talk[0]->speakerid, 'class="span3"'); ?>
 				</div>
+				<?php if($talk[0]->exists):?>
+					<p class="text-success"><i class="icon-ok"></i> An mp3 has been uploaded for this talk. If you want to replace the current file, just <a href="<?php echo base_url('/admin/uploadtalk/'.$talk[0]->id); ?>">upload a new one</a>.</p>
+				<?php else: ?>
+					<p class="text-error"><i class="icon-warning-sign"></i> No audio has been uploaded yet for this talk. To do it now, <a href="<?php echo base_url('/admin/uploadtalk/'.$talk[0]->id); ?>">click here</a>.</p>
+				<?php endif; ?>
 				<div class="input-prepend">
 						<span class="add-on"><i class="icon-book"></i></span>
 						<?php echo form_input(array("name"=>"passage", "value"=>$talk[0]->passage, "class"=>"span3", "maxlength"=>"50", "placeholder"=>"Passage")); ?>
 					</div>
 				<?php echo form_textarea(array("name"=>"summary", "value"=>$talk[0]->summary, "class"=>"span9", "maxlength"=>"1000", "placeholder"=>"Talk Summary")); ?>
 				<?php echo form_submit(array("value"=>"Submit Edits", "class"=>"btn btn-primary")); ?>
+				<a class="btn" href="<?php echo base_url('/talks/talk/'.$talk[0]->id); ?>">Cancel</a>
 				<?php echo form_hidden(array("id"=>$talk[0]->id)); ?>
 			<?php echo form_close(); ?>
 			</div>

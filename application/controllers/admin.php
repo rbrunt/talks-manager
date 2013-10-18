@@ -158,7 +158,7 @@ class Admin extends Talks_Controller {
 			$this->load->model("series_model");
 			$this->load->model("speakers_model");
 			$this->load->model("files_model");
-
+			
 			$series = $this->series_model->getAllSeriesTitles();
 			$speakers = $this->speakers_model->getAllSpeakerNames();
 
@@ -170,6 +170,7 @@ class Admin extends Talks_Controller {
 				foreach($speakers as $speaker) {
 					$speakerarray[$speaker->id] = $speaker->name;
 				}
+				$talk[0]->exists = $this->files_model->checkTalkExists($talk[0]->id);
 				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "speakerarray"=>$speakerarray, "content"=>"admin/edit_talk", "artwork"=>$artwork));
 			} else {
 				show_404();

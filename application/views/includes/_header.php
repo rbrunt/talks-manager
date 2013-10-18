@@ -23,10 +23,8 @@
 			<div class="container">
 				<a class="brand" href="<?php echo base_url()?>">DICCU Talks System</a>
 				<ul class="nav">
-					<li class="active"><a href="<?php echo base_url()?>">Home</a></li>
-					<li><a class="activate-tooltip" title="Browse by Series" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url('/series')?>">Series'</a></li>
-					<li><a href="<?php echo base_url('/series/seriesdetail/1')?>">Series</a></li>
-					<li><a href="<?php echo base_url('/talks/talk/1')?>">Talk</a></li>
+					<li class="<?php echo (current_url() == base_url()) ? "active" : "";?>"><a href="<?php echo base_url()?>">Home</a></li>
+					<li <?php echo (current_url() == base_url('/series/')) ? "class=\"active\"" : "";?>><a class="activate-tooltip" title="Browse by Series" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url('/series')?>">Browse Series</a></li>
 				</ul>
 				<ul class="nav pull-right">
 					<li><a class="activate-tooltip" data-container="body" data-placement="bottom" data-toggle="tooltip" title="Edit and upload talks and series. (You'll need to have a login)" href="<?php echo base_url("admin") ;?>"><i class="icon-cog icon-white"></i></a></li>

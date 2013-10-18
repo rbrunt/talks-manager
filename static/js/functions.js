@@ -55,14 +55,14 @@ $("#passagelink").popover({
 	html: true,
 	trigger: "hover focus",
 	title: function (){
-		return "<strong>"+$("#passagelink").html()+" <a href=\"http://www.esv.org\" class=\"muted pull-right\">ESV</a></strong>";
+		return "<strong>"+$(this).html()+" <a href=\"http://www.esv.org\" class=\"muted pull-right\">ESV</a></strong>";
 	},
 	delay: {
 		hide: 500
 	},
 	content: function() {
 		if (passagecontent == "") {
-			getPassage($("#passagelink").html());
+			getPassage($(this).html());
 			return "<div id=\"popoverinner\"><img class=\"img-center\" alt=\"Loading...\"src=\"" + base_url + "bootstrap/img/ajax-loader.gif\"></img></div>";
 		} else {
 			return passagecontent;

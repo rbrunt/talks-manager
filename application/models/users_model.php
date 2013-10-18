@@ -49,6 +49,7 @@ class Users_Model extends CI_Model {
 		if ($user == false) return false;
 		if ($user->password != hash("SHA512", $password.$user->salt)) return false;
 		$this->session->set_userdata("userid", $user->id);
+		$this->session->set_userdata("useremail", $user->email);
 		return true;
 	}
 

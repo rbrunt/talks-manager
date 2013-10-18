@@ -110,11 +110,22 @@ class Admin extends Talks_Controller {
 	}
 
 	public function addUser() {
-		$this->checkLogin();		
+		$this->checkLogin();
+		$this->load->library("email");
 		if ($email = $this->input->post("email")) {
 			$this->load->model("users_model");
 			if ($insertId = $this->users_model->addUser($email)) {
 				$this->session->set_flashdata("alert", array("success"=>"successfully added user ".$email." with userId:".$insertId["insertId"]." and token: ".$insertId["token"]));
+
+				$this->email->from($this->config->item("email_from"));
+				$this->email->to($email);
+				$this->email->subject("Account Verification");
+				$message = "An account has been created for you on the DICCU Talks system. Please click on the link below to verify your email address and create a password:
+
+				<a href=\"\">".base_url('/admin/setpassword/'.$insertId["token"])."</a>";
+				$this->email->send();
+				echo $this->email->print_debugger();
+
 				redirect(base_url());
 			} else {
 				$this->load->view("includes/template", array("content"=>"login/add_user", "alert"=>array("error"=>"a user with that email already exists!")));
@@ -133,10 +144,10 @@ class Admin extends Talks_Controller {
 				$this->load->model("users_model");
 				$affectedRows = $this->users_model->setPassword($token, $email, $password);
 				if ($affectedRows == 1) {
-					$this->session->set_flashdata("alert", array("success"=>"successfully set a password, now try loggin in!"));
+					$this->session->set_flashdata("alert", array("success"=>"successfully set a password, now try logging in!"));
 					redirect(base_url());
 				} else {
-					$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"email not in the system, invalid token, or other random error :(")));					
+					$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"Either your email isn't in the system, or you have an invalid token. Make sure typed your email address correctly and that you have the right link!")));					
 				}
 			} else {
 				$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"passwords didn't match")));

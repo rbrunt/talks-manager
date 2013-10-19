@@ -42,6 +42,7 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function checkValidTalkId($talkId) {
+		$talkId = $this->db->escape($talkId);
 		$talk = $this->db->get_where("talks", "id = $talkId");
 		return ($talk->num_rows() > 0) ? true : false;
 	}

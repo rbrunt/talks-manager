@@ -12,8 +12,4 @@ class Home extends Talks_Controller {
         $this->load->view("includes/template", array("talks"=>$talks, "content"=>"homepage", "artwork"=>$artwork));
     }
 
-    public function cookies() {
-    	$this->load->view("includes/template", array("content"=>"cookies"));
-    }
-
 }

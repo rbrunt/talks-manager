@@ -4,7 +4,7 @@
 		<div class="container">
 			<p>Designed an built by <a href="http://richardbrunt.co.uk">Richard Brunt</a> for <a href="http://diccu.co.uk">DICCU</a></p>
 			<p>This is an open source project - get the source code at <a href="https://github.com/rbrunt/talks-manager">Github</a></p>
-			<p><small><?php if ($isLoggedIn) : ?>Page took {elapsed_time} seconds to build | <?php endif; ?><a href="<?php if ($isLoggedIn) {echo base_url('/admin/');} else{echo base_url("admin/login");}; ?>"><?php echo ($isLoggedIn ? "Admin" : "Login" ); ?></a><?php if ($isLoggedIn) :?> | Logged in as <?php echo $this->session->userdata("useremail");?><?php endif; ?></small></p>
+			<p><small><a href="<?php echo base_url('/about/cookies/'); ?>">Cookies</a> | <?php if ($isLoggedIn) : ?>Page took {elapsed_time} seconds to build | <?php endif; ?><a href="<?php if ($isLoggedIn) {echo base_url('/admin/');} else{echo base_url("admin/login");}; ?>"><?php echo ($isLoggedIn ? "Admin" : "Login" ); ?></a><?php if ($isLoggedIn) :?> | Logged in as <?php echo $this->session->userdata("useremail");?><?php endif; ?></small></p>
 		</div>
 	</footer>
 	<!-- begin Script includes -->

@@ -52,7 +52,7 @@ $("#searchbox").keydown(function (e) {
 
 function checkCookies() {
 	if ($.cookie("new_visitor") != "no") {
-		$("#alertscontainer").append("<div class=\"alert alert-info fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>This site uses <strong>Cookies</strong>, to find out more about what they are and how we use them, <a href="+base_url+"cookies"+">click here</a></div>");
+		$("#alertscontainer").append("<div class=\"alert alert-info fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>This site uses <strong>Cookies</strong>, to find out more about what they are and how we use them, <a href="+base_url+"about/cookies"+">click here</a></div>");
 		$.cookie("new_visitor", "no", { expires: 30, path: "/" });
 	}
 }

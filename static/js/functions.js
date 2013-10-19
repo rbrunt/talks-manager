@@ -4,6 +4,7 @@
 
 $(document).ready(function(){
 		$(".activate-tooltip").tooltip(); // Add a bootstrap tooltip to all elements with the .activate-tooltip class
+		checkCookies();
 });
 
 /*
@@ -44,6 +45,17 @@ $("#searchbox").keydown(function (e) {
  		window.location.href = base_url + "search/"+$("#searchbox").val();
  	}
  	});
+
+/*
+	Cookies alert
+*/
+
+function checkCookies() {
+	if ($.cookie("new_visitor") != "no") {
+		$("#alertscontainer").append("<div class=\"alert alert-info fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>This site uses <strong>Cookies</strong>, to find out more about what they are and how we use them, <a href="+base_url+"cookies"+">click here</a></div>");
+		$.cookie("new_visitor", "no", { expires: 30, path: "/" });
+	}
+}
 
 /*
 	Popover Activation & Utilities:

@@ -44,6 +44,7 @@ $route['404_override'] = 'errors/error_404';
 // Begin custom routing:
 $route['series/:num'] = 'series';
 $route['search/(:any)'] = 'search/index/$1';
+$route['cookies'] = 'home/cookies';
 
 
 /* End of file routes.php */

@@ -9,7 +9,9 @@
 	</footer>
 	<!-- begin Script includes -->
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- Jqeury cdn -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- Jqeury cdn -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+	<!--<script src="//cdnjs.cloudflare.com/ajax/libs/Cookies.js/0.3.1/cookies.min.js"></script>-->
 	<script src="<?php echo base_url("/bootstrap/js/bootstrap.min.js"); ?>"></script> <!-- boostrap plugins -->
 	<script src="<?php echo base_url("/static/js/functions.js"); ?>"></script> <!-- general functions -->
 <?php if (isset($page) && $page == "uploadtalk") : ?>

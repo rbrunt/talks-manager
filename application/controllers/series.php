@@ -21,7 +21,7 @@ class Series extends Talks_Controller {
 			$artwork[$single_series->id] = $this->files_model->getSeriesArtworkFileName($single_series->id);
 		}
 
-		$this->load->view('includes/template', array("series"=>$series, "content"=>"all_series", "artwork"=>$artwork));
+		$this->load->view('includes/template', array("title"=>"Browse Series", "series"=>$series, "content"=>"all_series", "artwork"=>$artwork));
 	}
 
 	public function seriesdetail($seriesId) {
@@ -31,7 +31,7 @@ class Series extends Talks_Controller {
 		if ($series = $this->series_model->getSeriesById($seriesId)) {
 			$artwork_location = $this->files_model->getSeriesArtworkFileName($seriesId);
 			$talks = $this->talks_model->getTalksBySeries($seriesId);
-			$this->load->view('includes/template', array("series"=>$series, "talks"=>$talks, "content"=>"series_details", "artwork"=>$artwork_location));
+			$this->load->view('includes/template', array("series"=>$series, "talks"=>$talks, "content"=>"series_details", "artwork"=>$artwork_location, "title"=>$series[0]->title));
 		} else {
 			show_404();
 		}

@@ -40,7 +40,11 @@
 					</tbody>
 				</table>
 				<?php else : ?>
-				<p><strong>No talks yet!</strong> Click <a href="<?php echo base_url('admin/addtalk'); ?>">here</a> to add a talk</p>
+					<?php if($isLoggedIn): ?>
+						<p><strong>No talks yet!</strong> Click <a href="<?php echo base_url('admin/addtalk'); ?>">here</a> to add a talk</p>
+					<?php else: ?>
+						<p><strong>No talks yet!</strong> Someone will add some soon!</p>
+					<?php endif;?>
 				<?php endif; ?>
 			</div>
 		</div>

@@ -19,7 +19,7 @@ class Search extends Talks_Controller {
 				$artwork = false;
 			}
 
-			$this->load->view('includes/template', array("content"=>"search_results", "talks"=>$talks, "series"=>$series, "searchTerm"=>$searchTerm, "artwork"=>$artwork));
+			$this->load->view('includes/template', array("content"=>"search_results", "talks"=>$talks, "series"=>$series, "searchTerm"=>$searchTerm, "artwork"=>$artwork, "title"=>"Search: ".$searchTerm));
 		} else {
 			$this->session->set_flashdata("alert", array("info"=>"You need to provide a search term!"));
 			redirect("series");

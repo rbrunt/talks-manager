@@ -25,7 +25,7 @@
 	<div class="span3">
 		<h4>Speakers<span class="badge pull-right activate-tooltip" data-placement="bottom" title="There are <?php echo $num_speakers; ?> speakers on the system"><?php echo $num_speakers; ?></span></h4><hr>
 		<ul class="unstyled">
-			<li><a href="#"><i class="icon-edit"></i> Manage Speakers</a></li>
+			<li><a href="<?php echo base_url('/admin/speakers'); ?>"><i class="icon-edit"></i> Manage Speakers</a></li>
 			<li><a class="text-success" href="<?php echo base_url('/admin/addspeaker/'); ?>"><i class="icon-plus"></i> Add Speaker</a></li>
 		</ul>
 	</div>

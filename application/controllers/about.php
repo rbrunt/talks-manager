@@ -7,11 +7,11 @@ class About extends Talks_Controller {
     }
 
     public function cookies() {
-    	$this->load->view("includes/template", array("content"=>"cookies"));
+    	$this->load->view("includes/template", array("title"=>"Cookies", "content"=>"cookies"));
     }
 
     public function copyright() {
-    	$this->load->view("includes/template", array("content"=>"copyright"));
+    	$this->load->view("includes/template", array("content"=>"copyright", "title"=>"Copyright Policy"));
     }
 
 }

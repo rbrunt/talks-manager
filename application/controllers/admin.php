@@ -17,7 +17,7 @@ class Admin extends Talks_Controller {
 		$num_series = $this->series_model->countSeries();
 		$num_speakers = $this->speakers_model->countSpeakers();
 		$num_users = $this->users_model->countUsers();
-		$this->load->view('includes/template', array("content"=>"admin/home", "num_talks"=>$num_talks, "num_series"=>$num_series, "num_speakers"=>$num_speakers, "num_users"=>$num_users));
+		$this->load->view('includes/template', array("content"=>"admin/home", "num_talks"=>$num_talks, "num_series"=>$num_series, "num_speakers"=>$num_speakers, "num_users"=>$num_users, "title"=>"Admin"));
 	}
 
 	public function talks() {
@@ -38,7 +38,7 @@ class Admin extends Talks_Controller {
 			$talk->exists = $this->files_model->checkTalkExists($talk->id);
 		}
 
-		$this->load->view("includes/template", array("content"=>"all_talks", "talks"=>$talks));
+		$this->load->view("includes/template", array("content"=>"all_talks", "talks"=>$talks, "title"=>"Manage Talks"));
 	}
 
 	public function series() {
@@ -55,7 +55,7 @@ class Admin extends Talks_Controller {
 		$this->pagination->initialize($config);
 		//$series = $this->series_model->getSeriesPage($limit, $this->uri->segment(3));
 		$series = $this->series_model->getSeriesPageWithTalkCount($limit, $this->uri->segment(3));
-		$this->load->view("includes/template", array("content"=>"admin/all_series_table", "series"=>$series));
+		$this->load->view("includes/template", array("content"=>"admin/all_series_table", "series"=>$series, "title"=>"Manage Series"));
 	}
 
 	public function speakers() {
@@ -70,7 +70,7 @@ class Admin extends Talks_Controller {
 
 		$this->pagination->initialize($config);
 		$speakers = $this->speakers_model->getSpeakersPage($limit, $this->uri->segment(3));
-		$this->load->view("includes/template", array("content"=>"admin/all_speakers", "speakers"=>$speakers));
+		$this->load->view("includes/template", array("content"=>"admin/all_speakers", "speakers"=>$speakers, "title"=>"Manage Speakers"));
 	}
 
 	public function users() {
@@ -90,11 +90,11 @@ class Admin extends Talks_Controller {
 				$this->session->set_flashdata("alert",array("success"=>"Logged in!"));
 				redirect("admin");
 			} else {
-				$this->load->view("includes/template", array("content"=>"login/login_page", "alert"=>array("error"=>"wrong username or password")));
+				$this->load->view("includes/template", array("content"=>"login/login_page", "alert"=>array("error"=>"wrong username or password", "title"=>"Login")));
 			}
 
 		} else {
-			$this->load->view("includes/template", array("content"=>"login/login_page"));
+			$this->load->view("includes/template", array("content"=>"login/login_page", "title"=>"Login"));
 		}
 	}
 
@@ -122,16 +122,16 @@ class Admin extends Talks_Controller {
 				$this->email->subject("Account Verification");
 				$message = "An account has been created for you on the DICCU Talks system. Please click on the link below to verify your email address and create a password:
 
-				<a href=\"\">".base_url('/admin/setpassword/'.$insertId["token"])."</a>";
+				<a href=\"".base_url('/admin/setpassword/'.$insertId["token"])."\">".base_url('/admin/setpassword/'.$insertId["token"])."</a>";
 				$this->email->send();
 				echo $this->email->print_debugger();
 
 				redirect(base_url());
 			} else {
-				$this->load->view("includes/template", array("content"=>"login/add_user", "alert"=>array("error"=>"a user with that email already exists!")));
+				$this->load->view("includes/template", array("content"=>"login/add_user", "alert"=>array("error"=>"a user with that email already exists!", "title"=>"Add a user | Admin")));
 			}
 		} else {
-			$this->load->view("includes/template", array("content"=>"login/add_user"));
+			$this->load->view("includes/template", array("content"=>"login/add_user", "title"=>"Add a user | Admin"));
 		}
 	}
 
@@ -144,16 +144,16 @@ class Admin extends Talks_Controller {
 				$this->load->model("users_model");
 				$affectedRows = $this->users_model->setPassword($token, $email, $password);
 				if ($affectedRows == 1) {
-					$this->session->set_flashdata("alert", array("success"=>"successfully set a password, now try logging in!"));
+					$this->session->set_flashdata("alert", array("success"=>"successfully set a password, now try <a href=\"".base_url('/admin/login')."\">logging in</a>!"));
 					redirect(base_url());
 				} else {
-					$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"Either your email isn't in the system, or you have an invalid token. Make sure typed your email address correctly and that you have the right link!")));					
+					$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"Either your email isn't in the system, or you have an invalid token. Make sure typed your email address correctly and that you have the right link!", "title"=>"Account Creation - Set a password")));
 				}
 			} else {
-				$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"passwords didn't match")));
+				$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"passwords didn't match", "title"=>"Account Creation - Set a password")));
 			}
 		} else {
-			$this->load->view("includes/template", array("content"=>"login/set_password"));
+			$this->load->view("includes/template", array("content"=>"login/set_password", "title"=>"Account Creation - Set a password"));
 		}
 	}
 
@@ -182,7 +182,7 @@ class Admin extends Talks_Controller {
 					$speakerarray[$speaker->id] = $speaker->name;
 				}
 				$talk[0]->exists = $this->files_model->checkTalkExists($talk[0]->id);
-				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "speakerarray"=>$speakerarray, "content"=>"admin/edit_talk", "artwork"=>$artwork));
+				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "speakerarray"=>$speakerarray, "content"=>"admin/edit_talk", "artwork"=>$artwork, "title"=>"Editing: ".$talk[0]->title." | Admin"));
 			} else {
 				show_404();
 			}
@@ -201,7 +201,7 @@ class Admin extends Talks_Controller {
 		if (isset($speakerId))	{
 			$this->load->model("speakers_model");
 			if ($speaker = $this->speakers_model->getSpeakerById($speakerId)) {
-				$this->load->view("includes/template", array("content"=>"admin/edit_speaker", "speaker"=>$speaker));
+				$this->load->view("includes/template", array("content"=>"admin/edit_speaker", "speaker"=>$speaker, "title"=>"Editing Speaker: ".$speaker[0]->name));
 			} else {
 				show_404();
 			}
@@ -211,10 +211,6 @@ class Admin extends Talks_Controller {
 			$this->session->set_flashdata("alert", array("success"=>"Successfully updated speaker name"));
 			redirect("/admin/speakers");
 		}
-	}
-
-	public function talkslist() {
-
 	}
 
 	public function editseries($seriesId) {
@@ -247,7 +243,7 @@ class Admin extends Talks_Controller {
 				if ($series = $this->series_model->getSeriesById($seriesId)) {
 					$this->load->model("files_model");
 					$artwork = $this->files_model->getSeriesArtworkFileName($seriesId);
-					$this->load->view("includes/template", array("series"=>$series, "content"=>"admin/edit_series", "artwork"=>$artwork, "page"=>"editseries"));
+					$this->load->view("includes/template", array("series"=>$series, "content"=>"admin/edit_series", "artwork"=>$artwork, "page"=>"editseries", "title"=>"Editing: ".$series[0]->title." | Admin"));
 				} else {
 					show_404();
 				}
@@ -282,7 +278,7 @@ class Admin extends Talks_Controller {
 				$speakersarray[$speaker->id] = $speaker->name;
 			}
 
-			$this->load->view("includes/template", array("content"=>"admin/add_talk", "seriesarray"=>$seriesarray, "speakersarray"=>$speakersarray));
+			$this->load->view("includes/template", array("content"=>"admin/add_talk", "seriesarray"=>$seriesarray, "speakersarray"=>$speakersarray, "title"=>"Add a talk | Admin"));
 		}
 	}
 
@@ -328,7 +324,7 @@ class Admin extends Talks_Controller {
 			$this->load->model("files_model");
 			$talk = $this->talks_model->getTalkDetailsById($talkId);
 			$artwork = $this->files_model->getSeriesArtworkFileName($talk[0]->seriesid);
-			$this->load->view("includes/template", array("content"=>"admin/upload_talk", "talk"=>$talk, "page"=>"uploadtalk", "alert"=>$alert, "artwork"=>$artwork));
+			$this->load->view("includes/template", array("content"=>"admin/upload_talk", "talk"=>$talk, "page"=>"uploadtalk", "alert"=>$alert, "artwork"=>$artwork, "title"=>"Upload audio for \"".$talk[0]->title."\" | Admin"));
 		}
 
 	}
@@ -338,11 +334,11 @@ class Admin extends Talks_Controller {
 		if ($this->input->post()) {
 			$this->load->model("series_model");
 			$insertId = $this->series_model->addSeries($this->input->post());
-			$alert["success"] = "Succesfully created the Series <strong>".$this->input->post("title")."</strong> Click <a href=\"".base_url("admin/addseries")."\">here</a> to add another."; //TODO: find a way of passing this through the redirect...
+			$alert["success"] = "Succesfully created the Series <strong>".$this->input->post("title")."</strong> Click <a href=\"".base_url("admin/addseries")."\">here</a> to add another. To upload custom cover artwork, just <a href=\"".base_url('admin/editseries/'.$insertId)."\">edit the series</a>."; //TODO: find a way of passing this through the redirect...
 			$this->session->set_flashdata("alert", $alert); // Set this as a session parameter: will only last till the next page load...
 			redirect("/series/seriesdetail/".$insertId);
 		} else {
-			$this->load->view("includes/template", array("content"=>"admin/add_series", "alert"=>array("warning"=>"Add image upload ability")));
+			$this->load->view("includes/template", array("content"=>"admin/add_series", "alert"=>array("info"=>"<strong>TODO:</strong> Add image upload ability. Can currently only do it from the talk edit screen"), "title"=>"Add a series | Admin"));
 		}
 	}
 
@@ -355,7 +351,7 @@ class Admin extends Talks_Controller {
 			$this->session->set_flashdata("alert", $alert);
 			redirect("admin/speakers");
 		} else {
-			$this->load->view("includes/template", array("content"=>"admin/add_speaker"));
+			$this->load->view("includes/template", array("content"=>"admin/add_speaker", "title"=>"Add a speaker | Admin"));
 		}
 	}
 	

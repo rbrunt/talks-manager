@@ -12,6 +12,6 @@ class Errors extends Talks_Controller {
 
 	public function error_404() {
 		$this->output->set_status_header("404");
-		$this->load->view("includes/template", array("content"=>"errors/error_404"));
+		$this->load->view("includes/template", array("content"=>"errors/error_404", "title"=>"Page not found"));
 	}
 }

@@ -2,8 +2,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>DICCU Talks system</title>
-
+<?php if(isset($title)) : ?>
+	<title><?php echo $title; ?> | DICCU Talks</title>
+<?php else: ?>
+	<title>DICCU Talks</title>
+<?php endif; ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="DICCU">

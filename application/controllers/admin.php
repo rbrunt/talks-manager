@@ -182,7 +182,7 @@ class Admin extends Talks_Controller {
 					$speakerarray[$speaker->id] = $speaker->name;
 				}
 				$talk[0]->exists = $this->files_model->checkTalkExists($talk[0]->id);
-				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "speakerarray"=>$speakerarray, "content"=>"admin/edit_talk", "artwork"=>$artwork, "title"=>"Editing: ".$talk[0]->title." | Admin"));
+				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "speakerarray"=>$speakerarray, "content"=>"admin/edit_talk", "artwork"=>$artwork, "title"=>"Editing: ".$talk[0]->title." | Admin", "page"=>"edittalk"));
 			} else {
 				show_404();
 			}
@@ -279,6 +279,38 @@ class Admin extends Talks_Controller {
 			}
 
 			$this->load->view("includes/template", array("content"=>"admin/add_talk", "seriesarray"=>$seriesarray, "speakersarray"=>$speakersarray, "title"=>"Add a talk | Admin"));
+		}
+	}
+
+	public function deletetalk($talkId) {
+		$this->checkLogin();
+		if (isset($talkId)) {
+			$this->load->model("talks_model");
+			if ($this->talks_model->deleteTalk($talkId)) {
+				$this->session->set_flashdata("alert", array("success"=>"Successfully deleted the talk."));
+				redirect("admin/talks");
+			}
+		} else {
+			show_404();
+		}
+	}
+
+	public function deletetalkfile($talkId) {
+		$this->checkLogin();
+		if (isset($talkId)) {
+			$this->load->model("files_model");
+			if ($this->files_model->checkTalkExists($talkId)) {
+				if ($this->files_model->deleteTalkFile($talkId)) {
+					$this->session->set_flashdata("alert", array("success"=>"Successfully deleted the talk."));
+					redirect("/talks/talk/".$talkId);
+				} else {
+					$this->session->set_flashdata("alert", array("error"=>"There was a problem deleting the file."));
+					redirect("/admin/edittalk/".$talkId);
+				}
+			} else {
+				$this->session->set_flashdata("alert", array("warning"=>"No file has been uploaded for that talk!"));
+				redirect("/talks/talk/".$talkId);
+			}
 		}
 	}
 

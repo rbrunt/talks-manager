@@ -93,4 +93,21 @@ class Talks_Model extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
+	public function deleteTalk($talkId) {
+		$this->load->model("files_model");
+		if ($this->files_model->checkTalkExists($talkId)) {
+			if ($this->files_model->deleteTalkFile($talkId)) {
+
+			} else {
+				return false;
+			}
+		}
+		if ($this->db->where("id", $talkId)->delete("talks")) {
+			return true;
+		} else {
+			return false;
+		}
+
+		
+	}
 }

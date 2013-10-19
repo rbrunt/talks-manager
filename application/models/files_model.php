@@ -10,5 +10,9 @@ class Files_Model extends CI_Model {
 		return (file_exists("files/talks/$talkId.mp3")) ? true : false ;
 	}
 
+	public function deleteTalkFile($talkId) {
+		return unlink("files/talks/".$talkId.".mp3");
+	}
+
 }
 

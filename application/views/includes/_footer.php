@@ -14,7 +14,6 @@
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- Jqeury cdn -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
-	<!--<script src="//cdnjs.cloudflare.com/ajax/libs/Cookies.js/0.3.1/cookies.min.js"></script>-->
 	<script src="<?php echo base_url("/bootstrap/js/bootstrap.min.js"); ?>"></script> <!-- boostrap plugins -->
 	<script src="<?php echo base_url("/static/js/functions.js"); ?>"></script> <!-- general functions -->
 <?php if (isset($page) && $page == "uploadtalk") : ?>
@@ -24,6 +23,15 @@
 <?php if (isset($page) && $page == "editseries") : ?>
 	<script src="<?php echo base_url("/bootstrap/js/fineuploader-3.7.0.min.js"); ?>"></script> <!-- fine uploader -->
 	<script src="<?php echo base_url("/static/js/coverupload.js"); ?>"></script>
+<?php endif; ?>
+<?php if (isset($page) && $page == "edittalk") : ?>
+	<script src="<?php echo base_url('/bootstrap/js/bootstrap-datepicker.js')?>"></script>
+	<script>
+		$('#datepicker').datepicker({format:"yyyy-mm-dd"})
+	</script>
+<?php endif; ?>
+<?php if ($isLoggedIn) : ?>
+	<script src="<?php echo base_url("/static/js/admin.js");?>"></script>
 <?php endif; ?>
 </body>
 </html>

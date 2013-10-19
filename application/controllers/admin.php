@@ -321,11 +321,14 @@ class Admin extends Talks_Controller {
 			// 	$this->session->set_flashdata("alert",array("error"=>$this->upload->display_errors()));	
 			// }			
 		} else {
+			
+			$alert = ($this->input->server('REQUEST_METHOD') == "GET") ? array() : array("error"=>$this->upload->display_errors()); // Only show error message if someone used a POST request (tried to submit the form).
+
 			$this->load->model("talks_model");
 			$this->load->model("files_model");
 			$talk = $this->talks_model->getTalkDetailsById($talkId);
 			$artwork = $this->files_model->getSeriesArtworkFileName($talk[0]->seriesid);
-			$this->load->view("includes/template", array("content"=>"admin/upload_talk", "talk"=>$talk, "page"=>"uploadtalk", "alert"=>array("error"=>$this->upload->display_errors()), "artwork"=>$artwork));
+			$this->load->view("includes/template", array("content"=>"admin/upload_talk", "talk"=>$talk, "page"=>"uploadtalk", "alert"=>$alert, "artwork"=>$artwork));
 		}
 
 	}

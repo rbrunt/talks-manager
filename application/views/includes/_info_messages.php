@@ -20,6 +20,6 @@
 <?php if(isset($alert["info"])) : ?>
 	<div class="alert alert-info fade in">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
-		<strong>Error:</strong> <?php echo $alert["info"] ?>
+		<?php echo $alert["info"] ?>
 	</div>
 <?php endif; ?>

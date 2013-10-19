@@ -19,6 +19,10 @@ class Series_Model extends CI_Model {
 		return $series;
 	}
 
+	public function countTalksInSeries($seriesId) {
+		return $this->db->where('seriesid', $seriesId)->count_all_results('talks');
+	}
+
 	public function getAllWithTalkCount() { // Talks to the talks table, but makes more sense to have it in this model...
 		$series = $this->db->query('SELECT  series.*, (SELECT COUNT(*) FROM talks WHERE talks.seriesid = series.id) AS "numtalks" FROM series');
 		if ($series->num_rows() > 0 ) {
@@ -84,9 +88,19 @@ class Series_Model extends CI_Model {
 		return $this->db->insert_id();
 	}
 
-	// public function editTalk($array) {
-	// 	$talk = $this->db->query("UPDATE talks SET title = ".$array['title'].", speaker = ".$array['speaker'].", seriesid = ".$array['seriesId'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);
-	// 	return $this->db->affected_rows();
-	// }
-
+	public function deleteSeries($seriesId) {
+		$this->load->model("files_model");
+		//Check that the series is empty first...
+		if ($this->countTalksInSeries($seriesId) != 0) {
+			$this->load->model("talks_model");
+			//need to delete each talk first...
+			$talks = $this->talks_model->getTalksBySeries($seriesId);
+			foreach ($talks as $talk) {
+				$this->talks_model->deleteTalk($talk->id);
+			}
+		}
+		$this->files_model->deleteArtwork($seriesId);
+		$this->db->where("id", $seriesId)->delete("series");
+		return true;
+	}
 }

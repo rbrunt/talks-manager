@@ -252,6 +252,15 @@ class Admin extends Talks_Controller {
 			redirect("/series/");
 		}
 		
+	}
+
+	public function deleteseries($seriesId) {
+		$this->checkLogin();
+		$this->load->model("series_model");
+		if ($this->series_model->deleteSeries($seriesId)) {
+			$this->session->set_flashdata("alert", array("success"=>"Series and all talks in it successfully deleted!"));
+			redirect("admin/series/");
+		}
 
 	}
 

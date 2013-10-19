@@ -330,7 +330,7 @@ class Admin extends Talks_Controller {
 		// Check that a talkId has been specified:
 		if (!isset($talkId)) redirect("admin/addtalk");
 		$this->load->model("talks_model");
-		
+
 		// Check that the supplied talkId is a valid talk:
 		if (!$this->talks_model->checkValidTalkId($talkId)) show_404(); // Shows a 404 error if it isnt
 
@@ -365,7 +365,12 @@ class Admin extends Talks_Controller {
 			$this->load->model("files_model");
 			$talk = $this->talks_model->getTalkDetailsById($talkId);
 			$artwork = $this->files_model->getSeriesArtworkFileName($talk[0]->seriesid);
-			$this->load->view("includes/template", array("content"=>"admin/upload_talk", "talk"=>$talk, "page"=>"uploadtalk", "alert"=>$alert, "artwork"=>$artwork, "title"=>"Upload audio for \"".$talk[0]->title."\" | Admin"));
+			if ($this->files_model->checkTalkExists($talk[0]->id)) {
+				$alertsarray = array("warning"=>"There's already a file on the server for this talk! If you upload one now, it will be replaced.");
+			} else {
+				$alertsarray = array();
+			}
+			$this->load->view("includes/template", array("content"=>"admin/upload_talk", "talk"=>$talk, "page"=>"uploadtalk", "alert"=>$alert, "artwork"=>$artwork, "title"=>"Upload audio for \"".$talk[0]->title."\" | Admin", "alert"=>$alertsarray));
 		}
 
 	}

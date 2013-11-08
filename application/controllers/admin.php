@@ -74,6 +74,22 @@ class Admin extends Talks_Controller {
 	}
 
 	public function users() {
+		$this->checkLogin();
+
+		$this->load->library("pagination");
+		$this->load->model("users_model");
+
+		$users = $this->users_model->getAll();
+
+		// Config for pagination
+		$config["base_url"] = base_url("/admin/users/");
+		$config["total_rows"] = $this->users_model->countUsers();
+		$limit = $config["per_page"] = 15;
+
+		$this->pagination->initialize($config);
+		$users = $this->users_model->getUsersPage($limit, $this->uri->segment(3));
+
+		$this->load->view("includes/template", array("content"=>"admin/users", "users"=>$users, "title"=>"Manage Users"));
 
 	}
 

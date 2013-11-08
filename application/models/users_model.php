@@ -2,17 +2,29 @@
 
 class Users_Model extends CI_Model {
 
-	// public function getAll() {
-	// 	$series = $this->db->get('series');
-	// 	if ($series->num_rows() > 0 ) {
-	// 		foreach($series->result() as $single_series){
-	// 			$seriesarray[] = $single_series;
-	// 		}
-	// 		return $seriesarray;
-	// 	} else {
-	// 		return false;
-	// 	}
-	// }
+	public function getAll() {
+		$series = $this->db->get('series');
+	 	if ($series->num_rows() > 0 ) {
+	 		foreach($series->result() as $single_series){
+	 			$seriesarray[] = $single_series;
+	 		}
+	 		return $seriesarray;
+	 	} else {
+	 		return false;
+	 	}
+	}
+	
+	public function getUsersPage($number, $offset) {
+		$users = $this->db->get('users', $number, $offset);
+		if ($users->num_rows() > 0 ) {
+			foreach($users->result() as $user){
+				$userarray[] = $user;
+			}
+			return $userarray;
+		} else {
+			return false;
+		}
+	}
 
 	public function countUsers() {
 		$users = $this->db->count_all('users');

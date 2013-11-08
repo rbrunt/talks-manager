@@ -6,7 +6,7 @@
 			<p>This is an open source project - get the source code at <a href="https://github.com/rbrunt/talks-manager">Github</a></p>
 			<p><small><a href="<?php echo base_url('/about/cookies/'); ?>">Cookies</a> | <a href="<?php echo base_url('/about/copyright/'); ?>">Copyright</a> | <a href="<?php if ($isLoggedIn) {echo base_url('/admin/');} else{echo base_url("admin/login");}; ?>"><?php echo ($isLoggedIn ? "Admin" : "Login" ); ?></a></small></p>
 <?php if ($isLoggedIn) : ?>			
-			<p><small>Logged in as <?php echo $this->session->userdata("useremail");?>. Page took {elapsed_time} seconds to build</small></p>
+			<p><small>Logged in as <?php echo $this->session->userdata("userrealname")?> (<?php echo $this->session->userdata("useremail");?>). Page took {elapsed_time} seconds to build</small></p>
 <?php endif; ?>			
 		</div>
 	</footer>

@@ -157,13 +157,14 @@ class Admin extends Talks_Controller {
 			$password = ($this->input->post("password1") == $this->input->post("password2")) ? $this->input->post("password1") : false;
 			if ($password) {
 				$email = $this->input->post("email");
+				$name = $this->input->post("name");
 				$this->load->model("users_model");
-				$affectedRows = $this->users_model->setPassword($token, $email, $password);
+				$affectedRows = $this->users_model->setPassword($token, $email, $password,$name);
 				if ($affectedRows == 1) {
 					$this->session->set_flashdata("alert", array("success"=>"successfully set a password, now try <a href=\"".base_url('/admin/login')."\">logging in</a>!"));
 					redirect(base_url());
 				} else {
-					$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"Either your email isn't in the system, or you have an invalid token. Make sure typed your email address correctly and that you have the right link!", "title"=>"Account Creation - Set a password")));
+					$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"Either your email isn't in the system, or you have an invalid token. Make sure typed your email address correctly and that you have the right link. Bear in mind that once you've set your password, the link expires.", "title"=>"Account Creation - Set a password")));
 				}
 			} else {
 				$this->load->view("includes/template", array("content"=>"login/set_password", "alert"=>array("error"=>"passwords didn't match", "title"=>"Account Creation - Set a password")));

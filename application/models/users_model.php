@@ -62,6 +62,7 @@ class Users_Model extends CI_Model {
 		if ($user->password != hash("SHA512", $password.$user->salt)) return false;
 		$this->session->set_userdata("userid", $user->id);
 		$this->session->set_userdata("useremail", $user->email);
+		$this->session->set_userdata("userrealname", $user->name);
 		return true;
 	}
 
@@ -69,14 +70,16 @@ class Users_Model extends CI_Model {
 		$this->session->unset_userdata("userid");
 	}
 
-	public function setPassword($token, $email, $password) {		
+	public function setPassword($token, $email, $password,  $name) {		
 
 		$salt = bin2hex(mcrypt_create_iv(32)); // Generate a cryptographically strong salt
 		$hash = hash("SHA512", $password.$salt); // Hash the password and salt
 
 		$insertArray = array(
 			"salt"=>$salt,
-			"password"=>$hash
+			"password"=>$hash,
+			"name"=>$name,
+			"token"=>""
 			);
 
 		$this->db->where("token",$token)->where("email",$email)->update("users", $insertArray); // Insert salt and hash into DB

@@ -32,7 +32,7 @@
 	<div class="span3">
 		<h4>Users<span class="badge pull-right activate-tooltip" data-placement="bottom" title="There <?php echo ($num_users == 1 ? "is " . $num_users . " user" : "are " . $num_users . " users"); ?> on the system"><?php echo $num_users; ?></span></h4><hr>
 		<ul class="unstyled">
-			<li><a href="#"><i class="icon-edit"></i> Manage Users</a></li>
+			<li><a href="<?php echo base_url('/admin/users/'); ?>"><i class="icon-edit"></i> Manage Users</a></li>
 			<li><a class="text-success" href="<?php echo base_url('/admin/adduser/'); ?>"><i class="icon-plus"></i> Add User</a></li>
 		</ul>
 	</div>

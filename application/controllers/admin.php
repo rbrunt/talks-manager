@@ -115,7 +115,7 @@ class Admin extends Talks_Controller {
 		if ($email = $this->input->post("email")) {
 			$this->load->model("users_model");
 			if ($insertId = $this->users_model->addUser($email)) {
-				$this->session->set_flashdata("alert", array("success"=>"successfully added user ".$email." with userId:".$insertId["insertId"]." and token: ".$insertId["token"]));
+				$this->session->set_flashdata("alert", array("success"=>"successfully added user ".$email."! An email has been sent to them with details on creating a password"));
 
 				$this->email->from($this->config->item("email_from"));
 				$this->email->to($email);

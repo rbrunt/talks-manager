@@ -31,7 +31,11 @@
 				</audio>
 				<p><a href="<?php echo base_url("download/talk/".$talk[0]->id); ?>" class="btn pull-right"><i class="icon-download-alt"></i> Download Talk</a></p>
 <?php else : ?>
+	<?php if($isLoggedIn) :?>
+				<p class="text-warning"><i class="icon-warning-sign"></i> There's no audio uploaded yet, <a href="<?php echo base_url("admin/uploadtalk/".$talk[0]->id); ?>">click here</a> to add some</p>
+	<?php else :?>
 				<p class="text-warning"><i class="icon-warning-sign"></i> There's no audio uploaded yet, but it should be added soon!</p>
+	<?php endif; ?>
 <?php endif; ?>				
 			</div>
 		</div>

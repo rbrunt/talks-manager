@@ -21,12 +21,21 @@
 			<p id="summary"><?php echo $series[0]->summary ?></p>
 			<div id="talkstable">
 				<?php if($talks) : ?>
+				<?php
+					$empty = true;
+					foreach($talks as $talk) {
+						if ($talk->passage != "") {
+							$empty = false;
+							break;
+						}
+					}
+				?>
 				<table class="table table-hover">
 					<thead>
 						<th>Title</th>
 						<th>Date</th>
 						<th>Speaker</th>
-						<th>Passage</th>
+						<?php if(!$empty): ?><th>Passage</th><?php endif;?>
 					</thead>
 					<tbody>
 						<?php foreach($talks as $talk): ?>
@@ -34,7 +43,13 @@
 							<td><a href="<?php echo base_url('/talks/talk/'.$talk->id);?>"><?php echo $talk->title;?></a></td>
 							<td><?php echo $talk->date;?></td>
 							<td><?php echo $talk->speakername; ?></td>
-							<td><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td>
+							<?php if(!$empty): ?>
+								<?php if($talk->passage == "") : ?>
+									<td>-</td>
+								<?php else: ?>
+									<td><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td>
+								<?php endif; ?>
+							<?php endif; ?>
 						</tr>
 					<?php endforeach;?>
 					</tbody>

@@ -21,7 +21,7 @@
 							</tr>
 							<tr>
 								<th>Codec Settings</th>
-								<td>Use the LAME codec in Audacity, using 32kbps variable bitrate</td>
+								<td>Use the LAME codec in Audacity, using Variable Bitrate, and quality setting of 7 (80-120kbps).</td>
 							</tr>
 							<tr>
 								<th>File Size</th>

@@ -29,7 +29,7 @@
 				<audio controls preload="none" src="<?php echo base_url("files/talks/".$talk[0]->id); ?>.mp3" type="audio/mpeg">
 					<!-- Add flash fallback here... -->
 				</audio>
-				<p><a href="<?php echo base_url("download/talk/".$talk[0]->id); ?>">download</a></p>
+				<p><a href="<?php echo base_url("download/talk/".$talk[0]->id); ?>" class="btn pull-right"><i class="icon-download-alt"></i> Download Talk</a></p>
 <?php else : ?>
 				<p class="text-warning"><i class="icon-warning-sign"></i> There's no audio uploaded yet, but it should be added soon!</p>
 <?php endif; ?>				

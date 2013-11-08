@@ -11,7 +11,7 @@
 		<div class="category">
 			<div class="row">
 				<div class="span3">
-					<img src="<?php echo $artwork[$single->id]; ?>">
+					<a href="<?php echo base_url('/series/seriesdetail/'.$single->id); ?>"><img src="<?php echo $artwork[$single->id]; ?>"></a>
 				</div>
 				<div class="span9">
 					<h1><a href="<?php echo base_url('/series/seriesdetail/'.$single->id); ?>"><?php echo $single->title; ?></a></h1>

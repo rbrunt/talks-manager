@@ -24,7 +24,7 @@
 	<script src="<?php echo base_url("/bootstrap/js/fineuploader-3.7.0.min.js"); ?>"></script> <!-- fine uploader -->
 	<script src="<?php echo base_url("/static/js/coverupload.js"); ?>"></script>
 <?php endif; ?>
-<?php if (isset($page) && ($page == "edittalk") || $page == "addtalk"):?>
+<?php if (isset($page) && ($page == "edittalk" || $page == "addtalk")) : ?>
 	<script>
 		$("#seriesselector").change(function() {
     		var seriesId = $(this).val();

@@ -9,11 +9,14 @@
 				<div class="page-header">
 					<?php 	echo form_input(array("name"=>"title", "value"=>$talk[0]->title, "class"=>"h1 span9", "maxlength"=>"128", "placeholder"=>"Talk Title"));
 							echo form_dropdown("seriesid", $seriesarray, $talk[0]->seriesid, 'class="span3"'); ?>
-					<div class="input-prepend">
+					<div class="input-prepend activate-tooltip" title="Date of the Talk. Click to open a calendar picker, or just type a date in." data-placement="bottom">
 						<span class="add-on"><i class="icon-calendar"></i></span>
 						<?php echo form_input( array("name"=>"date", "value"=>$talk[0]->date, "class"=>"span2", "id"=>"datepicker", "placeholder"=>"yyyy-mm-dd")); ?>
 					</div>
-					<?php echo form_dropdown("speakerid", $speakerarray, $talk[0]->speakerid, 'class="span3"'); ?>
+					<div class="input-prepend  activate-tooltip" title="Who spoke? (You can leave it blank if you don't know)" data-placement="bottom" data-container="body">
+						<span class="add-on"><i class="icon-user"></i></span>
+						<?php echo form_input(array("name"=>"speakername", "value"=>$talk[0]->speakername, "class"=>"span3", "placeholder"=>"Speaker Name")); ?>
+					</div>
 				</div>
 				<?php if($talk[0]->exists):?>
 					<p class="text-success"><i class="icon-ok"></i> An mp3 has been uploaded for this talk. If you want to replace the current file, just <a href="<?php echo base_url('/admin/uploadtalk/'.$talk[0]->id); ?>">upload a new one</a>.</p><a title="Delete the mp3 from the server. Does not delete the talk entry on the website, just the file. CANNOT BE UNDONE!" data-placement="bottom" class="btn btn-small btn-danger pull-right activate-tooltip" id="deletebutton" href="<?php echo base_url('/admin/deletetalkfile/'.$talk[0]->id); ?>">Delete mp3</a>

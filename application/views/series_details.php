@@ -42,7 +42,11 @@
 						<tr>
 							<td><a href="<?php echo base_url('/talks/talk/'.$talk->id);?>"><?php echo $talk->title;?></a></td>
 							<td><?php echo $talk->date;?></td>
-							<td><?php echo $talk->speakername; ?></td>
+							<?php if($talk->speakername==""): ?>
+								<td>-</td>
+							<?php else: ?>
+								<td><?php echo $talk->speakername; ?></td>
+							<?php endif; ?>
 							<?php if(!$empty): ?>
 								<?php if($talk->passage == "") : ?>
 									<td>-</td>

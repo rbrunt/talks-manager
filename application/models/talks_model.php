@@ -22,7 +22,7 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function getTalkPage($number, $offset) {
-		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.passage, talks.seriesid, speakers.name AS speakername, series.title as seriestitle")->join("speakers", "speakers.id = talks.speakerid")->join("series", "talks.seriesid = series.id")->order_by("date", "DESC")->get('talks', $number, $offset);
+		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.passage, talks.speakername, talks.seriesid, series.title as seriestitle")->join("series", "talks.seriesid = series.id")->order_by("date", "DESC")->get('talks', $number, $offset);
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;
@@ -49,14 +49,14 @@ class Talks_Model extends CI_Model {
 
 	public function getTalkDetailsById($talkId) {
 		$talkId = $this->db->escape($talkId);
-		$talk = $this->db->select("talks.*, speakers.name AS speakername, series.title AS seriestitle")->from("talks")->where("talks.id = ".$talkId)->join("speakers", "talks.speakerid = speakers.id")->join("series", "talks.seriesid = series.id")->get();
+		$talk = $this->db->select("talks.*, series.title AS seriestitle")->from("talks")->where("talks.id = ".$talkId)->join("series", "talks.seriesid = series.id")->get();
 		//echo $this->db->last_query();
 		return ($talk->num_rows() > 0) ? array($talk->row()) : false;
 	}
 
 	public function getTalksBySeries($seriesId) {
 		$seriesId = $this->db->escape($seriesId);
-		$talks = $this->db->select("talks.*, speakers.name AS speakername")->from("talks")->where("seriesid = $seriesId")->join("speakers", "talks.speakerid = speakers.id")->order_by("date", "ASC")->get();
+		$talks = $this->db->select("talks.*")->from("talks")->where("seriesid = $seriesId")->order_by("date", "ASC")->get();
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;
@@ -70,7 +70,7 @@ class Talks_Model extends CI_Model {
 	public function getRecentTalks($numTalks = 5) {
 		$numTalks = $this->db->escape($numTalks);
 		//$talks = $this->db->query("SELECT id, title, summary, date FROM talks ORDER BY date DESC LIMIT ".$numTalks);
-		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, speakers.name AS speakername")->from("talks")->join("speakers", "talks.speakerid = speakers.id")->order_by("date", "DESC")->limit($numTalks)->get();
+		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername")->from("talks")->order_by("date", "DESC")->limit($numTalks)->get();
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;

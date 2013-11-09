@@ -10,8 +10,11 @@
 					<?php 	echo form_input(array("name"=>"title", "class"=>"h1 span9", "maxlength"=>"128", "placeholder"=>"Talk Title"));
 							echo form_label("Series", "seriesid");
 							echo form_dropdown("seriesid", $seriesarray, 'class="span3"');
-							echo form_label("Speaker", "seriesid");
-							echo form_dropdown("speakerid", $speakersarray, 'class="span3"'); ?>
+							echo form_label("Speaker", "seriesid"); ?>
+					<div class="input-prepend  activate-tooltip" title="Who spoke? (You can leave it blank if you don't know)" data-placement="bottom" data-container="body">
+						<span class="add-on"><i class="icon-user"></i></span>
+						<?php echo form_input(array("name"=>"speakername","maxlength"=>"64", "class"=>"span3", "placeholder"=>"Speaker Name")); ?>
+					</div>
 					<div class="input-prepend">
 						<span class="add-on"><i class="icon-calendar"></i></span>
 						<?php echo form_input( array("name"=>"date", "class"=>"span2", "value"=>date("Y-m-d"), "id"=>"datepicker", "placeholder"=>"yyyy-mm-dd")); ?>

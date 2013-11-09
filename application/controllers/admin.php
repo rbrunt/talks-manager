@@ -11,13 +11,11 @@ class Admin extends Talks_Controller {
 		$this->checkLogin();
 		$this->load->model("talks_model");
 		$this->load->model("series_model");
-		$this->load->model("speakers_model");
 		$this->load->model("users_model");
 		$num_talks = $this->talks_model->countTalks();
 		$num_series = $this->series_model->countSeries();
-		$num_speakers = $this->speakers_model->countSpeakers();
 		$num_users = $this->users_model->countUsers();
-		$this->load->view('includes/template', array("content"=>"admin/home", "num_talks"=>$num_talks, "num_series"=>$num_series, "num_speakers"=>$num_speakers, "num_users"=>$num_users, "title"=>"Admin"));
+		$this->load->view('includes/template', array("content"=>"admin/home", "num_talks"=>$num_talks, "num_series"=>$num_series, "num_users"=>$num_users, "title"=>"Admin"));
 	}
 
 	public function talks() {
@@ -56,21 +54,6 @@ class Admin extends Talks_Controller {
 		//$series = $this->series_model->getSeriesPage($limit, $this->uri->segment(3));
 		$series = $this->series_model->getSeriesPageWithTalkCount($limit, $this->uri->segment(3));
 		$this->load->view("includes/template", array("content"=>"admin/all_series_table", "series"=>$series, "title"=>"Manage Series"));
-	}
-
-	public function speakers() {
-		$this->checkLogin();		
-		$this->load->library("pagination"); // We want to paginate so we don't get a really really long list if there are lots of talks on the system...
-		$this->load->model("speakers_model");
-
-		// Config for pagination
-		$config["base_url"] = base_url("/admin/speakers/");
-		$config["total_rows"] = $this->speakers_model->countSpeakers();
-		$limit = $config["per_page"] = 5;
-
-		$this->pagination->initialize($config);
-		$speakers = $this->speakers_model->getSpeakersPage($limit, $this->uri->segment(3));
-		$this->load->view("includes/template", array("content"=>"admin/all_speakers", "speakers"=>$speakers, "title"=>"Manage Speakers"));
 	}
 
 	public function users() {
@@ -184,22 +167,17 @@ class Admin extends Talks_Controller {
 		if (isset($talkId)){
 			$this->load->model("talks_model");
 			$this->load->model("series_model");
-			$this->load->model("speakers_model");
 			$this->load->model("files_model");
 			
 			$series = $this->series_model->getAllSeriesTitles();
-			$speakers = $this->speakers_model->getAllSpeakerNames();
 
 			if ($talk = $this->talks_model->getTalkById($talkId)) {
 				$artwork = $this->files_model->getSeriesArtworkFileName($talk[0]->seriesid);
 				foreach($series as $single) {
 					$seriesarray[$single->id] = $single->title;
 				}
-				foreach($speakers as $speaker) {
-					$speakerarray[$speaker->id] = $speaker->name;
-				}
 				$talk[0]->exists = $this->files_model->checkTalkExists($talk[0]->id);
-				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "speakerarray"=>$speakerarray, "content"=>"admin/edit_talk", "artwork"=>$artwork, "title"=>"Editing: ".$talk[0]->title." | Admin", "page"=>"edittalk"));
+				$this->load->view("includes/template", array("talk"=>$talk, "series"=>$series, "seriesarray"=>$seriesarray, "content"=>"admin/edit_talk", "artwork"=>$artwork, "title"=>"Editing: ".$talk[0]->title." | Admin", "page"=>"edittalk"));
 			} else {
 				show_404();
 			}
@@ -210,23 +188,6 @@ class Admin extends Talks_Controller {
 			redirect("/talks/talk/".$this->input->post("id"));
 		} else {
 			redirect("/talks/");
-		}
-	}
-
-	public function editspeaker($speakerId) {
-		$this->checkLogin();		
-		if (isset($speakerId))	{
-			$this->load->model("speakers_model");
-			if ($speaker = $this->speakers_model->getSpeakerById($speakerId)) {
-				$this->load->view("includes/template", array("content"=>"admin/edit_speaker", "speaker"=>$speaker, "title"=>"Editing Speaker: ".$speaker[0]->name));
-			} else {
-				show_404();
-			}
-		} elseif ($this->input->post()) {
-			$this->load->model("speakers_model");
-			$this->speakers_model->editSpeaker($this->input->post(), $this->input->post("id"));
-			$this->session->set_flashdata("alert", array("success"=>"Successfully updated speaker name"));
-			redirect("/admin/speakers");
 		}
 	}
 
@@ -293,18 +254,13 @@ class Admin extends Talks_Controller {
 		}
 		else {
 			$this->load->model("series_model");
-			$this->load->model("speakers_model");
 			
 			$series = $this->series_model->getAllSeriesTitles();
-			$speakers = $this->speakers_model->getAll();
 			foreach($series as $single) {
 				$seriesarray[$single->id] = $single->title;
 			}
-			foreach($speakers as $speaker) {
-				$speakersarray[$speaker->id] = $speaker->name;
-			}
 
-			$this->load->view("includes/template", array("content"=>"admin/add_talk", "seriesarray"=>$seriesarray, "speakersarray"=>$speakersarray, "title"=>"Add a talk | Admin"));
+			$this->load->view("includes/template", array("content"=>"admin/add_talk", "seriesarray"=>$seriesarray, "title"=>"Add a talk | Admin"));
 		}
 	}
 
@@ -403,19 +359,5 @@ class Admin extends Talks_Controller {
 		} else {
 			$this->load->view("includes/template", array("content"=>"admin/add_series", "alert"=>array("info"=>"<strong>TODO:</strong> Add image upload ability. Can currently only do it from the talk edit screen"), "title"=>"Add a series | Admin"));
 		}
-	}
-
-	public function addspeaker() {
-		$this->checkLogin();		
-		if ($this->input->post()) {
-			$this->load->model("speakers_model");
-			$insertId = $this->speakers_model->addSpeaker($this->input->post());
-			$alert["success"] = "Successfully added speaker <strong>".$this->input->post("name")."</strong>. Click <a href=\"".$this->input->post("id")."\">here</a> to add another.";
-			$this->session->set_flashdata("alert", $alert);
-			redirect("admin/speakers");
-		} else {
-			$this->load->view("includes/template", array("content"=>"admin/add_speaker", "title"=>"Add a speaker | Admin"));
-		}
-	}
-	
+	}	
 }

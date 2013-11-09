@@ -2,14 +2,14 @@
 		<div class="row">
 			
 			<div class="span3">
-				<img src="http://placehold.it/500">
+				<img id="artwork" src="<?php echo base_url("/files/covers/default.jpg"); ?>">
 			</div>
 			<div class="span9">
 				<?php echo form_open("admin/addtalk"); ?>
 				<div class="page-header">
 					<?php 	echo form_input(array("name"=>"title", "class"=>"h1 span9", "maxlength"=>"128", "placeholder"=>"Talk Title"));
 							echo form_label("Series", "seriesid");
-							echo form_dropdown("seriesid", $seriesarray, 'class="span3"');
+							echo form_dropdown("seriesid", $seriesarray, 0, 'class="span3" id="seriesselector"');
 							echo form_label("Speaker", "seriesid"); ?>
 					<div class="input-prepend  activate-tooltip" title="Who spoke? (You can leave it blank if you don't know)" data-placement="bottom" data-container="body">
 						<span class="add-on"><i class="icon-user"></i></span>

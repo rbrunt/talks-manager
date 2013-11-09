@@ -18,3 +18,4 @@ $RECYCLE.BIN/
 # Ignore uploaded files:
 files/talks/*
 files/covers/*
+!files/covers/default.jpg

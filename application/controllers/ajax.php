@@ -56,4 +56,8 @@ class Ajax extends Talks_Controller {
         }
     }
 
+    public function getartworkurl($seriesId) {
+    	$this->load->model("files_model");
+ 		echo $this->files_model->getSeriesArtworkFileName($seriesId);
+ 	}
 }

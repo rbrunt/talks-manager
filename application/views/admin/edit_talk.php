@@ -2,13 +2,13 @@
 		<div class="row">
 			
 			<div class="span3">
-				<img src="<?php echo $artwork; ?>">
+				<img id="artwork" src="<?php echo $artwork; ?>">
 			</div>
 			<div class="span9">
 				<?php echo form_open("admin/edittalk"); ?>
 				<div class="page-header">
 					<?php 	echo form_input(array("name"=>"title", "value"=>$talk[0]->title, "class"=>"h1 span9", "maxlength"=>"128", "placeholder"=>"Talk Title"));
-							echo form_dropdown("seriesid", $seriesarray, $talk[0]->seriesid, 'class="span3"'); ?>
+							echo form_dropdown("seriesid", $seriesarray, $talk[0]->seriesid, 'class="span3" id="seriesselector"'); ?>
 					<div class="input-prepend activate-tooltip" title="Date of the Talk. Click to open a calendar picker, or just type a date in." data-placement="bottom">
 						<span class="add-on"><i class="icon-calendar"></i></span>
 						<?php echo form_input( array("name"=>"date", "value"=>$talk[0]->date, "class"=>"span2", "id"=>"datepicker", "placeholder"=>"yyyy-mm-dd")); ?>

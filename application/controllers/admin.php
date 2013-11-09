@@ -260,7 +260,7 @@ class Admin extends Talks_Controller {
 				$seriesarray[$single->id] = $single->title;
 			}
 
-			$this->load->view("includes/template", array("content"=>"admin/add_talk", "seriesarray"=>$seriesarray, "title"=>"Add a talk | Admin"));
+			$this->load->view("includes/template", array("content"=>"admin/add_talk", "seriesarray"=>$seriesarray, "title"=>"Add a talk | Admin", "page"=>"addtalk"));
 		}
 	}
 

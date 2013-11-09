@@ -46,6 +46,7 @@
 				<div class="progress hide" style="position: relative;">
 					<div class="bar" style=""></div>
 				</div>
+			<a href="<?php echo base_url("/talks/talk/".$talk[0]->id); ?>" class="btn btn-primary pull-right activate-tooltip" data-placement="bottom" title="Skip to the talk details page without uploading audio right now. You can always come back and do it later.">Skip uploading a file for now <i class="icon-chevron-right"></i></a>
 			<hr>
 			</div>
 		</div>

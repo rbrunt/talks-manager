@@ -199,7 +199,7 @@ class Admin extends Talks_Controller {
 				$this->load->model("users_model");
 				$affectedRows = $this->users_model->doPasswordReset($email, $token, $password);
 				if ($affectedRows == 1) {
-					$this->session->set_flashdata("alert", array("success"=>"successfully resset your password, now try <a href=\"".base_url('/admin/login')."\">logging in</a>!"));
+					$this->session->set_flashdata("alert", array("success"=>"successfully reset your password, now try <a href=\"".base_url('/admin/login')."\">logging in</a>!"));
 					redirect(base_url());
 				} else {
 					$this->load->view("includes/template", array("content"=>"login/do_password_reset", "alert"=>array("error"=>"Either your email isn't in the system, or you have an invalid token. Make sure typed your email address correctly and that you have the right link. Bear in mind that once you've reset your password, the link expires, and you'll need to request a new one.", "title"=>"Reset your Password")));
@@ -211,7 +211,34 @@ class Admin extends Talks_Controller {
 			$this->load->view("includes/template", array("content"=>"login/do_password_reset", "title"=>"Reset your Password"));
 		}
 	}
+	
 
+	public function changepassword() {
+		$this->checkLogin();
+		$userid = $this->session->userdata("userid");
+		if ($this->input->post()){
+			$password = ($this->input->post("password1") == $this->input->post("password2")) ? $this->input->post("password1") : false;
+			if ($password) {
+				$this->load->model("users_model");
+				if ($this->users_model->authenticateById($userid, $this->input->post("password"))){
+					$affectedRows = $this->users_model->changePassword($userid, $password);	
+					if ($affectedRows == 1) {
+						$this->session->set_flashdata("alert", array("success"=>"Successfully changed your password!"));
+						redirect(base_url("/admin/"));
+					} else {
+						$this->load->view("includes/template", array("content"=>"admin/change_password", "alert"=>array("error"=>"There was an error trying to change your password :(", "title"=>"Change your Password")));
+					}
+				} else {
+					$this->load->view("includes/template", array("content"=>"admin/change_password", "alert"=>array("error"=>"You didn't enter your old password correctly. Try again.", "title"=>"Change your Password")));
+				}
+
+			} else {				
+				$this->load->view("includes/template", array("content"=>"admin/change_password", "alert"=>array("error"=>"Passwords didn't match", "title"=>"Change your Password")));
+			}
+		} else {
+			$this->load->view("includes/template", array("content"=>"admin/change_password", "title"=>"Change your Password"));
+		}
+	}
 
 	public function editusers() {
 

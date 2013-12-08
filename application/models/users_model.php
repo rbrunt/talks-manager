@@ -55,6 +55,13 @@ class Users_Model extends CI_Model {
 		return array("token"=>$token, "insertId"=>$this->db->insert_id());
 	}
 
+	public function authenticateById($id, $password){
+		$user = $this->getUserById($id);
+		if ($user == false) return false;
+		if ($user->password != hash("SHA512", $password.$user->salt)) return false;
+		return true;
+	}
+
 	public function login($email, $password) {
 		$user = $this->getUserByEmail($email);
 		
@@ -108,6 +115,20 @@ class Users_Model extends CI_Model {
 			);
 
 		$this->db->where("token",$token)->where("email",$email)->update("users", $insertArray);
+		
+		return $this->db->affected_rows();
+	}
+
+	public function changePassword($id, $password) {
+		$salt = bin2hex(mcrypt_create_iv(32));
+		$hash = hash("SHA512", $password.$salt);
+
+		$insertArray = array(
+			"salt"=>$salt,
+			"password"=>$hash,
+			);
+
+		$this->db->where("id",$id)->update("users", $insertArray);
 		
 		return $this->db->affected_rows();
 	}

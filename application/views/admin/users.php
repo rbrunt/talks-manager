@@ -20,7 +20,7 @@
 					<tr>
 						<td><?php echo $user->name; ?></td>
 						<td><?php echo $user->email; ?></td>
-						<td><a href="<?php echo base_url('/admin/deleteuser/'.$user->id) ;?>" class="btn btn-danger btn-small pull-right"><i class="icon-remove"></i> Delete User</a></td>
+						<td><a href="<?php echo base_url('/admin/deleteuser/'.$user->id) ;?>" class="text-error pull-right"><i class="icon-remove"></i> Delete User</a></td>
 					</tr>
 <?php endforeach;?>
 				</tbody>

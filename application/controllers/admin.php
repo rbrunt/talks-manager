@@ -416,4 +416,38 @@ class Admin extends Talks_Controller {
 			$this->load->view("includes/template", array("content"=>"admin/add_series", "alert"=>array("info"=>"<strong>TODO:</strong> Add image upload ability. Can currently only do it from the talk edit screen"), "title"=>"Add a series | Admin"));
 		}
 	}	
+
+	public function deleteuser($userid) {
+		$this->checkLogin();
+		$this->load->model("users_model");
+		if ($this->input->post()) {
+			if ($this->input->post("token") == $this->session->flashdata("confirmationtoken")) {
+				if($this->users_model->deleteUser($userid)) {
+					$this->session->set_flashdata("alert", array("success"=>"User successfully deleted"));	
+				} else {
+					$this->session->set_flashdata("error", array("success"=>"An error ocurred deleting that user. Try again, or contact whoever maintains the site."));
+				}
+				$this->session->set_flashdata("alert", array("success"=>"User successfully deleted"));
+				redirect("/admin/users/");
+			} else {
+				$user = $this->users_model->getUserById($userid);
+				if ($user){
+					$token = bin2hex(mcrypt_create_iv(16));
+					$this->load->view("includes/template", array("content"=>"admin/delete_user", "alert"=>array("error"=>"Invalid Token. Make sure you're pressing the button from the website! Make sure you really want to delete the user, then try again below:"), "user"=>$user, "token"=>$token, "title"=>"Delete a User | Admin"));
+				} else {
+					show_404();
+				}
+			}
+		} else {
+			$user = $this->users_model->getUserById($userid);
+			if ($user){
+				$token = bin2hex(mcrypt_create_iv(16));
+				$this->session->set_flashdata("confirmationtoken", $token);
+				$this->load->view("includes/template", array("content"=>"admin/delete_user", "user"=>$user, "token"=>$token, "title"=>"Delete a User | Admin"));
+			} else {
+				show_404();
+			}
+		}
+
+	}
 }

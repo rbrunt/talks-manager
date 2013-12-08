@@ -112,5 +112,15 @@ class Users_Model extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
+	public function deleteUser($userId) {
+		$this->load->model("files_model");
+		
+		if ($this->db->where("id", $userId)->delete("users")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 }

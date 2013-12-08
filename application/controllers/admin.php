@@ -123,7 +123,6 @@ class Admin extends Talks_Controller {
 
 				<a href=\"".base_url('/admin/setpassword/'.$insertId["token"])."\">".base_url('/admin/setpassword/'.$insertId["token"])."</a>";
 				$this->email->send();
-				echo $this->email->print_debugger();
 
 				redirect(base_url());
 			} else {
@@ -156,6 +155,63 @@ class Admin extends Talks_Controller {
 			$this->load->view("includes/template", array("content"=>"login/set_password", "title"=>"Account Creation - Set a password"));
 		}
 	}
+
+	public function passwordreset() {
+			
+		if ($this->input->post()){
+			$email = $this->input->post("email");
+			$this->load->model("users_model");
+			$user = $this->users_model->getUserByEmail($email);
+			if ($user) {
+				$this->load->library("email");
+
+				
+
+				$token = $this->users_model->setupPasswordReset($email);
+
+				$this->email->from($this->config->item("email_from"));
+				$this->email->to($email);
+				$this->email->subject("Password Reset");
+				$message = "You asked us to reset your password on the DICCU Talks system. Please click on the link below to create a new password:
+
+				<a href=\"".base_url('/login/resetpassword/'.$token)."\">".base_url('/login/resetpassword/'.$token)."</a>
+
+				If you didn't request a new password, then just ignore this email.";
+				$this->email->send();
+
+				$this->session->set_flashdata("alert", array("success"=>"successfully set a password, now try <a href=\"".base_url('/admin/login')."\">logging in</a>!"));
+				redirect(base_url());
+			} else {
+				$this->session->set_flashdata("alert", array("error"=>"That email address doesn't seem to be registered. Are you sure you typed it right?"));
+				$this->load->view("includes/template", array("content"=>"login/reset_password", "title"=>"Reset your Password"));
+			}
+		} else {
+			$this->load->view("includes/template", array("content"=>"login/reset_password", "title"=>"Account Creation - Set a password"));
+		}
+	}
+
+	public function resetpassword($token) {
+		
+		if ($this->input->post()){
+			$password = ($this->input->post("password1") == $this->input->post("password2")) ? $this->input->post("password1") : false;
+			if ($password) {
+				$email = $this->input->post("email");
+				$this->load->model("users_model");
+				$affectedRows = $this->users_model->doPasswordReset($email, $token, $password);
+				if ($affectedRows == 1) {
+					$this->session->set_flashdata("alert", array("success"=>"successfully resset your password, now try <a href=\"".base_url('/admin/login')."\">logging in</a>!"));
+					redirect(base_url());
+				} else {
+					$this->load->view("includes/template", array("content"=>"login/do_password_reset", "alert"=>array("error"=>"Either your email isn't in the system, or you have an invalid token. Make sure typed your email address correctly and that you have the right link. Bear in mind that once you've reset your password, the link expires, and you'll need to request a new one.", "title"=>"Reset your Password")));
+				}
+			} else {
+				$this->load->view("includes/template", array("content"=>"login/do_password_reset", "alert"=>array("error"=>"Passwords didn't match", "title"=>"Reset your Password")));
+			}
+		} else {
+			$this->load->view("includes/template", array("content"=>"login/do_password_reset", "title"=>"Reset your Password"));
+		}
+	}
+
 
 	public function editusers() {
 

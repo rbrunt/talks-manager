@@ -87,4 +87,30 @@ class Users_Model extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
+	public function setupPasswordReset($email) {		
+		$token = bin2hex(mcrypt_create_iv(16));
+
+		$updateArray["token"] = $token;
+
+		$this->db->where("email", $email)->update("users", $updateArray);
+
+		return $token;
+	}
+
+	public function doPasswordReset($email, $token, $password) {
+		$salt = bin2hex(mcrypt_create_iv(32));
+		$hash = hash("SHA512", $password.$salt);
+
+		$insertArray = array(
+			"salt"=>$salt,
+			"password"=>$hash,
+			"token"=>""
+			);
+
+		$this->db->where("token",$token)->where("email",$email)->update("users", $insertArray);
+		
+		return $this->db->affected_rows();
+	}
+
+
 }

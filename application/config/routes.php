@@ -45,6 +45,7 @@ $route['404_override'] = 'errors/error_404';
 $route['series/:num'] = 'series';
 $route['search/(:any)'] = 'search/index/$1';
 $route['cookies'] = 'home/cookies';
+$route['login/resetpassword/(:any)'] = 'admin/resetpassword/$1';
 
 
 /* End of file routes.php */

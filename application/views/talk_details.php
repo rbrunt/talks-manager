@@ -19,7 +19,7 @@
 <?php if($isLoggedIn) : ?>					
 					<a class="btn btn-primary pull-right" title="Edit this talk" href="<?php echo base_url('/admin/edittalk/'.$talk[0]->id);?>">Edit</a>
 <?php endif; ?>					
-					<p class="muted"><?php echo $talk[0]->date ?></p>
+					<p class="muted"><span class="activate-tooltip" title="<?php echo $talk[0]->date;?>" data-placement="bottom"><?php echo relative_time($talk[0]->date); ?></span></p>
 				</div>
 <?php if($talk[0]->passage != ""): ?>
 				<p>Passage: <a id="passagelink" href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk[0]->passage;?>" target="_blank"><?php echo $talk[0]->passage; ?></a></p>

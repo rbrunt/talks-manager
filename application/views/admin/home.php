@@ -33,7 +33,7 @@
 		<h4>My Account<span class="label pull-right"><?php echo $this->session->userdata("useremail"); ?></span></h4><hr>
 		<ul class="unstyled">
 			<li><a href="#"><i class="icon-key"></i> Change Password</a></li>
-			<li><a class="text-warning" href="#"><i class="icon-remove"></i> Delete Account</a></li>
+			<li><a class="text-error" href="<?php echo base_url("/admin/deleteuser/" . $this->session->userdata("userid"));?>"><i class="icon-remove"></i> Delete Account</a></li>
 		</ul>
 	</div>
 </div>

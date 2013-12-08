@@ -20,7 +20,7 @@
 			<?php echo form_textarea(array("name"=>"summary", "value"=>$series[0]->summary,  "class"=>"span9", "maxlength"=>"1000", "placeholder"=>"Series Summary")); ?></p>
 			<?php echo form_submit(array("value"=>"Submit Edits", "class"=>"btn btn-primary")); ?>
 			<a class="btn" href="<?php echo base_url('/series/seriesdetail/'.$series[0]->id); ?>">Cancel</a>
-			<a id="deletebutton" class="btn btn-danger pull-right activate-tooltip" title="Delete the series. Deletes all the talks that the series contains, including all uploaded files and artwork. CANNOT BE UNDONE!" href="<?php echo base_url('/admin/deleteseries/'.$series[0]->id); ?>">Delete Series</a>
+			<a class="text-error pull-right activate-tooltip click-to-confirm" title="Delete the series. Deletes all the talks that the series contains, including all uploaded files and artwork. CANNOT BE UNDONE!" href="#" data-href="<?php echo base_url('/admin/deleteseries/'.$series[0]->id); ?>">Delete Series</a>
 			<?php echo form_hidden(array("id"=>$series[0]->id)); ?>
 			<?php echo form_close(); ?>
 		</div>

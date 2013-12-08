@@ -19,7 +19,7 @@
 					</div>
 				</div>
 				<?php if($talk[0]->exists):?>
-					<p class="text-success"><i class="icon-ok"></i> An mp3 has been uploaded for this talk. If you want to replace the current file, just <a href="<?php echo base_url('/admin/uploadtalk/'.$talk[0]->id); ?>">upload a new one</a>.</p><a title="Delete the mp3 from the server. Does not delete the talk entry on the website, just the file. CANNOT BE UNDONE!" data-placement="bottom" class="btn btn-small btn-danger pull-right activate-tooltip" id="deletebutton" href="<?php echo base_url('/admin/deletetalkfile/'.$talk[0]->id); ?>">Delete mp3</a>
+					<p class="text-success"><i class="icon-ok"></i> An mp3 has been uploaded for this talk. If you want to replace the current file, just <a href="<?php echo base_url('/admin/uploadtalk/'.$talk[0]->id); ?>">upload a new one</a>.</p><a title="Delete the mp3 from the server. Does not delete the talk entry on the website, just the file. CANNOT BE UNDONE!" data-placement="bottom" class="text-error pull-right activate-tooltip click-to-confirm" href="#" data-href="<?php echo base_url('/admin/deletetalkfile/'.$talk[0]->id); ?>">Delete mp3</a>
 				<?php else: ?>
 					<p class="text-error"><i class="icon-warning-sign"></i> No audio has been uploaded yet for this talk. To do it now, <a href="<?php echo base_url('/admin/uploadtalk/'.$talk[0]->id); ?>">click here</a>.</p>
 				<?php endif; ?>
@@ -30,7 +30,7 @@
 				<?php echo form_textarea(array("name"=>"summary", "value"=>$talk[0]->summary, "class"=>"span9", "maxlength"=>"1000", "placeholder"=>"Talk Summary")); ?>
 				<?php echo form_submit(array("value"=>"Submit Edits", "class"=>"btn btn-primary")); ?>
 				<a class="btn" href="<?php echo base_url('/talks/talk/'.$talk[0]->id); ?>">Cancel</a>
-				<a id="deletebutton" class="btn btn-danger pull-right activate-tooltip" title="Delete the mp3 on the server and all the talk details from the database. CANNOT BE UNDONE!" href="<?php echo base_url('/admin/deletetalk/'.$talk[0]->id); ?>">Delete Talk</a>
+				<a class="text-error pull-right activate-tooltip click-to-confirm" title="Delete the mp3 on the server and all the talk details from the database. CANNOT BE UNDONE!" href="#" data-href="<?php echo base_url('/admin/deletetalk/'.$talk[0]->id); ?>">Delete Talk</a>
 				<?php echo form_hidden(array("id"=>$talk[0]->id)); ?>
 			<?php echo form_close(); ?>
 			</div>

@@ -43,6 +43,8 @@ $route['404_override'] = 'errors/error_404';
 
 // Begin custom routing:
 $route['series/:num'] = 'series';
+$route['talks/:num'] = 'talks';
+$route['talks/future/:num'] = 'talks/future';
 $route['search/(:any)'] = 'search/index/$1';
 $route['cookies'] = 'home/cookies';
 $route['login/resetpassword/(:any)'] = 'admin/resetpassword/$1';

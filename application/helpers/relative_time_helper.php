@@ -17,12 +17,20 @@ if (!function_exists('relative_time')) {
             1 => 'second'
         );
 
+        $suffix = " ago";
+        $prefix = "";
+
+        if ($timeSince < 0) {
+            $timeSince = -$timeSince;
+            $suffix = "";
+            $prefix = "in ";
+        }
+
         foreach ($tokens as $unit => $text) {
             if ($timeSince < $unit) continue;
             $numberOfUnits = floor($timeSince / $unit);
-            return $numberOfUnits . ' ' . $text . (($numberOfUnits > 1) ? 's' : '') . ' ago';
+            return $prefix . $numberOfUnits . ' ' . $text . (($numberOfUnits > 1) ? 's' : '') . $suffix;
         }
-
     }
 
 }

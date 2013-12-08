@@ -2,13 +2,52 @@
 
 class Talks extends Talks_Controller {
 
-	public function index()
-	{
-		// $this->load->model("talks_model");
-		// $talks = $this->talks_model->getAll();
-		// $this->load->view('includes/template', array("talks"=>$talks, "content"=>"all_talks"));
-		redirect("/series/");
+	public function index() {
+		$this->load->library("pagination");
+		$this->load->model("talks_model");
+		$this->load->model("files_model");
+		$this->load->helper("relative_time");
+
+		// Config for pagination
+		$config["base_url"] = base_url("/talks/");
+		$config["total_rows"] = $this->talks_model->countPastTalks();
+		$segment = $config["uri_segment"] = 2;
+		$limit = $config["per_page"] = 5;
+
+		$this->pagination->initialize($config);
+
+		$talks = $this->talks_model->getRecentTalksPage($limit, $this->uri->segment($segment));
+		
+		foreach ($talks as $talk) {
+        	$artwork[$talk->id] = $this->files_model->getSeriesArtworkFileName($talk->seriesid);
+        }
+
+		$this->load->view('includes/template', array("talks"=>$talks, "artwork"=>$artwork, "content"=>"recent_talks", "breadcrumb"=>"Recent Talks"));
 	}
+
+	public function future() {
+		$this->load->library("pagination");
+		$this->load->model("talks_model");
+		$this->load->model("files_model");
+		$this->load->helper("relative_time");
+
+		// Config for pagination
+		$config["base_url"] = base_url("/talks/future/");
+		$config["total_rows"] = $this->talks_model->countFutureTalks();
+		$segment = $config["uri_segment"] = 3;
+		$limit = $config["per_page"] = 5;
+
+		$this->pagination->initialize($config);
+
+		$talks = $this->talks_model->getFutureTalksPage($limit, $this->uri->segment($segment));
+		
+		foreach ($talks as $talk) {
+        	$artwork[$talk->id] = $this->files_model->getSeriesArtworkFileName($talk->seriesid);
+        }
+
+		$this->load->view('includes/template', array("talks"=>$talks, "artwork"=>$artwork, "content"=>"recent_talks", "breadcrumb"=>"Coming Soon"));
+	}
+
 
 	public function talk($talkId) {
 		$this->load->model("talks_model");

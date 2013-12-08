@@ -1,24 +1,51 @@
-		<div class="well">
-			<h1>Welcome to the DICCU Talks system!</h1>
-			<p>Here are some of the most recent talks:</p>
-		</div>
-
+	<div class="well">
+		<h1>Welcome to the DICCU Talks system!</h1>
+		<p>Here are some of the most recent talks, as well as a few that are coming soon:	</p>
+	</div>
+<div class="clearfix">
 <?php foreach($talks as $talk): ?>
-		<div class="category">
-			<div class="row">
-				<div class="span3">
-					<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>"></a>
-				</div>
-				<div class="span9">
-					<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
-					<?php if($talk->speakername != "") : ?>
-						<p class="muted"><i class="icon-user"></i> <?php echo $talk->speakername; ?></p>
-					<?php endif;?>
-					<div id="categorydescription">
-						<p><?php echo $talk->summary; ?></p>
-					</div>
+	<div class="category">
+		<div class="row">
+			<div class="span3">
+				<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>"></a>
+			</div>
+			<div class="span9">
+				<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
+				<?php if($talk->speakername != "") : ?>
+					<p class="muted"><i class="icon-user"></i> <?php echo $talk->speakername; ?></p>
+				<?php endif;?>
+				<div id="categorydescription">
+					<p><?php echo $talk->summary; ?></p>
 				</div>
 			</div>
 		</div>
-		
+	</div>
 <?php endforeach; ?>
+<a class="pull-right" href="<?php echo base_url("talks"); ?>">See more Recent Talks <i class="icon-angle-right"></i></a>
+</div>
+<?php if(is_array($futuretalks)) :?>
+	
+	<hr>
+
+	<h2>Coming soon:</h2>
+	<?php foreach($futuretalks as $talk): ?>
+			<div class="category">
+				<div class="row">
+					<div class="span3">
+						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>"></a>
+					</div>
+					<div class="span9">
+						<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
+						<?php if($talk->speakername != "") : ?>
+							<p class="muted"><i class="icon-user"></i> <?php echo $talk->speakername; ?></p>
+						<?php endif;?>
+						<div id="categorydescription">
+							<p><?php echo $talk->summary; ?></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+	<?php endforeach; ?>
+	<a class="pull-right" href="<?php echo base_url("talks/future"); ?>">See more Coming Soon <i class="icon-angle-right"></i></a>
+<?php endif; ?>

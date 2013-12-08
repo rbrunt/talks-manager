@@ -21,6 +21,16 @@ class Talks_Model extends CI_Model {
 		return $talks;
 	}
 
+	public function countPastTalks() {
+		$talks = $this->db->where("date <", date("Y-m-d"))->count_all_results('talks');
+		return $talks;
+	}
+
+	public function countFutureTalks() {
+		$talks = $this->db->where("date >", date("Y-m-d"))->count_all_results('talks');
+		return $talks;
+	}
+
 	public function getTalkPage($number, $offset) {
 		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.passage, talks.speakername, talks.seriesid, series.title as seriestitle")->join("series", "talks.seriesid = series.id")->order_by("date", "DESC")->get('talks', $number, $offset);
 		if ($talks->num_rows() > 0 ) {
@@ -31,8 +41,30 @@ class Talks_Model extends CI_Model {
 		} else {
 			return false;
 		}
+	}
 
-		// return ($talks->num_rows() > 0) ? $talks : false;
+	public function getRecentTalksPage($number, $offset) {
+		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.summary, talks.speakername, talks.seriesid, series.title as seriestitle")->where("date <", date("Y-m-d"))->join("series", "talks.seriesid = series.id")->order_by("date", "DESC")->get('talks', $number, $offset);
+		if ($talks->num_rows() > 0 ) {
+			foreach($talks->result() as $talk){
+				$talkarray[] = $talk;
+			}
+			return $talkarray;
+		} else {
+			return false;
+		}
+	}
+
+	public function getFutureTalksPage($number, $offset) {
+		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.summary, talks.speakername, talks.seriesid, series.title as seriestitle")->where("date >", date("Y-m-d"))->join("series", "talks.seriesid = series.id")->order_by("date", "ASC")->get('talks', $number, $offset);
+		if ($talks->num_rows() > 0 ) {
+			foreach($talks->result() as $talk){
+				$talkarray[] = $talk;
+			}
+			return $talkarray;
+		} else {
+			return false;
+		}
 	}
 
 	public function getTalkById($talkId) {
@@ -70,7 +102,20 @@ class Talks_Model extends CI_Model {
 	public function getRecentTalks($numTalks = 5) {
 		$numTalks = $this->db->escape($numTalks);
 		//$talks = $this->db->query("SELECT id, title, summary, date FROM talks ORDER BY date DESC LIMIT ".$numTalks);
-		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername")->from("talks")->order_by("date", "DESC")->limit($numTalks)->get();
+		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername")->where("date <", date("Y-m-d"))->from("talks")->order_by("date", "DESC")->limit($numTalks)->get();
+		if ($talks->num_rows() > 0 ) {
+			foreach($talks->result() as $talk){
+				$talkarray[] = $talk;
+			}
+			return $talkarray;
+		} else {
+			return false;
+		}
+	}
+
+	public function getFutureTalks($numTalks = 1) {
+		$numTalks = $this->db->escape($numTalks);
+		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername")->where("date >", date("Y-m-d"))->from("talks")->order_by("date", "ASC")->limit($numTalks)->get();
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;

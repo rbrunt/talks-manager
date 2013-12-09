@@ -89,7 +89,7 @@ class Admin extends Talks_Controller {
 				$this->session->set_flashdata("alert",array("success"=>"Logged in!"));
 				redirect("admin");
 			} else {
-				$this->load->view("includes/template", array("content"=>"login/login_page", "alert"=>array("error"=>"wrong username or password", "title"=>"Login")));
+				$this->load->view("includes/template", array("content"=>"login/login_page", "alert"=>array("error"=>"wrong username or password, or your account isn't active", "title"=>"Login")));
 			}
 
 		} else {

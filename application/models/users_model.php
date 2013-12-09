@@ -66,6 +66,7 @@ class Users_Model extends CI_Model {
 		$user = $this->getUserByEmail($email);
 		
 		if ($user == false) return false;
+		if ($user->active == false) return false;
 		if ($user->password != hash("SHA512", $password.$user->salt)) return false;
 		$this->session->set_userdata("userid", $user->id);
 		$this->session->set_userdata("useremail", $user->email);
@@ -86,6 +87,7 @@ class Users_Model extends CI_Model {
 			"salt"=>$salt,
 			"password"=>$hash,
 			"name"=>$name,
+			"active"=>1,
 			"token"=>""
 			);
 

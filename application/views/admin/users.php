@@ -17,8 +17,8 @@
 				</thead>
 				<tbody>
 <?php foreach($users as $user): ?>
-					<tr>
-						<td><?php echo $user->name; ?></td>
+					<tr class="activate-tooltip <?php echo ($user->active ? "" : "text-warning"); ?>" title="<?php echo ($user->active ? "" : "This user hasn't been activated - they'll need to set a password using the link they got before they can log in."); ?>" data-placement="bottom">
+						<td><?php echo (($user->name == "") ? "-" : $user->name ); ?></td>
 						<td><?php echo $user->email; ?></td>
 						<td><a href="<?php echo base_url('/admin/deleteuser/'.$user->id) ;?>" class="text-error pull-right"><i class="icon-remove"></i> Delete User</a></td>
 					</tr>

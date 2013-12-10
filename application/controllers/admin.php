@@ -116,12 +116,11 @@ class Admin extends Talks_Controller {
 			if ($insertId = $this->users_model->addUser($email)) {
 				$this->session->set_flashdata("alert", array("success"=>"successfully added user ".$email."! An email has been sent to them with details on creating a password"));
 
-				$this->email->from($this->config->item("email_from"));
+				$this->email->from($this->config->item("email_from"), "Durham Inter-Collegiate Christian Union");
 				$this->email->to($email);
 				$this->email->subject("Account Verification");
-				$message = "An account has been created for you on the DICCU Talks system. Please click on the link below to verify your email address and create a password:
-
-				<a href=\"".base_url('/admin/setpassword/'.$insertId["token"])."\">".base_url('/admin/setpassword/'.$insertId["token"])."</a>";
+				$this->email->message("An account has been created for you on the DICCU Talks system. Please click on the link below to verify your email address and create a password:<br>
+				<a href=\"".base_url('/admin/setpassword/'.$insertId["token"])."\">".base_url('/admin/setpassword/'.$insertId["token"])."</a>");
 				$this->email->send();
 
 				redirect(base_url());
@@ -169,17 +168,16 @@ class Admin extends Talks_Controller {
 
 				$token = $this->users_model->setupPasswordReset($email);
 
-				$this->email->from($this->config->item("email_from"));
+				$this->email->from($this->config->item("email_from"), "Durham Inter-Collegiate Christian Union");
 				$this->email->to($email);
 				$this->email->subject("Password Reset");
-				$message = "You asked us to reset your password on the DICCU Talks system. Please click on the link below to create a new password:
+				$this->email->message("You asked us to reset your password on the DICCU Talks system. Please click on the link below to create a new password:<br>
+				<a href=\"".base_url('/login/resetpassword/'.$token)."\">".base_url('/login/resetpassword/'.$token)."</a><br>
 
-				<a href=\"".base_url('/login/resetpassword/'.$token)."\">".base_url('/login/resetpassword/'.$token)."</a>
-
-				If you didn't request a new password, then just ignore this email.";
+				If you didn't request a new password, then just ignore this email.");
 				$this->email->send();
 
-				$this->session->set_flashdata("alert", array("success"=>"successfully set a password, now try <a href=\"".base_url('/admin/login')."\">logging in</a>!"));
+				$this->session->set_flashdata("alert", array("success"=>"You should receive a password reset link to your email very soon!"));
 				redirect(base_url());
 			} else {
 				$this->session->set_flashdata("alert", array("error"=>"That email address doesn't seem to be registered. Are you sure you typed it right?"));
@@ -244,10 +242,10 @@ class Admin extends Talks_Controller {
 
 	}
 
-	public function edittalk($talkId) {
+	public function edittalk($talkId = false) {
 		$this->checkLogin();		
 		if (!$this->isLoggedIn) $this->sendHome();
-		if (isset($talkId)){
+		if ($talkId != false){
 			$this->load->model("talks_model");
 			$this->load->model("series_model");
 			$this->load->model("files_model");

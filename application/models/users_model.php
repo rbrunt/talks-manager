@@ -121,6 +121,11 @@ class Users_Model extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
+	public function editUser($userId, $updateArray) {
+		$this->db->where("id", $userId)->update("users", $insertArray);
+		return $this->db->affected_rows();
+	}
+
 	public function changePassword($id, $password) {
 		$salt = bin2hex(mcrypt_create_iv(32));
 		$hash = hash("SHA512", $password.$salt);

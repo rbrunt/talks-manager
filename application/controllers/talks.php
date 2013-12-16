@@ -40,9 +40,12 @@ class Talks extends Talks_Controller {
 		$this->pagination->initialize($config);
 
 		$talks = $this->talks_model->getFutureTalksPage($limit, $this->uri->segment($segment));
-		
-		foreach ($talks as $talk) {
-        	$artwork[$talk->id] = $this->files_model->getSeriesArtworkFileName($talk->seriesid);
+		$artwork = array();
+
+		if ($talks != false) {
+			foreach ($talks as $talk) {
+	        	$artwork[$talk->id] = $this->files_model->getSeriesArtworkFileName($talk->seriesid);
+        	}
         }
 
 		$this->load->view('includes/template', array("talks"=>$talks, "artwork"=>$artwork, "content"=>"recent_talks", "breadcrumb"=>"Coming Soon"));

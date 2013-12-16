@@ -238,8 +238,17 @@ class Admin extends Talks_Controller {
 		}
 	}
 
-	public function editusers() {
-
+	public function edituser( $userid = $this->session->userdata("userid")){
+		$this->load->model("users_model");
+		
+		if ($this->input->post()) {
+			$updateArray = array(
+				"name" = $this->input->post("name");
+				);
+			$this->users_model->edituser($userid, $updateArray);
+			$this->session->set_flashdata("alert", array("success"=>"Details updated"))
+				redirect("/admin");
+		}
 	}
 
 	public function edittalk($talkId = false) {

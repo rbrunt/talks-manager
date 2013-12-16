@@ -6,7 +6,7 @@
 			</ul>
 		</div>
 	</div>
-
+<?php if ($talks != false):?>
 <?php foreach($talks as $talk): ?>
 	<div class="category">
 		<div class="row">
@@ -27,3 +27,9 @@
 <?php endforeach; ?>
 
 <?php echo $this->pagination->create_links(); ?>
+<?php else: ?>
+	<div class="hero-unit">
+		<h1>Nothing here <small>:(</small></h1>
+		<p>There aren't any talks to go here right now - try checking back another time! Since you're here anyway, why not check out some <a href="<?php echo base_url("talks/"); ?>">recent talks</a></p>
+	</div>
+<?php endif; ?>

@@ -17,6 +17,7 @@
 					<th>Speaker</th>
 					<th>Passage</th>
 					<th><i class="icon-headphones"></i></th>
+					<th><i class="icon-facetime-video"></i></th>
 					<th><a href="<?php echo base_url("admin/addtalk"); ?>" class="btn btn-mini" title="Add a Talk"><i class="icon-plus"></i></a></th>
 				</thead>
 				<tbody>
@@ -32,6 +33,7 @@
 						<td>-</td>
 <?php endif; ?>
 						<td><i class="activate-tooltip <?php echo ($talk->exists ? "icon-ok text-success" : "icon-warning-sign text-error"); ?>" title="<?php echo ($talk->exists ? "There is a file uploaded for this talk" : "No file uploaded - you'll need to upload one!"); ?>" data-placement="bottom"></i></td>
+						<td><i class="activate-tooltip <?php echo ($talk->video ? "icon-ok text-success" : "icon-warning-sign text-warning"); ?>" title="<?php echo ($talk->video ? "There is a video available for this talk" : "No video has been added for this talk. If there is one, why not add one?"); ?>" data-placement="bottom"></i></td>
 						<td><a href="<?php echo base_url('/admin/edittalk/'.$talk->id)?>" title="Edit" class="btn btn-mini btn-primary">Edit</a></td>
 					</tr>
 <?php endforeach;?>

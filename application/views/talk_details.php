@@ -25,6 +25,14 @@
 				<p>Passage: <a id="passagelink" href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk[0]->passage;?>" target="_blank"><?php echo $talk[0]->passage; ?></a></p>
 <?php endif; ?>
 				<p id="summary"><?php echo $talk[0]->summary ?></p>
+<?php if($talk[0]->video) :?>
+	<?php if (preg_match("/(?:https?:\/\/(?:www.)?youtube.com\/watch\?(?:[a-zA-Z0-9_=&]*&)?v=)([a-zA-Z0-9_]*)/", $talk[0]->video, $matches)) :?>
+		<iframe width="700" height="394" src="//www.youtube.com/embed/<?php echo $matches[1]; ?>" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+	<?php elseif (preg_match("/(?:https?:\/\/(?:www.)?vimeo.com\/)([0-9]+)/", $talk[0]->video, $matches)) :?>
+		<iframe src="//player.vimeo.com/video/<?php echo $matches[1];?>?title=0&amp;byline=0&amp;portrait=0" width="700" height="393" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+	<?php endif ;?>
+
+<?php endif; ?>
 <?php if($talk_exists) : ?>
 				<audio controls preload="none" src="<?php echo base_url("files/talks/".$talk[0]->id); ?>.mp3" type="audio/mpeg">
 					<!-- Add flash fallback here... -->

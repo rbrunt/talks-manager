@@ -25,6 +25,7 @@ class Series extends Talks_Controller {
 	}
 
 	public function seriesdetail($seriesId) {
+		$this->load->library("typography");
 		$this->load->model("series_model");
 		$this->load->model("talks_model");
 		$this->load->model("files_model");

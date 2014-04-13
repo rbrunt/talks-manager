@@ -53,6 +53,7 @@ class Talks extends Talks_Controller {
 
 
 	public function talk($talkId) {
+		$this->load->library("typography");
 		$this->load->model("talks_model");
 		$this->load->helper("relative_time");
 		if ($talk = $this->talks_model->getTalkDetailsById($talkId)) {

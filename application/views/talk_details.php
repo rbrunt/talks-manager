@@ -24,7 +24,7 @@
 <?php if($talk[0]->passage != ""): ?>
 				<p>Passage: <a id="passagelink" href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk[0]->passage;?>" target="_blank"><?php echo $talk[0]->passage; ?></a></p>
 <?php endif; ?>
-				<p id="summary"><?php echo $talk[0]->summary ?></p>
+				<div id="summary"><?php echo $this->typography->auto_typography($talk[0]->summary) ?></div>
 <?php if($talk[0]->video) :?>
 	<?php if (preg_match("/(?:https?:\/\/(?:www.)?youtube.com\/watch\?(?:[a-zA-Z0-9_=&]*&)?v=)([a-zA-Z0-9_-]*)/", $talk[0]->video, $matches)) :?>
 		<iframe width="700" height="394" src="//www.youtube.com/embed/<?php echo $matches[1]; ?>" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>

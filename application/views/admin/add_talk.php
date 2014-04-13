@@ -20,10 +20,18 @@
 						<?php echo form_input( array("name"=>"date", "class"=>"span2", "value"=>date("Y-m-d"), "id"=>"datepicker", "placeholder"=>"yyyy-mm-dd")); ?>
 					</div>
 				</div>
-				<div class="input-prepend">
-						<span class="add-on"><i class="icon-book"></i></span>
-						<?php echo form_input(array("name"=>"passage", "class"=>"span3", "maxlength"=>"50", "placeholder"=>"Passage")); ?>
+				<div class="row">
+					<div class="input-prepend activate-tooltip span6" title="YouTube or Vimeo video of this event. Will be embedded in the talk's page." data-placement="bottom" data-container="body">
+							<span class="add-on"><i class="icon-facetime-video"></i></span>
+							<?php echo form_input(array("type"=>"url", "class"=>"span6", "name"=>"video", "maxlength"=>"128", "placeholder"=>"Video URL")); ?>
 					</div>
+				</div>
+				<div class="row">
+					<div class="input-prepend span3">
+							<span class="add-on"><i class="icon-book"></i></span>
+							<?php echo form_input(array("name"=>"passage", "class"=>"span3", "maxlength"=>"50", "placeholder"=>"Passage")); ?>
+					</div>
+				</div>
 				<?php echo form_textarea(array("name"=>"summary", "class"=>"span9", "maxlength"=>"1000", "placeholder"=>"Talk Summary")); ?>
 				<?php echo form_hidden(array("uploadedby"=>1)); ?>
 				<?php echo form_submit(array("value"=>"Submit", "class"=>"btn btn-primary")); ?>

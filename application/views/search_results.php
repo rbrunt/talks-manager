@@ -16,7 +16,8 @@
 				<th>Title</th>
 				<th>Series</th>
 				<th>Date</th>
-				<th>Passage</th>
+				<th>Speaker</th>
+				<!-- <th>Passage</th> -->
 			</thead>
 			<tbody>
 <?php foreach($talks as $talk): ?>
@@ -24,8 +25,8 @@
 					<td><strong><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title;?></a></strong></td>
 					<td><a href="<?php echo base_url('/series/seriesdetail/'.$talk->seriesid) ;?>"><?php echo $talk->seriestitle;?></a></td>
 					<td><?php echo $talk->date;?></td>
-					<!-- <td><?php echo $talk->speakername; ?></td> -->
-					<td><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td>
+					<td><?php echo ($talk->speakername != "" ) ? $talk->speakername : "-" ; ?></td>
+					<!-- <td><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td> -->
 				</tr>
 <?php endforeach;?>
 			</tbody>

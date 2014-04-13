@@ -10,6 +10,8 @@ class Search_Model extends CI_Model {
 		(SELECT `talks`.*, `series`.`title` AS seriestitle FROM `talks` JOIN `series` ON `talks`.`seriesid` = `series`.`id` WHERE `talks`.`passage` LIKE '%$escapedSearch%') 
 		UNION
 		(SELECT `talks`.*, `series`.`title` AS seriestitle FROM `talks` JOIN `series` ON `talks`.`seriesid` = `series`.`id` WHERE `talks`.`date` LIKE '%$escapedSearch%') 
+		UNION
+		(SELECT `talks`.*, `series`.`title` AS seriestitle FROM `talks` JOIN `series` ON `talks`.`seriesid` = `series`.`id` WHERE `talks`.`speakername` LIKE '%$escapedSearch%') 
 		LIMIT 10";
 		$results = $this->db->query($query);
 		if ($results->num_rows() > 0 ) {

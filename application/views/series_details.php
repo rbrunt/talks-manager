@@ -18,6 +18,13 @@
 							<a class="btn btn-primary pull-right" title="Edit this series" href="<?php echo base_url('/admin/editseries/'.$series[0]->id);?>">Edit</a>
 <?php endif; ?>
 			</div>
+			<?php if ($series[0]->video):?>
+				<?php if (preg_match("/(?:https?:\/\/(?:www.)?youtube.com\/watch\?(?:[a-zA-Z0-9_=&]*&)?v=)([a-zA-Z0-9_-]*)/", $series[0]->video, $matches)) :?>
+					<iframe width="700" height="394" src="//www.youtube.com/embed/<?php echo $matches[1]; ?>" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+				<?php elseif (preg_match("/(?:https?:\/\/(?:www.)?vimeo.com\/)([0-9]+)/", $series[0]->video, $matches)) :?>
+					<iframe src="//player.vimeo.com/video/<?php echo $matches[1];?>?title=0&amp;byline=0&amp;portrait=0" width="700" height="393" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				<?php endif ;?>
+			<?php endif; ?>
 			<p id="summary"><?php echo $series[0]->summary ?></p>
 			<div id="talkstable">
 				<?php if($talks) : ?>

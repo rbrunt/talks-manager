@@ -17,6 +17,12 @@
 				<?php echo form_input(array("name"=>"title", "value"=>$series[0]->title, "class"=>"h1 span9", "maxlength"=>"100", "placeholder"=>"Series Title")); ?></h1>
 			</div>
 			<?php echo form_open(); ?>
+			<div class="row">
+				<div class="input-prepend activate-tooltip span6" title="YouTube or Vimeo video of this event. Will be embedded in the talk's page." data-placement="bottom" data-container="body">
+						<span class="add-on"><i class="icon-facetime-video"></i></span>
+						<?php echo form_input(array("type"=>"url", "class"=>"span6", "name"=>"video", "value"=>$series[0]->video, "maxlength"=>"128", "placeholder"=>"Video URL")); ?>
+				</div>
+			</div>
 			<?php echo form_textarea(array("name"=>"summary", "value"=>$series[0]->summary,  "class"=>"span9", "maxlength"=>"1000", "placeholder"=>"Series Summary")); ?></p>
 			<?php echo form_submit(array("value"=>"Submit Edits", "class"=>"btn btn-primary")); ?>
 			<a class="btn" href="<?php echo base_url('/series/seriesdetail/'.$series[0]->id); ?>">Cancel</a>

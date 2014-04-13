@@ -23,3 +23,7 @@
 			</tr>
 		</tbody>
 	</table>
+
+	<h2>Google Analytics</h2>
+	<p>We also use Google Analytics to help us see how visitors use the site, and identify how we can make it better. Google Analytics uses cookies to keep track of a number of things, for example the path you take through the site, and whether you’re a new or returning visitor. The cookies set by Google Analytics anonymous – the data they collect cannot be used to personally identified you.</p>
+	<p>You can see <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage#gajs">what cookies Google Analytics sets and how they’re used</a>, or opt <a href="https://tools.google.com/dlpage/gaoptout?hl=en">out of Google Analytics altogeter.</a></p>

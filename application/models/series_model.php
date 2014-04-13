@@ -36,7 +36,7 @@ class Series_Model extends CI_Model {
 	}
 
 	public function getSeriesPage($number, $offset) {
-		$series = $this->db->get('series', $number, $offset);
+		$series = $this->db->order_by("id","desc")->get('series', $number, $offset);
 		if ($series->num_rows() > 0 ) {
 			foreach($series->result() as $single_series){
 				$seriesarray[] = $single_series;

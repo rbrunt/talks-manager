@@ -36,13 +36,18 @@
 			<li><a class="text-error" href="<?php echo base_url("/admin/deleteuser/" . $this->session->userdata("userid"));?>"><i class="icon-remove"></i> Delete Account</a></li>
 		</ul>
 	</div>
+	<div class="span6">
+			<div class="well">
+			<h4>Found a bug?<i class="icon-bug pull-right"></i> </h4>
+			<p>If you find that something on this site isn't working, or you have a suggestion for a new feature or how to make using it easier, send me an email at <a href="mailto:r.brunt@gmail.com">r.brunt@gmail.com</a>, and I'll see what I can do!</p>
+			</div>
+	</div>
 </div>
 <div class="row">
 	<div class="span12">
 		<h2><i class="icon-refresh"></i> Updates <small>What's new?</small></h2>
 		<hr>
-		<h3>April 2014 <i class="icon-youtube"></i></h3>
-		<p>You can now paste in the url to a youtube or vimeo video instead of uploading audio for a talk, and it will be automatically embeded into the talk's details page.<p>
-		<p>Try editing a page to try it out.</p>
+		<h3>April 2014 <i class="icon-youtube pull-right"></i></h3>
+		<p>You can now paste in the url to a YouTube or Vimeo video instead of uploading audio for a talk, and it will be automatically embeded into the talk's details page.<p>
 	</div>
 </div>

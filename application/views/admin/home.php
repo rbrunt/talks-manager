@@ -37,3 +37,12 @@
 		</ul>
 	</div>
 </div>
+<div class="row">
+	<div class="span12">
+		<h2><i class="icon-refresh"></i> Updates <small>What's new?</small></h2>
+		<hr>
+		<h3>April 2014 <i class="icon-youtube"></i></h3>
+		<p>You can now paste in the url to a youtube or vimeo video instead of uploading audio for a talk, and it will be automatically embeded into the talk's details page.<p>
+		<p>Try editing a page to try it out.</p>
+	</div>
+</div>

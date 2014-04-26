@@ -17,7 +17,7 @@
 					<th>Speaker</th>
 					<th>Passage</th>
 					<th><i class="icon-headphones"></i></th>
-					<th><i class="icon-facetime-video"></i></th>
+					<th><i class="icon-youtube"></i></th>
 					<th><a href="<?php echo base_url("admin/addtalk"); ?>" class="btn btn-mini" title="Add a Talk"><i class="icon-plus"></i></a></th>
 				</thead>
 				<tbody>

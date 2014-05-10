@@ -29,7 +29,6 @@
 <?php if(isset($is_talk_page)):?>
 		<meta name="twitter:card" content="player">
 		<meta name="twitter:site" content="Durham_CU">
-		<meta name="twitter:creator" content="">
 		<meta name="twitter:title" content="<?php echo $talk[0]->title;?>">
 		<meta name="twitter:description" content="<?php echo $description;?>">
 		<meta name="twitter:image:src" content="<?php echo $artwork;?>">

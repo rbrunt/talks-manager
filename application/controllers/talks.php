@@ -60,7 +60,7 @@ class Talks extends Talks_Controller {
 			$this->load->model("files_model");
 			$talkExists = $this->files_model->checkTalkExists($talkId);
 			$artwork = $this->files_model->getSeriesArtworkFileName($talk[0]->seriesid);
-			$this->load->view('includes/template', array("title"=>$talk[0]->title, "talk"=>$talk, "content"=>"talk_details", "artwork"=>$artwork, "talk_exists"=>$talkExists, "is_talk_page"=>true, "description"=>str_replace(array("\r\n", "\r", "\n"), "", $talk[0]->summary)));
+			$this->load->view('includes/template', array("title"=>$talk[0]->title, "talk"=>$talk, "content"=>"talk_details", "artwork"=>$artwork, "talk_exists"=>$talkExists, "add_meta"=>true, "is_talk_page"=>true, "description"=>strip_tags(str_replace(array("\r\n", "\r", "\n"), "", $talk[0]->summary))));
 		} else {
 			show_404();
 		}

@@ -2,13 +2,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-<?php if(isset($title)) : ?>
-	<title><?php echo $talk->title; ?></title>
-<?php else: ?>
-	<title>DICCU Talks</title>
-<?php endif; ?>
+	<title>DICCU Talks Widget</title>
 	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no">
-	<link rel="shortcut icon" href="<?php echo base_url('/favicon.ico')?>">
 	<style>
 		* {
 			margin:0;
@@ -43,6 +38,9 @@
 		body:hover h2 {
 			color:#aaa;
 		}
+		body:hover #player {
+			opacity:1;
+		}
 		h1 {
 			color: #fff;
 			font-size:16px;
@@ -72,6 +70,9 @@
 			position: absolute;
 			bottom:0;
 			width: 100vw;
+			padding: 5px 10px;
+			opacity: 0.5;
+			transition: opacity 0.3s;
 		}
 		.logo {
 			float: left;

@@ -43,6 +43,7 @@ $route['404_override'] = 'errors/error_404';
 
 // Begin custom routing:
 $route['series/:num'] = 'series';
+$route['talks/talk/(:num)/embed'] = 'talks/embed/$1';
 $route['talks/:num'] = 'talks';
 $route['talks/future/:num'] = 'talks/future';
 $route['search/(:any)'] = 'search/index/$1';

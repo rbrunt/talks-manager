@@ -8,6 +8,7 @@ class Home extends Talks_Controller {
         $this->load->helper("relative_time");
         $talks = $this->talks_model->getRecentTalks(3);
         $futuretalks = $this->talks_model->getFutureTalks(3);
+        $todaystalks = $this->talks_model->getTodaysTalks();
         foreach ($talks as $talk) {
         	$artwork[$talk->id] = $this->files_model->getSeriesArtworkFileName($talk->seriesid);
         }
@@ -16,7 +17,12 @@ class Home extends Talks_Controller {
             $artwork[$talk->id] = $this->files_model->getSeriesArtworkFileName($talk->seriesid);
            }
         }
-        $this->load->view("includes/template", array("talks"=>$talks, "futuretalks"=>$futuretalks, "content"=>"homepage", "artwork"=>$artwork));
+        if (is_array($todaystalks)) {
+            foreach ($todaystalks as $talk) {
+            $artwork[$talk->id] = $this->files_model->getSeriesArtworkFileName($talk->seriesid);
+           }
+        }
+        $this->load->view("includes/template", array("talks"=>$talks, "futuretalks"=>$futuretalks, "todaystalks"=>$todaystalks, "content"=>"homepage", "artwork"=>$artwork));
     }
 
 }

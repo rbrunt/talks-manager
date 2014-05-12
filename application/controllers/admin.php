@@ -15,6 +15,10 @@ class Admin extends Talks_Controller {
 		$num_talks = $this->talks_model->countTalks();
 		$num_series = $this->series_model->countSeries();
 		$num_users = $this->users_model->countUsers();
+		
+		$this->load->helper("cookie");
+		set_cookie(array('name' => 'disable_analytics', 'value'  => 'true', 'expire' => '31536000'));
+		
 		$this->load->view('includes/template', array("content"=>"admin/home", "num_talks"=>$num_talks, "num_series"=>$num_series, "num_users"=>$num_users, "title"=>"Admin"));
 	}
 

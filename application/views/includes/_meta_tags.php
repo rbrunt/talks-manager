@@ -32,7 +32,7 @@
 		<meta name="twitter:title" content="<?php echo $talk[0]->title;?>">
 		<meta name="twitter:description" content="<?php echo $description;?>">
 		<meta name="twitter:image:src" content="<?php echo $artwork;?>">
-		<meta name="twitter:player" content="">
+		<meta name="twitter:player" content="<?php echo base_url("/talks/talk/".$talk[0]->id."/embed");?>">
 		<meta name="twitter:player:stream" content="<?php echo base_url("/files/talks/".$talk[0]->id.".mp3");?>">
 		<meta name="twitter:player:stream:content_type" content="audio/mpeg">
 		<meta name="twitter:player:height" content="500">

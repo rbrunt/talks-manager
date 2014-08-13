@@ -66,4 +66,20 @@ class Talks extends Talks_Controller {
 		}
 		
 	}
+
+
+	public function embed($talkId) {
+		$this->load->library("typography");
+		$this->load->model("talks_model");
+		$this->load->helper("relative_time");
+		if ($talk = $this->talks_model->getTalkDetailsById($talkId)) {
+			$this->load->model("files_model");
+			$talkExists = $this->files_model->checkTalkExists($talkId);
+			$artwork = $this->files_model->getSeriesArtworkFileName($talk[0]->seriesid);
+			$this->load->view('embeds/talk', array("talk"=>$talk[0], "artwork"=>$artwork, "talk_exists"=>$talkExists, "description"=>strip_tags(str_replace(array("\r\n", "\r", "\n"), " ", $talk[0]->summary))));
+		} else {
+			show_404();
+		}
+		
+	}
 }

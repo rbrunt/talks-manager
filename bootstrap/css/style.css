@@ -59,14 +59,14 @@ input.h1 {
 	font-weight:bold;
 }
 
-@media (max-width: 767px) {
+/*@media (max-width: 767px) {
 	#footer {
 		margin-left:-20px;
 		margin-right:-20px;
 		padding-left:20px;
 		padding-right:20px;
 	}
-}
+}*/
 
 
 .navbar-teal {

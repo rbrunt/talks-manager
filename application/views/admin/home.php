@@ -8,35 +8,37 @@
 </div>
 </div>
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-4 col-xs-6">
 		<h4>Talks<span class="badge pull-right activate-tooltip" data-placement="bottom" title="There are <?php echo $num_talks; ?> talks on the system"><?php echo $num_talks; ?></span></h4><hr>
 		<ul class="list-unstyled">
 			<li><a href="<?php echo base_url('/admin/talks/'); ?>"><i class="fa fa-edit"></i> Manage Talks</a></li>
 			<li><a class="text-success" href="<?php echo base_url('/admin/addtalk/'); ?>"><i class="fa fa-plus"></i> Add Talk</a></li>
 		</ul>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-4 col-xs-6">
 		<h4>Series<span class="badge pull-right activate-tooltip" data-placement="bottom" title="There are <?php echo $num_series; ?> series on the system"><?php echo $num_series; ?></span></h4><hr>
 		<ul class="list-unstyled">
 			<li><a href="<?php echo base_url('/admin/series/'); ?>"><i class="fa fa-edit"></i> Manage Series</a></li>
 			<li><a class="text-success" href="<?php echo base_url('/admin/addseries/'); ?>"><i class="fa fa-plus"></i> Add Series</a></li>
 		</ul>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-4 col-sm-6 col-xs-12">
 		<h4>Users<span class="badge pull-right activate-tooltip" data-placement="bottom" title="There <?php echo ($num_users == 1 ? "is " . $num_users . " user" : "are " . $num_users . " users"); ?> on the system"><?php echo $num_users; ?></span></h4><hr>
 		<ul class="list-unstyled">
 			<li><a href="<?php echo base_url('/admin/users/'); ?>"><i class="fa fa-edit"></i> Manage Users</a></li>
 			<li><a class="text-success" href="<?php echo base_url('/admin/adduser/'); ?>"><i class="fa fa-plus"></i> Add User</a></li>
 		</ul>
 	</div>
-	<div class="col-md-6">
+</div>
+<div class="row">
+	<div class="col-sm-6">
 		<h4>My Account<span class="label pull-right"><?php echo $this->session->userdata("useremail"); ?></span></h4><hr>
 		<ul class="list-unstyled">
 			<li><a href="<?php echo base_url("/admin/changepassword/	");?>"><i class="fa fa-key"></i> Change Password</a></li>
-			<li><a class="text-error" href="<?php echo base_url("/admin/deleteuser/" . $this->session->userdata("userid"));?>"><i class="fa fa-remove"></i> Delete Account</a></li>
+			<li><a class="text-danger" href="<?php echo base_url("/admin/deleteuser/" . $this->session->userdata("userid"));?>"><i class="fa fa-trash-o"></i> Delete Account</a></li>
 		</ul>
 	</div>
-	<div class="col-md-6">
+	<div class="col-sm-6">
 			<div class="well">
 			<h4>Found a bug?<i class="fa fa-bug pull-right"></i> </h4>
 			<p>If you find that something on this site isn't working, or you have a suggestion for a new feature or how to make using it easier, send me an email at <a href="mailto:r.brunt@gmail.com">r.brunt@gmail.com</a>, and I'll see what I can do!</p>

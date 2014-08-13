@@ -1,7 +1,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<ul class="breadcrumb">
-				<li><a href="<?php echo base_url(); ?>">Home</a> <span class="divider"></span></li>
+				<li><a href="<?php echo base_url(); ?>">Home</a></li>
 				<li class="active"><?php echo $breadcrumb; ?></li>
 			</ul>
 		</div>

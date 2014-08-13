@@ -78,6 +78,19 @@ class Series_Model extends CI_Model {
 		}
 	}
 
+	public function getSeriesInEvent($eventId) {
+		$eventId = $this->db->escape($eventId);
+		$series = $this->db->get_where("series", "eventid=".$eventID);
+		if ($series->num_rows() > 0) {
+			foreach($series->result() as $single) {
+				$seriesarray[] = $single;
+			}
+			return $seriesarray;
+		} else {
+			return false;
+		}
+	}
+
 	public function editSeries($array, $id) {
 		$series = $this->db->where("id", $id)->update("series", $array);
 		return $this->db->affected_rows();

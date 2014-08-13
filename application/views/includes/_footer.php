@@ -13,7 +13,7 @@
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- Jqeury cdn -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
-	<script src="<?php echo base_url("/bootstrap/js/bootstrap.min.js"); ?>"></script> <!-- boostrap plugins -->
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> <!-- boostrap plugins -->
 	<script src="<?php echo base_url("/static/js/functions.js"); ?>"></script> <!-- general functions -->
 <?php if (isset($page) && $page == "uploadtalk") : ?>
 	<script src="<?php echo base_url("/bootstrap/js/fineuploader-3.7.0.min.js"); ?>"></script> <!-- fine uploader -->

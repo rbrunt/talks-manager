@@ -68,18 +68,39 @@ input.h1 {
 	}
 }
 
-/*
-The follwing makes the search bar grow when focused and adds transition to this
-*/
-.navbar-inverse .navbar-search .search-query { 
-	-webkit-transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
-	-moz-transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
-	-o-transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
-	transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
+
+.navbar-teal {
+	background-color:#3A9293;
 }
 
-.navbar-inverse .navbar-search .search-query:focus{
-	width:206px;
+.navbar-default.navbar-teal .navbar-toggle .icon-bar {
+	background-color:#fff;
+}
+
+.navbar-default.navbar-teal .navbar-toggle:hover, .navbar-default.navbar-teal .navbar-toggle:focus {
+	background-color:#4BBCBC;
+}
+
+.navbar-teal .navbar-nav > .active > a{
+	background-color: #4BBCBC;
+	color:#fff;
+}
+
+.navbar-teal .navbar-nav > .active > a:hover{
+	background-color: #51CCCC;
+	color:#fff;
+}
+
+.navbar-teal .navbar-nav > li > a {
+	color:#eee;
+}
+
+.navbar-teal .navbar-nav > li > a:hover {
+	color:#fff;
+}
+
+.navbar-teal .navbar-brand {
+	color:#fff;
 }
 
 .nowrap {

@@ -1,19 +1,19 @@
-<div class="row">
-			<div class="span12">
+		<div class="row">
+			<div class="col-md-12">
 				<?php //$this->load->view("includes/_info_messages"); ?>
 				<ul class="breadcrumb">
-					<li><a href="<?php echo base_url()?>">Home</a> <span class="divider">/</span></li>
-					<li><a href="<?php echo base_url('/series/seriesdetail/'.$talk[0]->seriesid)?>"><?php echo $talk[0]->seriestitle; ?></a> <span class="divider">/</span></li>
+					<li><a href="<?php echo base_url()?>">Home</a></li>
+					<li><a href="<?php echo base_url('/series/seriesdetail/'.$talk[0]->seriesid)?>"><?php echo $talk[0]->seriestitle; ?></a></li>
 					<li class="active"><?php echo $talk[0]->title ?></li>
 				</ul>
 			</div>
 		</div>
 		<div class="row">
-			<div class="span3">
-				<img src="<?php echo $artwork; ?>">
+			<div class="col-md-3">
+				<img src="<?php echo $artwork; ?>" class="img-responsive">
 				<h4><?php echo $talk[0]->seriestitle; ?></h4>
 			</div>
-			<div class="span9">
+			<div class="col-md-9">
 				<div class="page-header">
 					<h1><?php echo $talk[0]->title ?> <small class="nowrap"><?php echo $talk[0]->speakername ?></small></h1>
 <?php if($isLoggedIn) : ?>					
@@ -49,7 +49,7 @@
 		</div>
 <?php if($talk[0]->passage != ""): ?>		
 		<div class="row">
-			<div class="span12">
+			<div class="col-md-12">
 				<p class="muted" id="copyright-notice"><small>Scripture quotations marked &quot;ESV&quot; are taken from The Holy Bible, English Standard Version. Copyright &copy;2001 by <a href="http://www.crosswaybibles.org">Crossway Bibles</a>, a publishing ministry of Good News Publishers. Used by permission. All rights reserved. Text provided by the <a href="http://www.gnpcb.org/esv/share/services/">Crossway Bibles Web Service</a></small></p>
 			</div>
 <?php endif; ?>

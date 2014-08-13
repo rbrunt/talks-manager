@@ -1,21 +1,21 @@
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 		<ul class="breadcrumb">
-			<li><a href="<?php echo base_url()?>">Home</a> <span class="divider">/</span></li>
-			<li><a href="<?php echo base_url('/series/')?>">Browse Series</a> <span class="divider">/</span></li>
+			<li><a href="<?php echo base_url()?>">Home</a></li>
+			<li><a href="<?php echo base_url('/series/')?>">Browse Series</a></li>
 			<li class="active"><?php echo $series[0]->title ?></li>
 		</ul>
 		</div>
 	</div>
 	<div class="row">
-		<div class="span3">
-			<img src="<?php echo $artwork; ?>">
+		<div class="col-md-3">
+			<img src="<?php echo $artwork; ?>" class="img-responsive">
 		</div>
-		<div class="span9">
+		<div class="col-md-9">
 			<div class="page-header">
 				<h1><?php echo $series[0]->title ?></h1>
 <?php if($isLoggedIn) : ?>
-							<a class="btn btn-primary pull-right" title="Edit this series" href="<?php echo base_url('/admin/editseries/'.$series[0]->id);?>">Edit</a>
+				<a class="btn btn-primary pull-right" title="Edit this series" href="<?php echo base_url('/admin/editseries/'.$series[0]->id);?>">Edit</a>
 <?php endif; ?>
 			</div>
 			<?php if ($series[0]->video):?>
@@ -37,7 +37,7 @@
 						}
 					}
 				?>
-				<table class="table table-hover">
+				<table class="table table-hover table-responsive">
 					<thead>
 						<th>Title</th>
 						<th>Date</th>

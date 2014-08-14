@@ -32,7 +32,7 @@
 </div>
 <div class="row">
 	<div class="col-sm-6">
-		<h4>My Account<span class="label pull-right"><?php echo $this->session->userdata("useremail"); ?></span></h4><hr>
+		<h4>My Account<span class="label label-default pull-right"><?php echo $this->session->userdata("useremail"); ?></span></h4><hr>
 		<ul class="list-unstyled">
 			<li><a href="<?php echo base_url("/admin/changepassword/	");?>"><i class="fa fa-key"></i> Change Password</a></li>
 			<li><a class="text-danger" href="<?php echo base_url("/admin/deleteuser/" . $this->session->userdata("userid"));?>"><i class="fa fa-trash-o"></i> Delete Account</a></li>

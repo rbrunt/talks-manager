@@ -34,10 +34,10 @@
 
 <?php endif; ?>
 <?php if($talk_exists) : ?>
-				<audio controls preload="none" src="<?php echo base_url("files/talks/".$talk[0]->id); ?>.mp3" type="audio/mpeg">
+				<audio controls preload="none" src="<?php echo base_url("files/talks/".$talk[0]->id); ?>.mp3" type="audio/mpeg" class="col-xs-12 col-sm-6">
 					<!-- Add flash fallback here... -->
 				</audio>
-				<p><a href="<?php echo base_url("download/talk/".$talk[0]->id); ?>" class="btn pull-right"><i class="icon-download-alt"></i> Download Talk</a></p>
+				<p><a href="<?php echo base_url("download/talk/".$talk[0]->id); ?>" class="btn btn-default pull-right"><i class="fa fa-download"></i> Download Talk</a></p>
 <?php else : ?>
 	<?php if($isLoggedIn) :?>
 				<p class="text-warning"><i class="icon-warning-sign"></i> There's no audio uploaded yet, <a href="<?php echo base_url("admin/uploadtalk/".$talk[0]->id); ?>">click here</a> to add some</p>

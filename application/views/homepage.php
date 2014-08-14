@@ -49,12 +49,8 @@
 		</div>
 	</div>
 <?php endforeach; ?>
-<<<<<<< HEAD
 <a class="pull-right" href="<?php echo base_url("talks"); ?>">See more Recent Talks <i class="fa fa-angle-right"></i></a>
-=======
-<a class="pull-right" href="<?php echo base_url("talks"); ?>">See more Recent Talks <i class="icon-angle-right"></i></a>
 </section>
->>>>>>> origin/master
 </div>
 <?php if(is_array($futuretalks)) :?>
 	

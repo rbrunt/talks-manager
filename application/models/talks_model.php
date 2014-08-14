@@ -86,9 +86,13 @@ class Talks_Model extends CI_Model {
 		return ($talk->num_rows() > 0) ? array($talk->row()) : false;
 	}
 
-	public function getTalksBySeries($seriesId) {
+	public function getTalksBySeries($seriesId, $ascending=false) {
 		$seriesId = $this->db->escape($seriesId);
-		$talks = $this->db->select("talks.*")->from("talks")->where("seriesid = $seriesId")->order_by("date", "ASC")->get();
+		if ($ascending==true){
+			$talks = $this->db->select("talks.*")->from("talks")->where("seriesid = $seriesId")->order_by("date", "ASC")->get();
+		} elseif ($ascending==false){
+			$talks = $this->db->select("talks.*")->from("talks")->where("seriesid = $seriesId")->order_by("date", "DESC")->get();
+		}
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;
@@ -103,6 +107,18 @@ class Talks_Model extends CI_Model {
 		$numTalks = $this->db->escape($numTalks);
 		//$talks = $this->db->query("SELECT id, title, summary, date FROM talks ORDER BY date DESC LIMIT ".$numTalks);
 		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername, talks.video")->where("date <", date("Y-m-d"))->from("talks")->order_by("date", "DESC")->limit($numTalks)->get();
+		if ($talks->num_rows() > 0 ) {
+			foreach($talks->result() as $talk){
+				$talkarray[] = $talk;
+			}
+			return $talkarray;
+		} else {
+			return false;
+		}
+	}
+
+	public function getTodaysTalks() {
+		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername, talks.video")->where("date =", date("Y-m-d"))->from("talks")->order_by("date", "DESC")->get();
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;

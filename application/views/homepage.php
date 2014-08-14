@@ -3,6 +3,34 @@
 		<p>Here are some of the most recent talks, as well as a few that are coming soon:	</p>
 	</div>
 <div class="clearfix">
+<?php if(is_array($todaystalks)) :?>
+<section id="talksontoday">
+	<h2>Talks on Today:</h2>
+	<?php foreach($todaystalks as $talk): ?>
+			<div class="category">
+				<div class="row">
+					<div class="span3">
+						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>"></a>
+					</div>
+					<div class="span9">
+						<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small>Today</small></h1>
+						<?php if($talk->speakername != "") : ?>
+							<p class="muted"><i class="icon-user"></i> <?php echo $talk->speakername; ?></p>
+						<?php endif;?>
+						<div id="categorydescription">
+							<p><?php echo $talk->summary; ?></p>
+						</div>
+					</div>
+				</div>
+			</div>
+	<?php endforeach; ?>
+</section>
+<hr>
+<section>
+<h2>Recent Talks:</h2>	
+<?php else: ?>
+<section>
+<?php endif;?>
 <?php foreach($talks as $talk): ?>
 	<div class="category">
 		<div class="row">
@@ -21,12 +49,17 @@
 		</div>
 	</div>
 <?php endforeach; ?>
+<<<<<<< HEAD
 <a class="pull-right" href="<?php echo base_url("talks"); ?>">See more Recent Talks <i class="fa fa-angle-right"></i></a>
+=======
+<a class="pull-right" href="<?php echo base_url("talks"); ?>">See more Recent Talks <i class="icon-angle-right"></i></a>
+</section>
+>>>>>>> origin/master
 </div>
 <?php if(is_array($futuretalks)) :?>
 	
 	<hr>
-
+<section>
 	<h2>Coming soon:</h2>
 	<?php foreach($futuretalks as $talk): ?>
 			<div class="category">
@@ -48,4 +81,5 @@
 			
 	<?php endforeach; ?>
 	<a class="pull-right" href="<?php echo base_url("talks/future"); ?>">See more Coming Soon <i class="fa fa-angle-right"></i></a>
+	</section>
 <?php endif; ?>

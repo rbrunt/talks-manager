@@ -25,7 +25,7 @@
               <a href="<?php echo base_url("admin/passwordreset")?>" class="pull-right btn btn-link">Forgotten Password?</a>
             </div>
           </div>
-        
+          <p>If you don't have a login, but think you should, you can <a href="mailto:web@diccu.co.uk?subject=Account%20Request%20for%20Talks%20System">ask for one by email.</a></p>        
         	<?php echo form_close(); ?>
         	<script>
         		document.querySelector("input[name=email]").focus();

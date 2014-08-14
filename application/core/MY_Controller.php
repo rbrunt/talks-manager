@@ -8,7 +8,8 @@ class Talks_Controller extends CI_Controller {
         parent::__construct();
         $userid = $this->session->userdata("userid");
         $this->isLoggedIn = ($this->session->userdata("userid")) ? true : false;
-        $this->load->vars(array("isLoggedIn"=>$this->isLoggedIn));
+        $this->disable_analytics = ($this->input->cookie("disable_analtyics")=="true") ? true : false;
+        $this->load->vars(array("isLoggedIn"=>$this->isLoggedIn, "disable_analytics"=>$this->disable_analytics));
     }
 
     function sendHome() {

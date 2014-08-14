@@ -50,7 +50,7 @@
 		<h2><i class="fa fa-refresh"></i> Updates <small>What's new?</small></h2>
 		<hr>
 		<h3>July 2014</h3>
-		<p>You can now embed talks and series <a href="http://talks.diccu.co.uk/series/embed/9?hide_title=true&amp;hide_artwork=true&amp;hide_description=true">into other pages</a>. Check it out in use on the <a href="http://diccu.co.uk/whats-on/big-question/" target="_blank">Big Question</a> Page of the CU website.</p>
+		<p>You can now embed talks and series <a href="http://talks.diccu.co.uk/series/embed/9?hide_title=true&hide_artwork=true&hide_description=true">into other pages</a>. Check it out in use on the <a href="http://diccu.co.uk/whats-on/big-question/" target="_blank">Big Question</a> Page of the CU website.</p>
 		<h3>April 2014 <i class="fa fa-youtube pull-right"></i></h3>
 		<p>You can now paste in the url to a YouTube or Vimeo video instead of uploading audio for a talk, and it will be automatically embeded into the talk's details page.<p>
 	</div>

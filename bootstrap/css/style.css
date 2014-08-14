@@ -103,6 +103,11 @@ input.h1 {
 	color:#fff;
 }
 
+.navbar-teal .navbar-brand:hover {
+	color:#fff;
+	background: #51CCCC;
+}
+
 .nowrap {
 	white-space: nowrap;
 }

@@ -19,7 +19,7 @@ var dragAndDropModule = new qq.DragAndDrop({
 		processingDroppedFiles: function () {
 			$("#dropzone").css("display: block;");
 			$("#dropzone").addClass("processing");
-			$("#dropzone>h3").html('<i class="icon-refresh icon-spin"></i> Processing...');
+			$("#dropzone>h3").html('<i class="fa fa-refresh fa-spin"></i> Processing...');
 		},
 		processingDroppedFilesComplete: function (files) {
 			console.log("All files processed");
@@ -48,8 +48,7 @@ var dragAndDropModule = new qq.DragAndDrop({
 
 fineUploaderBasicInstance = new qq.FineUploaderBasic({
 	request: {
-		// endpoint: '<?php echo base_url("ajax/coverupload/".$this->uri->segment(3)); ?>'
-		endpoint: base_url + "/ajax/coverupload/" + document.URL.substr(document.URL.lastIndexOf('/') + 1) // This is set by PHP in the footer
+		endpoint: base_url + "ajax/coverupload/" + document.URL.substr(document.URL.lastIndexOf('/') + 1) // This is set by PHP in the footer
 	},
 	multiple: false,
 	callbacks: {
@@ -77,7 +76,7 @@ fineUploaderBasicInstance = new qq.FineUploaderBasic({
 			}
 		},
 		onError: function (id, name, errorReason, xhr) {
-			var html = '<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Error: </strong>' + errorReason + '</div>';
+			var html = '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Error: </strong>' + errorReason + '</div>';
 			$("#alertscontainer").append(html);
 			$("#progress").width(0);
 			$("#progress").css("background-image", "");

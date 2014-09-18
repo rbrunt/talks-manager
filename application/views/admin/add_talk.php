@@ -15,17 +15,17 @@
 				<div class="row">	
 					<div class="col-md-4">
 						<div class="form-group">
-							<?=	form_label("Series", "seriesid");?>
+							<?=	form_label("Series", "seriesselector");?>
 							<?= form_dropdown("seriesid", $seriesarray, 0, 'id="seriesselector" class="form-control"');?>
 						</div>
 					</div>
 					
 					<div class="col-md-5">
 						<div class="form-group">
-							<?= form_label("Speaker", "seriesid"); ?>
+							<?= form_label("Speaker", "speakername"); ?>
 							<div class="input-group activate-tooltip" title="Who spoke? (You can leave it blank if you don't know)" data-placement="bottom" data-container="body">
 								<div class="input-group-addon"><i class="fa fa-user"></i></div>
-								<?php echo form_input(array("name"=>"speakername","maxlength"=>"64", "class"=>"form-control", "placeholder"=>"Speaker Name")); ?>
+								<?php echo form_input(array("id"=>"speakername","name"=>"speakername","maxlength"=>"64", "class"=>"form-control", "placeholder"=>"Speaker Name")); ?>
 							</div>
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 					<div class="col-md-3">
 						<div class="form-group">
 							<?= form_label("Date", "datepicker"); ?>
-							<div class="input-group">
+							<div class="input-group activate-tooltip" title="Date of the Talk. Click to open a calendar picker, or just type a date in." data-placement="bottom">
 								<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
 								<?php echo form_input( array("name"=>"date", "class"=>"form-control", "value"=>date("Y-m-d"), "id"=>"datepicker", "placeholder"=>"yyyy-mm-dd")); ?>
 							</div>

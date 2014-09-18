@@ -9,13 +9,13 @@
 	<?php foreach($todaystalks as $talk): ?>
 			<div class="category">
 				<div class="row">
-					<div class="span3">
-						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>"></a>
+					<div class="col-md-3">
+						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
 					</div>
-					<div class="span9">
+					<div class="col-md-9">
 						<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small>Today</small></h1>
 						<?php if($talk->speakername != "") : ?>
-							<p class="muted"><i class="icon-user"></i> <?php echo $talk->speakername; ?></p>
+							<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>
 						<?php endif;?>
 						<div id="categorydescription">
 							<p><?php echo $talk->summary; ?></p>
@@ -40,7 +40,7 @@
 			<div class="col-md-9">
 				<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
 				<?php if($talk->speakername != "") : ?>
-					<p class="muted"><i class="icon-user"></i> <?php echo $talk->speakername; ?></p>
+					<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>
 				<?php endif;?>
 				<div id="categorydescription">
 					<p><?php echo $talk->summary; ?></p>
@@ -61,12 +61,12 @@
 			<div class="category">
 				<div class="row">
 					<div class="col-md-3">
-						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>"></a>
+						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
 					</div>
 					<div class="col-md-9">
 						<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
 						<?php if($talk->speakername != "") : ?>
-							<p class="muted"><i class="icon-user"></i> <?php echo $talk->speakername; ?></p>
+							<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>
 						<?php endif;?>
 						<div id="categorydescription">
 							<p><?php echo $talk->summary; ?></p>

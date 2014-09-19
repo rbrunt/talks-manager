@@ -27,8 +27,7 @@
 					</div>
 				</div><hr>
 <?php if($talk[0]->passage != ""): ?>
-				<p class="clearfix">Passage: <a id="passagelink" href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk[0]->passage;?>" target="_blank"><?php echo $talk[0]->passage; ?></a><button class="btn btn-default pull-right" data-toggle="collapse" data-target="#passagecontainer">Show/Hide Passage</button></p>
-				<div id="passagecontainer" class="passage-container collapse"></div>
+				<p class="clearfix">Passage: <a id="passagelink" href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk[0]->passage;?>" target="_blank"><?php echo $talk[0]->passage; ?></a></p>
 <?php endif; ?>
 				<div id="summary"><?php echo $this->typography->auto_typography($talk[0]->summary) ?></div>
 <?php if($talk[0]->video) :?>

@@ -14,7 +14,7 @@
 					<a href="<?php echo base_url('/series/seriesdetail/'.$single->id); ?>"><img src="<?php echo $artwork[$single->id]; ?>" class="img-responsive"></a>
 				</div>
 				<div class="col-md-9">
-					<h1><a href="<?php echo base_url('/series/seriesdetail/'.$single->id); ?>"><?php echo $single->title; ?></a></h1>
+					<h1 class="media-heading"><a href="<?php echo base_url('/series/seriesdetail/'.$single->id); ?>"><?php echo $single->title; ?></a></h1>
 					<div id="categorydescription">
 						<p id="summary"><?php echo $single->summary; ?></p>
 					</div>

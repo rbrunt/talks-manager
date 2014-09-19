@@ -57,7 +57,14 @@ input.h1 {
 	color: inherit;
 	text-rendering: optimizelegibility;
 	font-weight:bold;
+	margin-top:0;
 }
+
+.talk-title, .series-title {
+		margin-top: 0; /* Align talk/series title with top of artwork*/
+		margin-bottom: 5px;
+}
+
 
 /*@media (max-width: 767px) {
 	#footer {
@@ -293,3 +300,10 @@ div.thumbnail:hover{
 	background: #62c462;
 	border-color: #51a351;
 }
+
+/* Media queries for mobile styling */
+
+@media (max-width:767px) { /* size: xs*/
+	
+}
+

@@ -8,16 +8,22 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-sm-3 hidden-xs">
 			<img src="<?php echo $artwork; ?>" class="img-responsive">
 		</div>
-		<div class="col-md-9">
-			<div class="page-header">
-				<h1><?php echo $series[0]->title ?></h1>
+		<div class="col-sm-9">
+			<div class="row">
+				<div class="col-xs-4 visible-xs-block">
+					<img src="<?php echo $artwork; ?>" class="img-responsive">
+				</div>
+				<div class="col-xs-8 col-sm-12">
+					<h1 class="series-title"><?php echo $series[0]->title ?></h1>
 <?php if($isLoggedIn) : ?>
-				<a class="btn btn-primary pull-right" title="Edit this series" href="<?php echo base_url('/admin/editseries/'.$series[0]->id);?>">Edit</a>
+					<a class="btn btn-primary pull-right" title="Edit this series" href="<?php echo base_url('/admin/editseries/'.$series[0]->id);?>">Edit</a>
 <?php endif; ?>
+				</div>
 			</div>
+			<hr>
 			<?php if ($series[0]->video):?>
 				<?php if (preg_match("/(?:https?:\/\/(?:www.)?youtube.com\/watch\?(?:[a-zA-Z0-9_=&]*&)?v=)([a-zA-Z0-9_-]*)/", $series[0]->video, $matches)) :?>
 					<iframe width="700" height="394" src="//www.youtube.com/embed/<?php echo $matches[1]; ?>" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
@@ -42,7 +48,7 @@
 						<th>Title</th>
 						<th>Date</th>
 						<th>Speaker</th>
-						<?php if(!$empty): ?><th>Passage</th><?php endif;?>
+						<?php if(!$empty): ?><th class="hidden-xs">Passage</th><?php endif;?>
 					</thead>
 					<tbody>
 						<?php foreach($talks as $talk): ?>
@@ -56,9 +62,9 @@
 							<?php endif; ?>
 							<?php if(!$empty): ?>
 								<?php if($talk->passage == "") : ?>
-									<td>-</td>
+									<td class="hidden-xs">-</td>
 								<?php else: ?>
-									<td><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td>
+									<td class="hidden-xs"><a href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk->passage;?>" target="_blank"><?php echo $talk->passage;?></a></td>
 								<?php endif; ?>
 							<?php endif; ?>
 						</tr>

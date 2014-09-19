@@ -1,10 +1,10 @@
 
 		<div class="row">
 			
-			<div class="col-md-3">
+			<div class="col-sm-3">
 				<img id="artwork" src="<?php echo base_url("/files/covers/default.jpg"); ?>" class="img-responsive">
 			</div>
-			<div class="col-md-9">
+			<div class="col-sm-9">
 				<?php echo form_open("admin/addtalk"); ?>
 				<div class="row">
 					<div class="col-md-12">

@@ -1,7 +1,7 @@
 	<div class="row">
 
 <?php echo form_open_multipart(); ?>
-		<div class="col-md-3" style="position:relative;">
+		<div class="col-sm-3" style="position:relative;">
 			<div id="progress"></div>
 			<div id="dropzone" class="img-drop"><h3>Drop file here to begin upload</h3></div>
 			<img id="cover" class="img-responsive" src="<?php echo $artwork; ?>">
@@ -11,7 +11,7 @@
 			<p><span id="filename"></span></p>
 		</div>
 		
-		<div class="col-md-9">
+		<div class="col-sm-9">
 			<div class="row">
 				<div class="col-md-12">
 						<?php echo form_input(array("name"=>"title", "value"=>$series[0]->title, "class"=>"h1 form-control", "maxlength"=>"100", "placeholder"=>"Series Title")); ?></h1>

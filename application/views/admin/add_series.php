@@ -1,9 +1,9 @@
 	<div class="row">
 
-		<div class="col-md-3">
-			<img class="img-responsive" src="http://placehold.it/500">
+		<div class="col-sm-3">
+			<img id="artwork" class="img-responsive" src="http://placehold.it/500">
 		</div>
-		<div class="col-md-9">
+		<div class="col-sm-9">
 			<?php echo form_open("admin/addseries"); ?>
 			<div class="row">
 				<div class="col-md-12">

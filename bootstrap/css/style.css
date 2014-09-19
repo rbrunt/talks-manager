@@ -304,6 +304,8 @@ div.thumbnail:hover{
 /* Media queries for mobile styling */
 
 @media (max-width:767px) { /* size: xs*/
-	
+	#artwork {
+		margin-bottom: 10px;
+	}
 }
 

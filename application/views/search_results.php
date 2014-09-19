@@ -39,7 +39,7 @@
 <!-- 	<hr> -->
 		<ul class="thumbnails list-unstyled">
 <?php foreach($series as $single_series): ?>
-			<li class="col-md-4">
+			<li class="col-sm-4">
 				<div class="thumbnail">
 					<a class="" href="<?php echo base_url('/series/seriesdetail/'.$single_series->id)?>"><img src="<?php echo $artwork[$single_series->id]; ?>" class="img-responsive"></a>
 					<div class="caption">

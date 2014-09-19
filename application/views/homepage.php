@@ -9,10 +9,10 @@
 	<?php foreach($todaystalks as $talk): ?>
 			<div class="category">
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-sm-3">
 						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
 					</div>
-					<div class="col-md-9">
+					<div class="col-sm-9">
 						<h1 class="media-heading"><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small>Today</small></h1>
 						<?php if($talk->speakername != "") : ?>
 							<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>
@@ -34,10 +34,10 @@
 <?php foreach($talks as $talk): ?>
 	<div class="category">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-sm-3">
 				<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
 			</div>
-			<div class="col-md-9">
+			<div class="col-sm-9">
 				<h1 class="media-heading"><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
 				<?php if($talk->speakername != "") : ?>
 					<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>
@@ -60,10 +60,10 @@
 	<?php foreach($futuretalks as $talk): ?>
 			<div class="category">
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-sm-3">
 						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
 					</div>
-					<div class="col-md-9">
+					<div class="col-sm-9">
 						<h1 class="media-heading"><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
 						<?php if($talk->speakername != "") : ?>
 							<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>

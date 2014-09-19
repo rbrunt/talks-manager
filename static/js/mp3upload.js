@@ -17,7 +17,7 @@ var dragAndDropModule = new qq.DragAndDrop({
 			$("#dropzone").css("display: block;");
 			$("#dropzone").addClass("processing");
 			console.log($("#dropzone"));
-			$("#dropzone>h3").html('<i class="icon-refresh icon-spin"></i> Processing...');
+			$("#dropzone>h3").html('<i class="fa fa-refresh fa-spin"></i> Processing...');
 		},
 		processingDroppedFilesComplete: function (files) {
 			console.log("All files processed");
@@ -46,8 +46,7 @@ var dragAndDropModule = new qq.DragAndDrop({
 
 fineUploaderBasicInstance = new qq.FineUploaderBasic({
 	request: {
-		//endpoint: '<?php echo base_url("ajax/mp3upload/".$this->uri->segment(3)); ?>'
-		endpoint: base_url + "/ajax/mp3upload/" + document.URL.substr(document.URL.lastIndexOf('/') + 1) // This is set by PHP in the footer
+		endpoint: base_url + "ajax/mp3upload/" + document.URL.substr(document.URL.lastIndexOf('/') + 1) // This is set by PHP in the footer
 	},
 	multiple: false,
 	validation: {
@@ -63,10 +62,10 @@ fineUploaderBasicInstance = new qq.FineUploaderBasic({
 				$("#progresstext").html("");
 				$("#progressdescription").html("");
 				$(".progress").addClass("progress-striped active");
-				$(".bar").html('<i class="icon-refresh icon-spin"></i> Processing...');
+				$(".progress-bar").html('<i class="fa fa-refresh fa-spin"></i> Processing...');
 			}
 
-			$(".bar").width(percentage + "%");
+			$(".progress-bar").width(percentage + "%");
 		},
 		onComplete: function(id, name, responseJSON, xhr) {
 			console.log("upload complete");
@@ -75,14 +74,14 @@ fineUploaderBasicInstance = new qq.FineUploaderBasic({
 				$(".progress").addClass("progress-success");
 				$(".progress").removeClass("active");
 				$(".progress").removeClass("progress-striped");
-				$(".bar").html("<strong>Success!</strong>");
+				$(".progress-bar").html("<strong>Success!</strong>");
 				$("#alertscontainer").append("<div class=\"alert alert-success fade in\"><button class=\"close\" data-dismiss=\"alert\" type=\"button\">&times;</button><strong>Success!</strong><p>mp3 file successfully uploaded! Click <a href="+base_url+"talks/talk/"+document.URL.substr(document.URL.lastIndexOf('/') + 1)+">here</a> to go to the talk page and listen to the track back again.</p></div>");
 			}
 		},
 		onError: function (id, name, errorReason, xhr) {
-			var html = '<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Error: </strong>' + errorReason + '</div>';
+			var html = '<div class="alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Error: </strong>' + errorReason + '</div>';
 			$("#alertscontainer").append(html);
-			$(".bar").width(0);
+			$(".progress-bar").width(0);
 		}
 	}
 });

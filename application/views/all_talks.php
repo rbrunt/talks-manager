@@ -1,14 +1,14 @@
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
 			<ul class="breadcrumb">
-				<!-- <li><a href="/">Home</a> <span class="divider">/</span></li> -->
-				<li><a href="<?php echo base_url('/admin/')?>">Admin</a> <span class="divider">/</span></li>
+				<li><a href="<?php echo base_url('/admin/')?>">Admin</a></li>
 				<li class="active">Talks</li>
 			</ul>
 		</div>
 	</div>
 	<div class="row">
-		<div class="span12">
+		<div class="col-md-12">
+		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
 					<th>Title</th>
@@ -16,9 +16,9 @@
 					<th>Date</th>
 					<th>Speaker</th>
 					<th>Passage</th>
-					<th><i class="icon-headphones"></i></th>
-					<th><i class="icon-youtube"></i></th>
-					<th><a href="<?php echo base_url("admin/addtalk"); ?>" class="btn btn-mini" title="Add a Talk"><i class="icon-plus"></i></a></th>
+					<th><i class="fa fa-headphones"></i></th>
+					<th><i class="fa fa-youtube"></i></th>
+					<th><a href="<?php echo base_url("admin/addtalk"); ?>" class="btn btn-sm btn-default btn-block" title="Add a Talk"><i class="fa fa-plus"></i></a></th>
 				</thead>
 				<tbody>
 <?php foreach($talks as $talk): ?>
@@ -32,13 +32,14 @@
 <?php else: ?>
 						<td>-</td>
 <?php endif; ?>
-						<td><i class="activate-tooltip <?php echo ($talk->exists ? "icon-ok text-success" : "icon-warning-sign text-error"); ?>" title="<?php echo ($talk->exists ? "There is a file uploaded for this talk" : "No file uploaded - you'll need to upload one!"); ?>" data-placement="bottom"></i></td>
-						<td><i class="activate-tooltip <?php echo ($talk->video ? "icon-ok text-success" : "icon-warning-sign text-warning"); ?>" title="<?php echo ($talk->video ? "There is a video available for this talk" : "No video has been added for this talk. If there is one, why not add one?"); ?>" data-placement="bottom"></i></td>
-						<td><a href="<?php echo base_url('/admin/edittalk/'.$talk->id)?>" title="Edit" class="btn btn-mini btn-primary">Edit</a></td>
+						<td><i class="activate-tooltip <?php echo ($talk->exists ? "fa fa-check text-success" : "fa fa-exclamation-triangle text-danger"); ?>" title="<?php echo ($talk->exists ? "There is a file uploaded for this talk" : "No file uploaded - you'll need to upload one!"); ?>" data-placement="bottom"></i></td>
+						<td><i class="activate-tooltip <?php echo ($talk->video ? "fa fa-check text-success" : "fa fa-exclamation-triangle text-warning"); ?>" title="<?php echo ($talk->video ? "There is a video available for this talk" : "No video has been added for this talk. If there is one, why not add one?"); ?>" data-placement="bottom"></i></td>
+						<td><a href="<?php echo base_url('/admin/edittalk/'.$talk->id)?>" title="Edit" class="btn btn-sm btn-primary">Edit</a></td>
 					</tr>
 <?php endforeach;?>
 				</tbody>
 			</table>
+			</div>
 <?php echo $this->pagination->create_links(); ?>
 		</div>
 	</div>

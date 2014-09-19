@@ -1,13 +1,16 @@
+	</div><!-- close conatiner -->
+	<div class="container-fluid">
 	<div class="row">
-		<?php if($options["hide_artwork"]==false):?><div style="float:left;width:250px;max-width:25%;">
-			<img src="<?php echo $artwork; ?>">
+		<?php if($options["hide_artwork"]==false):?><div class="col-xs-3">
+			<img src="<?php echo $artwork; ?>" class="img-responsive">
 		</div><?php endif; ?>
-			<?php if($options["hide_title"]==false):?><div class="page-header">
-				<h3><?php echo $series[0]->title ?></h3>
-			</div><?php endif; ?>
+			<?php if($options["hide_title"]==false):?>
+				<h3 class="media-heading"><?php echo $series[0]->title ?></h3>
+			<hr><?php endif; ?>
 			<?php if($options["hide_description"]==false):?><div id="summary"><?php echo $this->typography->auto_typography($series[0]->summary) ?></div><?php endif; ?>
-		<div class="span12" style="overflow:hidden;">
-			<div>
+	</div>
+	<div clas="row">
+		<div class="col-xs-12" style="overflow:hidden;">
 				<?php if($talks) : ?>
 				<table class="table table-hover">
 					<thead>

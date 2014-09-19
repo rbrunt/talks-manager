@@ -9,13 +9,13 @@
 	<?php foreach($todaystalks as $talk): ?>
 			<div class="category">
 				<div class="row">
-					<div class="span3">
-						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>"></a>
+					<div class="col-sm-3">
+						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
 					</div>
-					<div class="span9">
-						<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small>Today</small></h1>
+					<div class="col-sm-9">
+						<h1 class="media-heading"><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small>Today</small></h1>
 						<?php if($talk->speakername != "") : ?>
-							<p class="muted"><i class="icon-user"></i> <?php echo $talk->speakername; ?></p>
+							<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>
 						<?php endif;?>
 						<div id="categorydescription">
 							<p><?php echo $talk->summary; ?></p>
@@ -34,13 +34,13 @@
 <?php foreach($talks as $talk): ?>
 	<div class="category">
 		<div class="row">
-			<div class="span3">
-				<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>"></a>
+			<div class="col-sm-3">
+				<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
 			</div>
-			<div class="span9">
-				<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
+			<div class="col-sm-9">
+				<h1 class="media-heading"><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
 				<?php if($talk->speakername != "") : ?>
-					<p class="muted"><i class="icon-user"></i> <?php echo $talk->speakername; ?></p>
+					<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>
 				<?php endif;?>
 				<div id="categorydescription">
 					<p><?php echo $talk->summary; ?></p>
@@ -49,7 +49,7 @@
 		</div>
 	</div>
 <?php endforeach; ?>
-<a class="pull-right" href="<?php echo base_url("talks"); ?>">See more Recent Talks <i class="icon-angle-right"></i></a>
+<a class="pull-right" href="<?php echo base_url("talks"); ?>">See more Recent Talks <i class="fa fa-angle-right"></i></a>
 </section>
 </div>
 <?php if(is_array($futuretalks)) :?>
@@ -60,13 +60,13 @@
 	<?php foreach($futuretalks as $talk): ?>
 			<div class="category">
 				<div class="row">
-					<div class="span3">
-						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>"></a>
+					<div class="col-sm-3">
+						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
 					</div>
-					<div class="span9">
-						<h1><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
+					<div class="col-sm-9">
+						<h1 class="media-heading"><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
 						<?php if($talk->speakername != "") : ?>
-							<p class="muted"><i class="icon-user"></i> <?php echo $talk->speakername; ?></p>
+							<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>
 						<?php endif;?>
 						<div id="categorydescription">
 							<p><?php echo $talk->summary; ?></p>
@@ -76,6 +76,6 @@
 			</div>
 			
 	<?php endforeach; ?>
-	<a class="pull-right" href="<?php echo base_url("talks/future"); ?>">See more Coming Soon <i class="icon-angle-right"></i></a>
+	<a class="pull-right" href="<?php echo base_url("talks/future"); ?>">See more Coming Soon <i class="fa fa-angle-right"></i></a>
 	</section>
 <?php endif; ?>

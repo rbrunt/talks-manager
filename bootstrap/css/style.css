@@ -57,29 +57,62 @@ input.h1 {
 	color: inherit;
 	text-rendering: optimizelegibility;
 	font-weight:bold;
+	margin-top:0;
 }
 
-@media (max-width: 767px) {
+.talk-title, .series-title {
+		margin-top: 0; /* Align talk/series title with top of artwork*/
+		margin-bottom: 5px;
+}
+
+
+/*@media (max-width: 767px) {
 	#footer {
 		margin-left:-20px;
 		margin-right:-20px;
 		padding-left:20px;
 		padding-right:20px;
 	}
+}*/
+
+
+.navbar-teal {
+	background-color:#3A9293;
 }
 
-/*
-The follwing makes the search bar grow when focused and adds transition to this
-*/
-.navbar-inverse .navbar-search .search-query { 
-	-webkit-transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
-	-moz-transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
-	-o-transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
-	transition: width 0.3s 0.2s, background-color 0.2s, color 0.2s;
+.navbar-default.navbar-teal .navbar-toggle .icon-bar {
+	background-color:#fff;
 }
 
-.navbar-inverse .navbar-search .search-query:focus{
-	width:206px;
+.navbar-default.navbar-teal .navbar-toggle:hover, .navbar-default.navbar-teal .navbar-toggle:focus {
+	background-color:#4BBCBC;
+}
+
+.navbar-teal .navbar-nav > .active > a{
+	background-color: #4BBCBC;
+	color:#fff;
+}
+
+.navbar-teal .navbar-nav > .active > a:hover{
+	background-color: #51CCCC;
+	color:#fff;
+}
+
+.navbar-teal .navbar-nav > li > a {
+	color:#eee;
+}
+
+.navbar-teal .navbar-nav > li > a:hover {
+	color:#fff;
+}
+
+.navbar-teal .navbar-brand {
+	color:#fff;
+}
+
+.navbar-teal .navbar-brand:hover {
+	color:#fff;
+	background: #51CCCC;
 }
 
 .nowrap {
@@ -267,3 +300,12 @@ div.thumbnail:hover{
 	background: #62c462;
 	border-color: #51a351;
 }
+
+/* Media queries for mobile styling */
+
+@media (max-width:767px) { /* size: xs*/
+	#artwork {
+		margin-bottom: 10px;
+	}
+}
+

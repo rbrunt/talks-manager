@@ -1,6 +1,6 @@
 <?php $alert = (isset($alert)) ? $alert : $this->session->flashdata("alert"); ?>
 <?php if(isset($alert["error"])) : ?>
-	<div class="alert alert-error fade in">
+	<div class="alert alert-danger fade in">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
 		<strong>Error:</strong> <?php echo $alert["error"] ?>
 	</div>

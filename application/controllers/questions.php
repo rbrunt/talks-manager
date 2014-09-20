@@ -3,12 +3,10 @@
 class Questions extends CI_Controller {
 
 
-	public function add() {
+	public function add($eventId) {
 		$this->load->model("events_model");
 		$this->load->model("questions_model");
 		$this->load->library("pusher");
-
-		$eventId = $this->input->post('eventid', TRUE);
 
 		$event = $this->events_model->getEventById($eventId);
 		if ($event) {

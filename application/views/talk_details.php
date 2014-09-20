@@ -30,11 +30,26 @@
 				<p class="clearfix">Passage: <a id="passagelink" href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk[0]->passage;?>" target="_blank"><?php echo $talk[0]->passage; ?></a></p>
 <?php endif; ?>
 				<div id="summary"><?php echo $this->typography->auto_typography($talk[0]->summary) ?></div>
+<?php if($talk[0]->questionsenabled):?>
+	<div class="row">
+		<div class="col-sm-12">
+				<?= form_open('talks/talk/'.$talk[0]->id.'/submitquestion'); ?>
+				<div class="form-group">
+					<?= form_label("Question", "question_input"); ?>
+					<?= form_textarea(array("name"=>"question", "id"=>"question_input", "class"=>"form-control"));?>
+				</div>
+				<div class="form-group">
+					<?= form_submit(array("value"=>"Add Question", "class"=>"btn btn-primary pull-right"));?>
+				</div>
+				<?= form_close(); ?>
+		</div>
+	</div>
+<?php endif; ?>
 <?php if($talk[0]->video) :?>
 	<div class="embed-responsive embed-responsive-16by9">
 	<?php if (preg_match("/(?:https?:\/\/(?:www.)?youtube.com\/watch\?(?:[a-zA-Z0-9_=&]*&)?v=)([a-zA-Z0-9_-]*)/", $talk[0]->video, $matches)) :?>
 		<iframe class="embed-responsive-item" src="//www.youtube.com/embed/<?php echo $matches[1]; ?>" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
-	<?php elseif (preg_match("/(?:https?:\/\/(?:www.)?vimeo.com\/)([0-9]+)/", $talk[0]->video, $matches)) :?>
+<?php elseif (preg_match("/(?:https?:\/\/(?:www.)?vimeo.com\/)([0-9]+)/", $talk[0]->video, $matches)) :?>
 		<iframe class="embed-responsive-item" src="//player.vimeo.com/video/<?php echo $matches[1];?>?title=0&amp;byline=0&amp;portrait=0" width="700" height="393" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 	<?php endif ;?>
 	</div>

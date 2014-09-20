@@ -56,6 +56,7 @@ class Talks extends Talks_Controller {
 		$this->load->library("typography");
 		$this->load->model("talks_model");
 		$this->load->helper("relative_time");
+		$this->load->helper("form");
 		if ($talk = $this->talks_model->getTalkDetailsById($talkId)) {
 			$this->load->model("files_model");
 			$talkExists = $this->files_model->checkTalkExists($talkId);

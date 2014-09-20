@@ -42,6 +42,7 @@ $route['default_controller'] = "home";
 $route['404_override'] = 'errors/error_404';
 
 // Begin custom routing:
+$route['talks/talk/(:num)/submitquestion'] = 'questions/add/$1';
 $route['series/:num'] = 'series';
 $route['talks/talk/(:num)/embed'] = 'talks/embed/$1';
 $route['talks/:num'] = 'talks';

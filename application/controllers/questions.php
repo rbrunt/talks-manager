@@ -10,15 +10,19 @@ class Questions extends CI_Controller {
 
 		$talk = $this->talks_model->getTalkById($talkId);
 		if ($talk) {
-			$newQuestion = $this->input->post();
-			$newQuestion["talkid"] = $talkId;
+			if($talk[0]->questionsenabled && $talk[0]->date ==  date('Y-m-d')) {
+				$newQuestion = $this->input->post();
+				$newQuestion["talkid"] = $talkId;
 
-			$insertId = $this->questions_model->addQuestion($newQuestion);
-			
-			$question = $this->questions_model->getQuestionById($insertId);
-			$this->pusher->trigger('talk-'.$talkId, 'questionAdded', $question);
-			$this->session->set_flashdata("alert",array("success"=>"Question received!"));
-			redirect("/talks/talk/$talkId/");
+				$insertId = $this->questions_model->addQuestion($newQuestion);
+				
+				$question = $this->questions_model->getQuestionById($insertId);
+				$this->pusher->trigger('talk-'.$talkId, 'questionAdded', $question);
+				$this->session->set_flashdata("alert",array("success"=>"Question received!"));
+				redirect("/talks/talk/$talkId/");
+			} else {
+				show_404();
+			}
 		}
 	}
 }

@@ -46,6 +46,47 @@
 <?php if ($isLoggedIn) : ?>
 	<script src="<?php echo base_url("/static/js/admin.js");?>"></script>
 <?php endif; ?>
+<?php if (isset($page) && $page == "admin/questions") : ?>
+	<script src="//js.pusher.com/2.2/pusher.min.js"></script>
+	<script>
+		navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate; // Cross-browser vibration api
+
+		var pusher = new Pusher('<?= $this->config->item("pusher_api_key");?>');
+		var channel = pusher.subscribe('talk-<?=$talk->id;?>');
+		function escapeHtml(text) {
+		  var map = {
+		    '&': '&amp;',
+		    '<': '&lt;',
+		    '>': '&gt;',
+		    '"': '&quot;',
+		    "'": '&#039;'
+		  };
+
+		  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+		}
+
+		function getDate(elem) {
+			date = new Date($(elem).attr("data-timestamp")*1000);
+			return date;
+		}
+
+		channel.bind('questionAdded', function(data) {
+			if($("#question-list").length==0) {
+				window.location.reload(); // Reload the page if we've just received the first question.
+			} else {
+				$("#question-list").append('<tr id="question-'+data.id+'" data-timestamp="'+data.timestamp+'"><td>' + escapeHtml(data.question) + '</td><td><a href="'+base_url+'admin/deletequestion/'+data.id+'" class="btn btn-danger btn-sm">Delete</a></td></tr>');
+				$("#no-questions-text").remove();
+				if(navigator.vibrate) { // Vibrate phone to indicate that a new question has been received.
+					navigator.vibrate([200,200,200]); // on-off-on
+				}
+			}
+		});
+
+		channel.bind('questionDeleted', function(data) {
+			$("#question-"+data.id).remove();
+		});
+	</script>
+<?php endif; ?>
 <?php if ($disable_analytics) :?>
 	<script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

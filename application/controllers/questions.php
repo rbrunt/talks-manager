@@ -3,24 +3,24 @@
 class Questions extends CI_Controller {
 
 
-	public function add($eventId) {
-		$this->load->model("events_model");
+	public function add($talkId) {
+		$this->load->model("talks_model");
 		$this->load->model("questions_model");
 		$this->load->library("pusher");
 
-		$event = $this->events_model->getEventById($eventId);
-		if ($event) {
+		$talk = $this->talks_model->getTalkById($talkId);
+		if ($talk) {
 			$newQuestion = $this->input->post();
+			$newQuestion["talkid"] = $talkId;
 
 			$insertId = $this->questions_model->addQuestion($newQuestion);
 			
 			$question = $this->questions_model->getQuestionById($insertId);
-			$this->pusher->trigger('event-'.$event->id, 'questionAdded', $question);
-			
-			redirect("/events/$eventId/");
+			$this->pusher->trigger('talk-'.$talkId, 'questionAdded', $question);
+			$this->session->set_flashdata("alert",array("success"=>"Question received!"));
+			redirect("/talks/talk/$talkId/");
 		}
 	}
-
 }
 
 /* End of file welcome.php */

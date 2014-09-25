@@ -488,4 +488,47 @@ class Admin extends Talks_Controller {
 		}
 
 	}
+
+
+	public function displayquestions($talkId) {
+		$this->load->model("talks_model");
+		$this->load->model("questions_model");
+		$this->load->helper("date");
+		$this->config->load("pusher");
+
+		$talk = $this->talks_model->getTalkById($talkId);
+		if ($talk) {
+			$talk = $talk[0];
+
+			$questions = $this->questions_model->getQuestionsByTalkId($talkId);
+
+			if ($questions) {
+				$talk->questions = $questions->result();
+			} else {
+				$talk->questions = false;
+			}
+			
+
+			$this->load->view('includes/template', array("content"=>"questions/questions_list", "talk"=>$talk, "title"=>"Questions for \"".$talk->title."\" | Admin", "page"=>"admin/questions"));
+
+		}	
+	}
+
+	public function deletequestion($questionId) {
+		$this->load->model("questions_model");
+		$this->load->library("pusher");
+
+		$question = $this->questions_model->getQuestionById($questionId);
+		if ($question) {
+
+			$this->questions_model->deleteQuestion($questionId);
+			$this->pusher->trigger('talk-'.$question->talkid, 'questionDeleted', $question);
+			$this->session->set_flashdata("alert", array("success"=>"Question Deleted."));
+			redirect("/admin/displayquestions/".$question->talkid);
+
+		} else {
+			show_404();	
+		}
+	}
+
 }

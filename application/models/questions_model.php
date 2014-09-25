@@ -2,9 +2,9 @@
 
 class Questions_Model extends CI_Model {
 
-	Public function getQuestionsByEventId($EventId) {
-		$EventId = $this->db->escape($EventId);
-		$questions = $this->db->get_where('questions', 'eventid = '.$EventId);
+	Public function getQuestionsByTalkId($TalkId) {
+		$TalkId = $this->db->escape($TalkId);
+		$questions = $this->db->get_where('questions', 'talkid = '.$TalkId);
 		if ($questions->num_rows() > 0) {
 			return $questions;
 		} else {

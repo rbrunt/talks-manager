@@ -56,6 +56,16 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
+							<div class="checkbox">
+								<label class="activate-tooltip" title="Allow questions to be asked on this talk?"><?= form_checkbox(array("name"=>"questionsenabled", "type"=>"checkbox", "checked"=>$talk[0]->questionsenabled));?> Questions Enabled?</label>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon"><i class="fa fa-book"></i></div>
 								<?php echo form_input(array("name"=>"passage", "value"=>$talk[0]->passage, "maxlength"=>"50", "placeholder"=>"Passage", "class"=>"form-control")); ?>

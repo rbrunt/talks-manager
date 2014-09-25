@@ -150,6 +150,11 @@ class Talks_Model extends CI_Model {
 
 	public function editTalk($array, $id) {
 		// $talk = $this->db->query("UPDATE talks SET title = ".$array['title'].", speakerid = ".$array['speakerid'].", seriesid = ".$array['seriesid'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage']);
+		if(isset($array['questionsenabled'])) {
+			$array['questionsenabled'] = true;
+		} else {
+			$array['questionsenabled'] = false;
+		}
 		$talk = $this->db->where("id", $id)->update("talks", $array);
 		return $this->db->affected_rows();
 	}

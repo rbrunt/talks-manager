@@ -11,7 +11,6 @@
 		<div class="row">
 			<div class="col-sm-3 hidden-xs">
 				<img src="<?php echo $artwork; ?>" class="img-responsive">
-				<h4><?php echo $talk[0]->seriestitle; ?></h4>
 			</div>
 			<div class="col-sm-9">
 				<div class="row">
@@ -30,7 +29,7 @@
 				<p class="clearfix">Passage: <a id="passagelink" href="<?php echo "http://www.biblegateway.com/passage/?search=".$talk[0]->passage;?>" target="_blank"><?php echo $talk[0]->passage; ?></a></p>
 <?php endif; ?>
 				<div id="summary"><?php echo $this->typography->auto_typography($talk[0]->summary) ?></div>
-<?php if($talk[0]->questionsenabled):?>
+<?php if($talk[0]->questionsenabled && $talk[0]->date ==  date('Y-m-d')): ?>
 	<div class="row">
 		<div class="col-sm-12">
 				<?= form_open('talks/talk/'.$talk[0]->id.'/submitquestion'); ?>

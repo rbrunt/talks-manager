@@ -46,7 +46,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<?php if($talk[0]->exists):?>
-							<p class="text-success"><i class="fa fa-check"></i> An mp3 has been uploaded for this talk. If you want to replace the current file, just <a href="<?php echo base_url('/admin/uploadtalk/'.$talk[0]->id); ?>">upload a new one</a>.</p><a title="Delete the mp3 from the server. Does not delete the talk entry on the website, just the file. CANNOT BE UNDONE!" data-placement="bottom" class="text-error pull-right activate-tooltip click-to-confirm" href="#" data-href="<?php echo base_url('/admin/deletetalkfile/'.$talk[0]->id); ?>">Delete mp3</a>
+							<p class="text-success"><i class="fa fa-check"></i> An mp3 has been uploaded for this talk. If you want to replace the current file, just <a href="<?php echo base_url('/admin/uploadtalk/'.$talk[0]->id); ?>">upload a new one</a>.</p><a title="Delete the mp3 from the server. Does not delete the talk entry on the website, just the file. CANNOT BE UNDONE!" data-placement="bottom" class="text-danger pull-right activate-tooltip click-to-confirm" href="#" data-href="<?php echo base_url('/admin/deletetalkfile/'.$talk[0]->id); ?>">Delete mp3</a>
 						<?php else: ?>
 							<p class="text-danger"><i class="fa fa-warning"></i> No audio has been uploaded yet for this talk. To do it now, <a href="<?php echo base_url('/admin/uploadtalk/'.$talk[0]->id); ?>">click here</a>.</p>
 						<?php endif; ?>

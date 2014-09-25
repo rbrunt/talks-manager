@@ -10,7 +10,7 @@
 		<div class="col-md-12">
 
 		<h1>Questions for <small><a href="<?= base_url('/talks/talk/'.$talk->id);?>"><?= $talk->title; ?></a></small></h1>
-
+		<p>The list should auto-update, so there's no need to refresh.</p>
 <?php if($talk->questions):?>
 		<div>
 			<table class="table table-striped">

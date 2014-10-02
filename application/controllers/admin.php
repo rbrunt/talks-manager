@@ -12,14 +12,21 @@ class Admin extends Talks_Controller {
 		$this->load->model("talks_model");
 		$this->load->model("series_model");
 		$this->load->model("users_model");
+		$this->load->model("questions_model");
 		$num_talks = $this->talks_model->countTalks();
 		$num_series = $this->series_model->countSeries();
 		$num_users = $this->users_model->countUsers();
+		$todays_talks = $this->talks_model->getTodaysTalks();
+		if ($todays_talks) {
+			foreach ($todays_talks as $talk) {
+				$talk->num_questions = $this->questions_model->countQuestionsForTalk($talk->id);
+			}
+		}
 		
 		$this->load->helper("cookie");
 		set_cookie(array('name' => 'disable_analytics', 'value'  => 'true', 'expire' => '31536000'));
 		
-		$this->load->view('includes/template', array("content"=>"admin/home", "num_talks"=>$num_talks, "num_series"=>$num_series, "num_users"=>$num_users, "title"=>"Admin"));
+		$this->load->view('includes/template', array("content"=>"admin/home", "num_talks"=>$num_talks, "num_series"=>$num_series, "num_users"=>$num_users, "title"=>"Admin", "todays_talks"=>$todays_talks));
 	}
 
 	public function talks() {

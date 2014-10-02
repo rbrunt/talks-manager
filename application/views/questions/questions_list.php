@@ -27,7 +27,7 @@
 <?php else :?>
 		<div class="jumbotron">
 			<h1>No questions yet...</h1>
-			<p>Try refreshing the page.</p>
+			<p>The page should automatically refresh when the first one comes in and the list then keeps up to date. If you want to be absolutely sure you haven't missed one, refresh the page yourself.</p>
 		</div>
 <?php endif; ?>
 		</div>

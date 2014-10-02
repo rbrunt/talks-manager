@@ -12,6 +12,11 @@ class Questions_Model extends CI_Model {
 		}
 	}
 
+	public function countQuestionsForTalk($TalkId) {
+		$questions = $this->db->where("talkid =", $TalkId)->count_all_results('questions');
+		return $questions;
+	}
+
 	public function getQuestionById($QuestionId) {
 		$QuestionId = $this->db->escape($QuestionId);
 		$questions = $this->db->get_where('questions', 'id = '.$QuestionId);

@@ -7,6 +7,37 @@
 	</div>
 </div>
 </div>
+<?php if ($todays_talks):?>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h2 class="panel-title">Talks on today <span class="badge pull-right"><?=count($todays_talks);?></span></h2>
+			</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Talk</th>
+							<th>Questions</th>	
+						</tr>
+					</thead>
+					<tbody>
+					<?php foreach($todays_talks as $talk):?>
+						<tr>
+							<td><a href="<?= base_url('/talks/talk/'.$talk->id); ?>"><?=$talk->title;?></a></td>
+							<?php if($talk->questionsenabled):?>
+								<td><a href="<?= base_url('/admin/displayquestions/'.$talk->id);?>" title="View the questions for this talk." class="btn btn-sm btn-success activate-tooltip" data-placement="bottom">View <?= ($talk->num_questions > 0) ? $talk->num_questions." " : "" ;?>Questions <i class="fa fa-angle-right"></i></a></td>
+							<?php else: ?>
+								<td><span class="text-warning"><i class="fa fa-warning"></i> Questions aren't enabled for this talk. <a href="<?= base_url('/admin/edittalk/'.$talk->id);?>">Edit the talk</a> to enable them.</span></td>
+							<?php endif;?>
+						</tr>
+					<?php endforeach;?>
+					</tbody>
+				</table>
+		</div>
+	</div>
+</div>
+<?php endif;?>
 <div class="row">
 	<div class="col-sm-4">
 		<div class="panel panel-info">
@@ -75,6 +106,8 @@
 	<div class="col-md-12">
 		<h2><i class="fa fa-refresh"></i> Updates <small>What's new?</small></h2>
 		<hr>
+		<h3>October 2014</h3>
+		<p>You can now allow the public to ask questions on a talk directly on the website, and view a live-updating feed of them as they come in.</p>
 		<h3>September 2014</h3>
 		<p>Updated the look and feel, and made the site a lot more mobile friendly.</p>
 		<h3>July 2014</h3>

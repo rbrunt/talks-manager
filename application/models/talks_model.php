@@ -118,7 +118,7 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function getTodaysTalks() {
-		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername, talks.video")->where("date =", date("Y-m-d"))->from("talks")->order_by("date", "DESC")->get();
+		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername, talks.video, talks.questionsenabled")->where("date =", date("Y-m-d"))->from("talks")->order_by("date", "DESC")->get();
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;

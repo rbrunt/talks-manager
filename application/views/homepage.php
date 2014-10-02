@@ -20,6 +20,11 @@
 						<div id="categorydescription">
 							<p><?php echo $talk->summary; ?></p>
 						</div>
+						<?php if($talk->questionsenabled):?>
+							<div class="panel panel-success clearfix"><div class="panel-heading">
+								<a href="<?php echo base_url('/talks/talk/'.$talk->id.'/#question_input')?>" class="btn btn-success pull-right">Ask a question <i class="fa fa-angle-right"></i></a><p class="h5 text-success">You can ask questions via the website for this talk!</p>
+							</div></div>
+						<?php endif;?>
 					</div>
 				</div>
 			</div>

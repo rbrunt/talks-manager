@@ -307,5 +307,8 @@ div.thumbnail:hover{
 	#artwork {
 		margin-bottom: 10px;
 	}
+	.talk-title, .series-title {
+		font-size: 20px;
+	}
 }
 

@@ -32,15 +32,17 @@
 <?php if($talk[0]->questionsenabled && $talk[0]->date ==  date('Y-m-d')): ?>
 	<div class="row">
 		<div class="col-sm-12">
-				<?= form_open('talks/talk/'.$talk[0]->id.'/submitquestion'); ?>
-				<div class="form-group">
-					<?= form_label("Question", "question_input"); ?>
-					<?= form_textarea(array("name"=>"question", "id"=>"question_input", "class"=>"form-control"));?>
+			<div class="well clearfix">
+					<?= form_open('talks/talk/'.$talk[0]->id.'/submitquestion'); ?>
+						<div class="form-group">
+							<?= form_label("Questions", "question_input"); ?>
+							<?= form_textarea(array("name"=>"question", "id"=>"question_input", "class"=>"form-control", "placeholder"=>"Write your question here, then hit &quot;Submit Question&quot;."));?>
+						</div>
+						<div class="form-group">
+							<?= form_submit(array("value"=>"Submit Question", "class"=>"btn btn-primary pull-right"));?>
+						</div>
 				</div>
-				<div class="form-group">
-					<?= form_submit(array("value"=>"Add Question", "class"=>"btn btn-primary pull-right"));?>
-				</div>
-				<?= form_close(); ?>
+					<?= form_close(); ?>
 		</div>
 	</div>
 <?php endif; ?>
@@ -61,7 +63,7 @@
 <?php else : ?>
 	<?php if($isLoggedIn) :?>
 				<p class="text-warning"><i class="fa fa-warning"></i> There's no audio uploaded yet, <a href="<?php echo base_url("admin/uploadtalk/".$talk[0]->id); ?>">click here</a> to add some</p>
-	<?php else :?>
+	<?php elseif(strtotime($talk[0]->date) > time() ) :?>
 				<p class="text-warning"><i class="fa fa-warning"></i> There's no audio uploaded yet, but it should be added soon!</p>
 	<?php endif; ?>
 <?php endif; ?>				

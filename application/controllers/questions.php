@@ -10,7 +10,7 @@ class Questions extends CI_Controller {
 
 		$talk = $this->talks_model->getTalkById($talkId);
 		if ($talk) {
-			if($talk[0]->questionsenabled && $talk[0]->date ==  date('Y-m-d')) {
+			if($talk[0]->questionsenabled && $talk[0]->date ==  date('Y-m-d')) { // Are we allowed to ask a question today?
 				$newQuestion = $this->input->post();
 				$newQuestion["talkid"] = $talkId;
 

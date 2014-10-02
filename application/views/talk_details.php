@@ -32,15 +32,18 @@
 <?php if($talk[0]->questionsenabled && $talk[0]->date ==  date('Y-m-d')): ?>
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="well clearfix">
+			<div class="panel panel-success clearfix">
+			<div class="bg-success panel-body">
 					<?= form_open('talks/talk/'.$talk[0]->id.'/submitquestion'); ?>
 						<div class="form-group">
 							<?= form_label("Questions", "question_input"); ?>
+							<p class="help-block">You can anonymously ask a question about the talk, or Christianity in general using the form below:</p>
 							<?= form_textarea(array("name"=>"question", "id"=>"question_input", "class"=>"form-control", "placeholder"=>"Write your question here, then hit &quot;Submit Question&quot;."));?>
 						</div>
 						<div class="form-group">
 							<?= form_submit(array("value"=>"Submit Question", "class"=>"btn btn-primary pull-right"));?>
 						</div>
+				</div>
 				</div>
 					<?= form_close(); ?>
 		</div>

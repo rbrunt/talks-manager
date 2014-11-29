@@ -36,7 +36,7 @@ class Series_Model extends CI_Model {
 	}
 
 	public function getSeriesPage($number, $offset) {
-		$series = $this->db->order_by("id","desc")->get('series', $number, $offset);
+		$series = $this->db->order_by("lastmodified","desc")->get('series', $number, $offset);
 		if ($series->num_rows() > 0 ) {
 			foreach($series->result() as $single_series){
 				$seriesarray[] = $single_series;
@@ -89,6 +89,11 @@ class Series_Model extends CI_Model {
 		} else {
 			return false;
 		}
+	}
+
+	public function updateLastModified($id) {
+		$series = $this->db->where("id", $id)->update("series", array("lastmodified"=>date('Y-m-d G:i:s')));
+		return $this->db->affected_rows();
 	}
 
 	public function editSeries($array, $id) {

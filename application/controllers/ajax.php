@@ -48,6 +48,11 @@ class Ajax extends Talks_Controller {
             $this->load->library("Qqfileuploader", $config);
             $result = $this->qqfileuploader->handleUpload("./files/talks/", true);
 
+            $this->load->model("series_model");
+            $this->load->model("talks_model");
+            $talk = $this->talks_model->getTalkById($talkId)[0];
+            $series = $this->series_model->updateLastModified($talk->seriesid);
+
             $result["message"] = "sucessfully uploaded your file!";
             echo json_encode($result);
             //echo json_encode(array("success"=>true, "message"=>"New cover artwork has been successfully uploaded. " . $this->input->post("qqfilename")));

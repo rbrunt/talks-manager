@@ -340,14 +340,16 @@ class Admin extends Talks_Controller {
 			$this->session->set_flashdata("alert", array("success"=>"Series and all talks in it successfully deleted!"));
 			redirect("admin/series/");
 		}
-
 	}
 
 	public function addtalk() {
 		$this->checkLogin();
 		if ($this->input->post()) {
 			$this->load->model("talks_model");
+			$this->load->model("series_model");
 			$insertId = $this->talks_model->addTalk($this->input->post());
+			$talk = $this->talks_model->getTalkById($insertId)[0];
+			$series = $this->series_model->updateLastModified($talk->seriesid);
 			// $this->session->set_flashdata("alert", array("success"=>"Successfully added the talk <strong>".$this->input->post(title)."</strong>. Click <a href=\"".base_url("admin/addtalk")."\">here</a> to add another."));
 			$this->session->set_flashdata("alert", array("success"=>"Successfully added the talk <strong>".$this->input->post("title")."</strong>. Now you just need to upload the mp3!"));
 			//redirect("/talks/talk/".$insertId);
@@ -427,6 +429,9 @@ class Admin extends Talks_Controller {
 
 			// Add success message and redirect to talk details page:
 			$this->session->set_flashdata("alert", array("success"=>"File upload succesful. Please try listening to it below to check that it was the right one!"));
+			$this->load->model("series_model");
+			$talk = $this->talks_model->getTalkById($talkId)[0];
+			$series = $this->series_model->updateLastModified($talk->seriesid);
 			redirect("/talks/talk/$talkId");
 			// } else {
 			// 	$this->session->set_flashdata("alert",array("error"=>$this->upload->display_errors()));	

@@ -61,8 +61,12 @@ class Series_Model extends CI_Model {
 	}
 
 	public function getSeriesById($seriesId) {
-		$seriesId = $this->db->escape($seriesId);
-		$series = $this->db->get_where('series', 'id = '.$seriesId);
+		$series = $this->db->where('id',$seriesId)->get('series');
+		return ($series->num_rows() > 0) ? array($series->row()) : false;
+	}
+
+	public function getSeriesBySlug($slug) {
+		$series = $this->db->where('slug',$slug)->get('series');
 		return ($series->num_rows() > 0) ? array($series->row()) : false;
 	}
 

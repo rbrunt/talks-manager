@@ -25,13 +25,22 @@ class Series extends Talks_Controller {
 	}
 
 	public function seriesdetail($seriesId) {
+		$this->load->model("series_model");
+		if ($series = $this->series_model->getSeriesById($seriesId)) {
+			redirect($series[0]->slug);
+		} else {
+			show_404();
+		}
+	}
+
+	public function byslug($slug) {
 		$this->load->library("typography");
 		$this->load->model("series_model");
 		$this->load->model("talks_model");
 		$this->load->model("files_model");
-		if ($series = $this->series_model->getSeriesById($seriesId)) {
-			$artwork_location = $this->files_model->getSeriesArtworkFileName($seriesId);
-			$talks = $this->talks_model->getTalksBySeries($seriesId);
+		if ($series = $this->series_model->getSeriesBySlug($slug)) {
+			$artwork_location = $this->files_model->getSeriesArtworkFileName($series[0]->id);
+			$talks = $this->talks_model->getTalksBySeries($series[0]->id);
 			$this->load->view('includes/template', array("series"=>$series, "talks"=>$talks, "content"=>"series_details", "artwork"=>$artwork_location, "title"=>$series[0]->title, "add_meta"=>true, "is_series_page"=>true, "description"=>strip_tags(str_replace(array("\r\n", "\r", "\n"), " ", $series[0]->summary))));
 		} else {
 			show_404();

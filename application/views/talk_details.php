@@ -3,7 +3,7 @@
 				<?php //$this->load->view("includes/_info_messages"); ?>
 				<ul class="breadcrumb">
 					<li><a href="<?php echo base_url()?>">Home</a></li>
-					<li><a href="<?php echo base_url('/series/seriesdetail/'.$talk[0]->seriesid)?>"><?php echo $talk[0]->seriestitle; ?></a></li>
+					<li><a href="<?php echo base_url($talk[0]->seriesslug)?>"><?php echo $talk[0]->seriestitle; ?></a></li>
 					<li class="active"><?php echo $talk[0]->title ?></li>
 				</ul>
 			</div>

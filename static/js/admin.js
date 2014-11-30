@@ -18,3 +18,13 @@ $(".click-to-confirm").click(function(e) {
 		}, 2000);
 	}
 });
+
+/*
+	Auto-populate slug field
+*/
+$titleField = $("input[name=title]");
+$slugField = $("input[name=slug]");
+
+$titleField.keyup(function(e) {
+	$slugField.val($titleField.val().toLowerCase().trim().replace(/\&/gi, "and").replace(/[^A-Za-z0-9_ \.\~]/gi, "").replace(/ +/g, "-"));
+});

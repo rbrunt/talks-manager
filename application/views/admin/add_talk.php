@@ -40,7 +40,15 @@
 						</div>
 					</div>
 				</div>
-				
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group activate-tooltip" title="The slug will appear in the URL of the series" data-placement="bottom" data-container="body">
+							<?= form_label("Slug", "slug");?>
+							<?php echo form_input(array("type"=>"text", "pattern"=>"[a-z0-9A-Z_ \-\.\~]+", "class"=>"form-control", "name"=>"slug", "maxlength"=>"128", "placeholder"=>"URL Slug")); ?>
+						</div>	
+					</div>
+				</div>
+
 				<hr>
 				
 				<div class="row">

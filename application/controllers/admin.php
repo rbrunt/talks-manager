@@ -503,6 +503,7 @@ class Admin extends Talks_Controller {
 
 
 	public function displayquestions($talkId) {
+		$this->checkLogin();
 		$this->load->model("talks_model");
 		$this->load->model("questions_model");
 		$this->load->helper("date");

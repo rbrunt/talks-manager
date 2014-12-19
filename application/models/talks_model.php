@@ -77,6 +77,11 @@ class Talks_Model extends CI_Model {
 		return ($talk->num_rows() > 0) ? array($talk->row()) : false;
 	}
 
+	public function checkIfSlugExists($slug) {
+		$talk = $this->db->where('slug',$slug)->get('talks');
+		return ($talk->num_rows() > 0) ? true : false;
+	}
+
 	public function checkValidTalkId($talkId) {
 		$talkId = $this->db->escape($talkId);
 		$talk = $this->db->get_where("talks", "id = $talkId");
@@ -147,13 +152,11 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function addTalk($array) {
-		// $talk = $this->db->query("INSERT INTO talks SET title = ".$array['title'].", speakerid = ".$array['speakerid'].", seriesid = ".$array['seriesid'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);
 		$talk = $this->db->insert("talks", $array);
 		return $this->db->insert_id();
 	}
 
 	public function editTalk($array, $id) {
-		// $talk = $this->db->query("UPDATE talks SET title = ".$array['title'].", speakerid = ".$array['speakerid'].", seriesid = ".$array['seriesid'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage']);
 		if(isset($array['questionsenabled'])) {
 			$array['questionsenabled'] = true;
 		} else {

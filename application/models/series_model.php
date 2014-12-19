@@ -70,6 +70,11 @@ class Series_Model extends CI_Model {
 		return ($series->num_rows() > 0) ? array($series->row()) : false;
 	}
 
+	public function checkIfSlugExists($slug) {
+		$series = $this->db->where('slug',$slug)->get('series');
+		return ($series->num_rows() > 0) ? true : false;
+	}
+
 	public function getAllSeriesTitles() {
 		$series = $this->db->select('id, title')->from('series')->order_by("id", "ASC")->get();
 		if ($series->num_rows() > 0 ) {

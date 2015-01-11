@@ -21,6 +21,19 @@
 	<script src="<?php echo base_url("/bootstrap/js/fineuploader-3.7.0.min.js"); ?>"></script> <!-- fine uploader -->
 	<script src="<?php echo base_url("/static/js/mp3upload.js"); ?>"></script>
 <?php endif; ?>
+<?php if(isset($is_talk_page)):?>
+	<?php if($talk_exists) : ?>
+	<script src="<?= base_url("/static/soundmanager/script/soundmanager2-nodebug-jsmin.js");?>"></script>
+	<script src="<?= base_url("/static/soundmanager/bar-ui/script/bar-ui.js"); ?>"></script>
+	<link rel="stylesheet" href="<?= base_url("/static/soundmanager/bar-ui/css/bar-ui.css");?>" />
+	<?php endif;?>
+	<script>
+	$('#avTabs a').click(function (e) {
+  		e.preventDefault()
+  		$(this).tab('show')
+	})
+	</script>
+<?php endif; ?>
 <?php if (isset($page) && $page == "editseries") : ?>
 	<script src="<?php echo base_url("/bootstrap/js/fineuploader-3.7.0.min.js"); ?>"></script> <!-- fine uploader -->
 	<script src="<?php echo base_url("/static/js/coverupload.js"); ?>"></script>

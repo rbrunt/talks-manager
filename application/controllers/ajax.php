@@ -65,4 +65,15 @@ class Ajax extends Talks_Controller {
     	$this->load->model("files_model");
  		echo $this->files_model->getSeriesArtworkFileName($seriesId);
  	}
+
+    public function checkTalkSlug($slug) {
+        $this->load->model("talks_model");
+        echo $this->talks_model->checkIfSlugExists($slug) ?   json_encode(array("exists"=>true))  : json_encode(array("exists"=>false));
+    }
+
+    public function checkSeriesSlug($slug) {
+        $this->load->model("series_model");
+        echo $this->series_model->checkIfSlugExists($slug) ?   json_encode(array("exists"=>true))  : json_encode(array("exists"=>false));
+    }
+
 }

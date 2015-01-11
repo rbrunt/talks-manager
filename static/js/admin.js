@@ -39,4 +39,3 @@ if ($titleField.data("liveslug") != false) {
 		$slugField.parent().addClass("has-warning");
 	});
 }
-

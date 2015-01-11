@@ -310,5 +310,21 @@ div.thumbnail:hover{
 	.talk-title, .series-title {
 		font-size: 20px;
 	}
+
+	.wide-tabs {
+		width:100%;
+		border-bottom:0;
+	}
+	.wide-tabs>li {
+		float:none;
+		display:table-cell;
+		width: 1%;
+	}
+	.wide-tabs>li:not(.active){
+		border-bottom:1px solid #DDD;
+	}
+	.wide-tabs>li>a {
+		text-align: center;
+	}
 }
 

@@ -100,16 +100,61 @@
 		});
 	</script>
 <?php endif; ?>
-<?php if ($disable_analytics) :?>
+<?php if (!get_cookie('disable_analytics')) :?>
 	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-		ga('create', 'UA-41427098-4', 'diccu.co.uk');
-		ga('send', 'pageview');
+	  ga('create', 'UA-41427098-4', 'auto');
+	  ga('send', 'pageview');
+
+<?php if(isset($is_talk_page)):?>
+	$(".play-pause").click(function(e){
+		ga('send', 'event', 'audio', 'play', window.location.toString());
+		console.log("playing...");
+		$(".play-pause").off();
+	});
+
+	$(".download").click(function(e){
+		ga('send', 'event', 'audio', 'download', window.location.toString());
+		console.log("downloaded");
+		$(".download").off();
+	});
+	<?php if($talk[0]->video && preg_match("/(?:https?:\/\/(?:www.)?youtube.com\/watch\?(?:[a-zA-Z0-9_=&]*&)?v=)([a-zA-Z0-9_-]*)/", $talk[0]->video, $matches)):?>
+		var tag = document.createElement('script');
+		tag.src = "https://www.youtube.com/iframe_api";
+		var firstScriptTag = document.getElementsByTagName('script')[0];
+		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+		var playerID = "ytPlayer";
+		var firstPlay = true; // Tracks whether this is the first video play...
+		var ytPlayer;
+
+		function onYtStateChange(event) {
+			if (event.data == YT.PlayerState.PLAYING && firstPlay) {
+				firstPlay = false; // Only interested in first time video is played...
+				ga('send', 'event', 'video', 'play', window.location.toString());
+			}
+			if (event.data == YT.PlayerState.ENDED) {
+				ga('send', 'event', 'video', 'ended', window.location.toString());
+			}
+		}
+
+		function onYouTubeIframeAPIReady() {
+  			ytPlayer = new YT.Player(playerID, {
+    		events: {
+      			'onStateChange': onYtStateChange
+    		}
+  			});
+		}
+	<?php endif;?>
+
+<?php endif;?>
 	</script>
+<?php else: ?>
+	<!-- Analytics Disabled because you've been logged in recently -->
 <?php endif; ?>
 </body>
 </html>

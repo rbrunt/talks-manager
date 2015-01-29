@@ -12,14 +12,21 @@ class Admin extends Talks_Controller {
 		$this->load->model("talks_model");
 		$this->load->model("series_model");
 		$this->load->model("users_model");
+		$this->load->model("questions_model");
 		$num_talks = $this->talks_model->countTalks();
 		$num_series = $this->series_model->countSeries();
 		$num_users = $this->users_model->countUsers();
+		$todays_talks = $this->talks_model->getTodaysTalks();
+		if ($todays_talks) {
+			foreach ($todays_talks as $talk) {
+				$talk->num_questions = $this->questions_model->countQuestionsForTalk($talk->id);
+			}
+		}
 		
 		$this->load->helper("cookie");
 		set_cookie(array('name' => 'disable_analytics', 'value'  => 'true', 'expire' => '31536000'));
 		
-		$this->load->view('includes/template', array("content"=>"admin/home", "num_talks"=>$num_talks, "num_series"=>$num_series, "num_users"=>$num_users, "title"=>"Admin"));
+		$this->load->view('includes/template', array("content"=>"admin/home", "num_talks"=>$num_talks, "num_series"=>$num_series, "num_users"=>$num_users, "title"=>"Admin", "todays_talks"=>$todays_talks));
 	}
 
 	public function talks() {
@@ -333,14 +340,16 @@ class Admin extends Talks_Controller {
 			$this->session->set_flashdata("alert", array("success"=>"Series and all talks in it successfully deleted!"));
 			redirect("admin/series/");
 		}
-
 	}
 
 	public function addtalk() {
 		$this->checkLogin();
 		if ($this->input->post()) {
 			$this->load->model("talks_model");
+			$this->load->model("series_model");
 			$insertId = $this->talks_model->addTalk($this->input->post());
+			$talk = $this->talks_model->getTalkById($insertId)[0];
+			$series = $this->series_model->updateLastModified($talk->seriesid);
 			// $this->session->set_flashdata("alert", array("success"=>"Successfully added the talk <strong>".$this->input->post(title)."</strong>. Click <a href=\"".base_url("admin/addtalk")."\">here</a> to add another."));
 			$this->session->set_flashdata("alert", array("success"=>"Successfully added the talk <strong>".$this->input->post("title")."</strong>. Now you just need to upload the mp3!"));
 			//redirect("/talks/talk/".$insertId);
@@ -420,6 +429,9 @@ class Admin extends Talks_Controller {
 
 			// Add success message and redirect to talk details page:
 			$this->session->set_flashdata("alert", array("success"=>"File upload succesful. Please try listening to it below to check that it was the right one!"));
+			$this->load->model("series_model");
+			$talk = $this->talks_model->getTalkById($talkId)[0];
+			$series = $this->series_model->updateLastModified($talk->seriesid);
 			redirect("/talks/talk/$talkId");
 			// } else {
 			// 	$this->session->set_flashdata("alert",array("error"=>$this->upload->display_errors()));	
@@ -488,4 +500,48 @@ class Admin extends Talks_Controller {
 		}
 
 	}
+
+
+	public function displayquestions($talkId) {
+		$this->checkLogin();
+		$this->load->model("talks_model");
+		$this->load->model("questions_model");
+		$this->load->helper("date");
+		$this->config->load("pusher");
+
+		$talk = $this->talks_model->getTalkById($talkId);
+		if ($talk) {
+			$talk = $talk[0];
+
+			$questions = $this->questions_model->getQuestionsByTalkId($talkId);
+
+			if ($questions) {
+				$talk->questions = $questions->result();
+			} else {
+				$talk->questions = false;
+			}
+			
+
+			$this->load->view('includes/template', array("content"=>"questions/questions_list", "talk"=>$talk, "title"=>"Questions for \"".$talk->title."\" | Admin", "page"=>"admin/questions"));
+
+		}	
+	}
+
+	public function deletequestion($questionId) {
+		$this->load->model("questions_model");
+		$this->load->library("pusher");
+
+		$question = $this->questions_model->getQuestionById($questionId);
+		if ($question) {
+
+			$this->questions_model->deleteQuestion($questionId);
+			$this->pusher->trigger('talk-'.$question->talkid, 'questionDeleted', $question);
+			$this->session->set_flashdata("alert", array("success"=>"Question Deleted."));
+			redirect("/admin/displayquestions/".$question->talkid);
+
+		} else {
+			show_404();	
+		}
+	}
+
 }

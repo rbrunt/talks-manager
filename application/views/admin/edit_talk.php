@@ -8,7 +8,7 @@
 				<?php echo form_open("admin/edittalk"); ?>
 				<div class="row">
 					<div class="col-md-12">
-						<?= form_input(array("name"=>"title", "value"=>$talk[0]->title, "class"=>"h1 form-control", "maxlength"=>"128", "placeholder"=>"Talk Title"));?>
+						<?= form_input(array("name"=>"title", "value"=>$talk[0]->title, "class"=>"h1 form-control", "maxlength"=>"128", "placeholder"=>"Talk Title", "data-liveslug"=>"false",));?>
 					</div>
 				</div>
 
@@ -40,6 +40,14 @@
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group activate-tooltip" title="The slug will appear in the URL of the series" data-placement="bottom" data-container="body">
+							<?= form_label("Slug", "slug", array("class"=>"control-label"));?>
+							<?php echo form_input(array("type"=>"text", "pattern"=>"[a-z0-9A-Z_ \-\.\~]+", "class"=>"form-control", "name"=>"slug", "value"=>$talk[0]->slug, "maxlength"=>"128", "placeholder"=>"URL Slug")); ?>
+						</div>	
+					</div>
+				</div>
 
 				<hr>
 
@@ -50,6 +58,16 @@
 						<?php else: ?>
 							<p class="text-danger"><i class="fa fa-warning"></i> No audio has been uploaded yet for this talk. To do it now, <a href="<?php echo base_url('/admin/uploadtalk/'.$talk[0]->id); ?>">click here</a>.</p>
 						<?php endif; ?>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<div class="checkbox">
+								<label class="activate-tooltip" title="Allow questions to be asked on this talk?"><?= form_checkbox(array("name"=>"questionsenabled", "type"=>"checkbox", "checked"=>$talk[0]->questionsenabled));?> Questions Enabled?</label>
+							</div>
+						</div>
 					</div>
 				</div>
 

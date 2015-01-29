@@ -10,16 +10,21 @@
 			<div class="category">
 				<div class="row">
 					<div class="col-sm-3">
-						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
+						<a href="<?php echo base_url($talk->seriesslug.'/'.$talk->slug)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
 					</div>
 					<div class="col-sm-9">
-						<h1 class="media-heading"><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small>Today</small></h1>
+						<h1 class="media-heading"><a href="<?php echo base_url($talk->seriesslug.'/'.$talk->slug)?>"><?php echo $talk->title; ?></a> <small>Today</small></h1>
 						<?php if($talk->speakername != "") : ?>
 							<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>
 						<?php endif;?>
 						<div id="categorydescription">
 							<p><?php echo $talk->summary; ?></p>
 						</div>
+						<?php if($talk->questionsenabled):?>
+							<div class="panel panel-success clearfix"><div class="panel-heading">
+								<a href="<?php echo base_url($talk->seriesslug.'/'.$talk->slug.'/#question_input')?>" class="btn btn-success pull-right">Ask a question <i class="fa fa-angle-right"></i></a><p class="h5 text-success">You can ask questions via the website for this talk!</p>
+							</div></div>
+						<?php endif;?>
 					</div>
 				</div>
 			</div>
@@ -35,10 +40,10 @@
 	<div class="category">
 		<div class="row">
 			<div class="col-sm-3">
-				<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
+				<a href="<?php echo base_url($talk->seriesslug.'/'.$talk->slug)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
 			</div>
 			<div class="col-sm-9">
-				<h1 class="media-heading"><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
+				<h1 class="media-heading"><a href="<?php echo base_url($talk->seriesslug.'/'.$talk->slug)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
 				<?php if($talk->speakername != "") : ?>
 					<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>
 				<?php endif;?>
@@ -61,10 +66,10 @@
 			<div class="category">
 				<div class="row">
 					<div class="col-sm-3">
-						<a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
+						<a href="<?php echo base_url($talk->seriesslug.'/'.$talk->slug)?>"><img src="<?php echo $artwork[$talk->id]; ?>" class="img-responsive"></a>
 					</div>
 					<div class="col-sm-9">
-						<h1 class="media-heading"><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
+						<h1 class="media-heading"><a href="<?php echo base_url($talk->seriesslug.'/'.$talk->slug)?>"><?php echo $talk->title; ?></a> <small class="activate-tooltip" title="<?php echo $talk->date; ?>"><?php echo relative_time($talk->date); ?></small></h1>
 						<?php if($talk->speakername != "") : ?>
 							<p class="muted"><i class="fa fa-user"></i> <?php echo $talk->speakername; ?></p>
 						<?php endif;?>

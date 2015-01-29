@@ -32,7 +32,7 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function getTalkPage($number, $offset) {
-		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.passage, talks.speakername, talks.seriesid, talks.video, series.title as seriestitle")->join("series", "talks.seriesid = series.id")->order_by("date", "DESC")->get('talks', $number, $offset);
+		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.passage, talks.speakername, talks.seriesid, talks.video, talks.slug, series.title as seriestitle, series.slug as seriesslug")->join("series", "talks.seriesid = series.id")->order_by("date", "DESC")->get('talks', $number, $offset);
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;
@@ -44,7 +44,7 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function getRecentTalksPage($number, $offset) {
-		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.summary, talks.speakername, talks.seriesid, talks.video, series.title as seriestitle")->where("date <", date("Y-m-d"))->join("series", "talks.seriesid = series.id")->order_by("date", "DESC")->get('talks', $number, $offset);
+		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.summary, talks.speakername, talks.seriesid, talks.video, talks.slug, series.title as seriestitle, series.slug as seriesslug")->where("date <", date("Y-m-d"))->join("series", "talks.seriesid = series.id")->order_by("date", "DESC")->get('talks', $number, $offset);
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;
@@ -56,7 +56,7 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function getFutureTalksPage($number, $offset) {
-		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.summary, talks.speakername, talks.seriesid, talks.video, series.title as seriestitle")->where("date >", date("Y-m-d"))->join("series", "talks.seriesid = series.id")->order_by("date", "ASC")->get('talks', $number, $offset);
+		$talks = $this->db->select("talks.title, talks.id, talks.date, talks.summary, talks.speakername, talks.seriesid, talks.video, talks.slug, series.title as seriestitle, series.slug as seriesslug")->where("date >", date("Y-m-d"))->join("series", "talks.seriesid = series.id")->order_by("date", "ASC")->get('talks', $number, $offset);
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;
@@ -68,9 +68,18 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function getTalkById($talkId) {
-		$talkId = $this->db->escape($talkId);
-		$talk = $this->db->get_where('talks', 'id = '.$talkId);
+		$talk = $this->db->select('talks.*, series.slug AS seriesslug')->from('talks')->where('talks.id', $talkId)->join('series','talks.seriesid = series.id')->get();
 		return ($talk->num_rows() > 0) ? array($talk->row()) : false;
+	}
+
+	public function getTalkDetailsBySlug($talkSlug, $seriesId) {
+		$talk = $this->db->select('talks.*, series.title AS seriestitle, series.slug AS seriesslug')->from('talks')->where('talks.seriesid', $seriesId)->where('talks.slug',$talkSlug)->join('series','talks.seriesid = series.id')->get();
+		return ($talk->num_rows() > 0) ? array($talk->row()) : false;
+	}
+
+	public function checkIfSlugExists($slug) {
+		$talk = $this->db->where('slug',$slug)->get('talks');
+		return ($talk->num_rows() > 0) ? true : false;
 	}
 
 	public function checkValidTalkId($talkId) {
@@ -81,7 +90,7 @@ class Talks_Model extends CI_Model {
 
 	public function getTalkDetailsById($talkId) {
 		$talkId = $this->db->escape($talkId);
-		$talk = $this->db->select("talks.*, series.title AS seriestitle")->from("talks")->where("talks.id = ".$talkId)->join("series", "talks.seriesid = series.id")->get();
+		$talk = $this->db->select("talks.*, series.title AS seriestitle, series.slug AS seriesslug")->from("talks")->where("talks.id = ".$talkId)->join("series", "talks.seriesid = series.id")->get();
 		//echo $this->db->last_query();
 		return ($talk->num_rows() > 0) ? array($talk->row()) : false;
 	}
@@ -106,7 +115,7 @@ class Talks_Model extends CI_Model {
 	public function getRecentTalks($numTalks = 5) {
 		$numTalks = $this->db->escape($numTalks);
 		//$talks = $this->db->query("SELECT id, title, summary, date FROM talks ORDER BY date DESC LIMIT ".$numTalks);
-		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername, talks.video")->where("date <", date("Y-m-d"))->from("talks")->order_by("date", "DESC")->limit($numTalks)->get();
+		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername, talks.video, talks.slug, series.slug as seriesslug")->where("date <", date("Y-m-d"))->from("talks")->join("series", "talks.seriesid = series.id")->order_by("date", "DESC")->limit($numTalks)->get();
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;
@@ -118,7 +127,7 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function getTodaysTalks() {
-		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername, talks.video")->where("date =", date("Y-m-d"))->from("talks")->order_by("date", "DESC")->get();
+		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername, talks.video, talks.slug, talks.questionsenabled, series.slug as seriesslug")->where("date =", date("Y-m-d"))->from("talks")->join("series", "talks.seriesid = series.id")->order_by("date", "DESC")->get();
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;
@@ -131,7 +140,7 @@ class Talks_Model extends CI_Model {
 
 	public function getFutureTalks($numTalks = 1) {
 		$numTalks = $this->db->escape($numTalks);
-		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername, talks.video")->where("date >", date("Y-m-d"))->from("talks")->order_by("date", "ASC")->limit($numTalks)->get();
+		$talks = $this->db->select("talks.id, talks.title, talks.summary, talks.seriesid, talks.date, talks.speakername, talks.video, talks.slug, series.slug as seriesslug")->where("date >", date("Y-m-d"))->from("talks")->join("series", "talks.seriesid = series.id")->order_by("date", "ASC")->limit($numTalks)->get();
 		if ($talks->num_rows() > 0 ) {
 			foreach($talks->result() as $talk){
 				$talkarray[] = $talk;
@@ -143,13 +152,16 @@ class Talks_Model extends CI_Model {
 	}
 
 	public function addTalk($array) {
-		// $talk = $this->db->query("INSERT INTO talks SET title = ".$array['title'].", speakerid = ".$array['speakerid'].", seriesid = ".$array['seriesid'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage'].", uploadedby = ".$array['userid']);
 		$talk = $this->db->insert("talks", $array);
 		return $this->db->insert_id();
 	}
 
 	public function editTalk($array, $id) {
-		// $talk = $this->db->query("UPDATE talks SET title = ".$array['title'].", speakerid = ".$array['speakerid'].", seriesid = ".$array['seriesid'].", date = ".$array['date'].", summary = ".$array['summary'].",  passage = ".$array['passage']);
+		if(isset($array['questionsenabled'])) {
+			$array['questionsenabled'] = true;
+		} else {
+			$array['questionsenabled'] = false;
+		}
 		$talk = $this->db->where("id", $id)->update("talks", $array);
 		return $this->db->affected_rows();
 	}

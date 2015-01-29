@@ -55,7 +55,7 @@
 					<tbody>
 						<?php foreach($talks as $talk): ?>
 						<tr>
-							<td><a href="<?php echo base_url('/talks/talk/'.$talk->id);?>"><?php echo $talk->title;?></a></td>
+							<td><a href="<?php echo base_url($series[0]->slug.'/'.$talk->slug);?>"><?php echo $talk->title;?></a></td>
 							<td><?php echo $talk->date;?></td>
 							<?php if($talk->speakername==""): ?>
 								<td>-</td>

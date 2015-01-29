@@ -20,8 +20,8 @@
 			<tbody>
 <?php foreach($talks as $talk): ?>
 				<tr>
-					<td><strong><a href="<?php echo base_url('/talks/talk/'.$talk->id)?>"><?php echo $talk->title;?></a></strong></td>
-					<td><a href="<?php echo base_url('/series/seriesdetail/'.$talk->seriesid) ;?>"><?php echo $talk->seriestitle;?></a></td>
+					<td><strong><a href="<?php echo base_url($talk->seriesslug.'/'.$talk->slug)?>"><?php echo $talk->title;?></a></strong></td>
+					<td><a href="<?php echo base_url($talk->seriesslug) ;?>"><?php echo $talk->seriestitle;?></a></td>
 					<td><?php echo $talk->date;?></td>
 					<td><?php echo ($talk->speakername != "" ) ? $talk->speakername : "-" ; ?></td>
 				</tr>
@@ -41,9 +41,9 @@
 <?php foreach($series as $single_series): ?>
 			<li class="col-sm-4">
 				<div class="thumbnail">
-					<a class="" href="<?php echo base_url('/series/seriesdetail/'.$single_series->id)?>"><img src="<?php echo $artwork[$single_series->id]; ?>" class="img-responsive"></a>
+					<a class="" href="<?php echo base_url($single_series->slug)?>"><img src="<?php echo $artwork[$single_series->id]; ?>" class="img-responsive"></a>
 					<div class="caption">
-					<h4><a href="<?php echo base_url('/series/seriesdetail/'.$single_series->id)?>"><?php echo $single_series->title;?></a></h4>
+					<h4><a href="<?php echo base_url($single_series->slug)?>"><?php echo $single_series->title;?></a></h4>
 					<p id=""><?php echo character_limiter($single_series->summary, 150) ;?></p>
 					</div>
 				</div>

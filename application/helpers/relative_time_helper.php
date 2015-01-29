@@ -12,8 +12,8 @@ if (!function_exists('relative_time')) {
             2592000 => 'month',
             604800 => 'week',
             86400 => 'day',
-            3600 => 'hour',
-            60 => 'minute',
+            //3600 => 'hour',
+            //60 => 'minute',
             1 => 'second'
         );
 
@@ -29,6 +29,14 @@ if (!function_exists('relative_time')) {
         foreach ($tokens as $unit => $text) {
             if ($timeSince < $unit) continue;
             $numberOfUnits = floor($timeSince / $unit);
+            
+            if($text=='second') {
+                if($suffix == "") { // yesterday
+                    return "Tomorrow";
+                } else {
+                    return "Today";
+                }
+            }
             return $prefix . $numberOfUnits . ' ' . $text . (($numberOfUnits > 1) ? 's' : '') . $suffix;
         }
     }

@@ -14,6 +14,15 @@ class Files_Model extends CI_Model {
 		return (file_exists("files/talks/$talkId.mp3")) ? true : false ;
 	}
 
+	public function getTalkFileSize($talkId) {
+		if (self.checkTalkExists($talkId)) {
+			return filesize("files/talks/$talkId.mp3") / 1000000; // Return in megabytes
+		} else {
+			return false;
+		}
+
+	}
+
 	public function deleteTalkFile($talkId) {
 		if ($this->checkTalkExists($talkId)) {
 			return unlink("files/talks/$talkId.mp3");

@@ -36,7 +36,7 @@ class Series_Model extends CI_Model {
 	}
 
 	public function getSeriesPage($number, $offset) {
-		$series = $this->db->order_by("id","desc")->get('series', $number, $offset);
+		$series = $this->db->order_by("lastmodified","desc")->get('series', $number, $offset);
 		if ($series->num_rows() > 0 ) {
 			foreach($series->result() as $single_series){
 				$seriesarray[] = $single_series;
@@ -61,9 +61,18 @@ class Series_Model extends CI_Model {
 	}
 
 	public function getSeriesById($seriesId) {
-		$seriesId = $this->db->escape($seriesId);
-		$series = $this->db->get_where('series', 'id = '.$seriesId);
+		$series = $this->db->where('id',$seriesId)->get('series');
 		return ($series->num_rows() > 0) ? array($series->row()) : false;
+	}
+
+	public function getSeriesBySlug($slug) {
+		$series = $this->db->where('slug',$slug)->get('series');
+		return ($series->num_rows() > 0) ? array($series->row()) : false;
+	}
+
+	public function checkIfSlugExists($slug) {
+		$series = $this->db->where('slug',$slug)->get('series');
+		return ($series->num_rows() > 0) ? true : false;
 	}
 
 	public function getAllSeriesTitles() {
@@ -89,6 +98,11 @@ class Series_Model extends CI_Model {
 		} else {
 			return false;
 		}
+	}
+
+	public function updateLastModified($id) {
+		$series = $this->db->where("id", $id)->update("series", array("lastmodified"=>date('Y-m-d G:i:s')));
+		return $this->db->affected_rows();
 	}
 
 	public function editSeries($array, $id) {

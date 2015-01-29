@@ -16,6 +16,14 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
+						<div class="input-group activate-tooltip" title="The slug will appear in the URL of the series" data-placement="bottom" data-container="body">
+							<div class="input-group-addon">Slug</div>
+							<?php echo form_input(array("type"=>"text", "pattern"=>"[a-z0-9A-Z_ \-\.\~]+", "class"=>"form-control", "name"=>"slug", "maxlength"=>"128", "placeholder"=>"URL Slug")); ?>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
 						<div class="input-group activate-tooltip" title="YouTube or Vimeo video of this event. Will be embedded in the talk's page." data-placement="bottom" data-container="body">
 							<div class="input-group-addon"><i class="fa fa-youtube"></i></div>
 							<?php echo form_input(array("type"=>"url", "class"=>"form-control", "name"=>"video", "maxlength"=>"128", "placeholder"=>"YouTube or Vimeo Video URL")); ?>

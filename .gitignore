@@ -19,3 +19,6 @@ $RECYCLE.BIN/
 files/talks/*
 files/covers/*
 !files/covers/default.jpg
+
+# Ignore sensitive configs:
+application/config/pusher.php

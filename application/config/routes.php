@@ -51,8 +51,8 @@ $route['search/(:any)'] = 'search/index/$1';
 $route['cookies'] = 'home/cookies';
 $route['login/resetpassword/(:any)'] = 'admin/resetpassword/$1';
 // Slug-Based routing
-$route['^(?!talks|series|search|admin|login|cookies|ajax|download|about|questions|home|errors)([a-z0-9A-Z\-\.\~_]*)'] = 'series/byslug/$1';
-$route['^(?!talks|series|search|admin|login|cookies|ajax|download|about|questions|home|errors)([a-z0-9A-Z\-\.\~_]*)/([a-z0-9A-Z\-\.\~_]*)'] = 'talks/byslug/$1/$2';
+$route['^(?!talks|series|search|admin|login|cookies|ajax|download|about|questions|home|errors|api)([a-z0-9A-Z\-\.\~_]*)'] = 'series/byslug/$1';
+$route['^(?!talks|series|search|admin|login|cookies|ajax|download|about|questions|home|errors|api)([a-z0-9A-Z\-\.\~_]*)/([a-z0-9A-Z\-\.\~_]*)'] = 'talks/byslug/$1/$2';
 // $route['(:any)/(:any)'] = 'talks/byslug/$2'
 
 

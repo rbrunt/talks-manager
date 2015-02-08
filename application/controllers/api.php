@@ -12,8 +12,9 @@ class API extends Talks_Controller {
 		$this->load->model("talks_model");
 		$this->load->model("files_model");
 		if ($series = $this->series_model->getSeriesById($seriesId)[0]) {
-			$talks = $this->talks_model->getTalksBySeries($seriesId);
+			$talks = $this->talks_model->getTalksBySeries($seriesId, true);
 			$series->talks = $talks;
+			$series->artwork = $this->files_model->getSeriesArtworkFileName($seriesId);
 			//Add a urls to the json:
 			$series->url = base_url($series->slug);
 			foreach($series->talks as $talk) {

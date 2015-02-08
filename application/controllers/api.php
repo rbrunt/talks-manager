@@ -23,6 +23,7 @@ class API extends Talks_Controller {
 			}
 
 			$this->output
+				->set_header("Access-Control-Allow-Origin: *")
 				->set_content_type('application/json')
     			->set_output(json_encode($series));
 		} else {

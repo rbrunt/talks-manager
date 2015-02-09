@@ -13,13 +13,31 @@
 		<p>The list should auto-update, so there's no need to refresh.</p>
 <?php if($talk->questions):?>
 		<div>
+		<h3>Unanswered Questions:</h3>
 			<table class="table table-striped">
 				<tbody id="question-list">
 <?php foreach($talk->questions as $question): ?>
+	<?php if ($question->answered==false):?>
 					<tr id="question-<?=$question->id;?>" data-timestamp="<?=mysql_to_unix($question->timestamp);?>">
 						<td><?= htmlspecialchars($question->question);?></td>
-						<td><a href="<?= base_url("/admin/deletequestion/".$question->id);?>" class="btn btn-danger btn-sm">Delete</a></td>
+						<td><a href="<?= base_url("/admin/answerquestion/".$question->id);?>" class="btn btn-default btn-sm">Archive</a></td>
+						<td class="hidden-xs"><a href="<?= base_url("/admin/deletequestion/".$question->id);?>" class="btn btn-danger btn-sm">Delete</a></td>
 					</tr>
+<?php endif;?>
+<?php endforeach;?>
+				</tbody>
+			</table>
+			<h3>Answered Questions:</h3>
+			<table class="table table-striped">
+				<tbody id="answered-question-list">
+<?php foreach($talk->questions as $question): ?>
+	<?php if ($question->answered==true):?>
+					<tr id="question-<?=$question->id;?>" data-timestamp="<?=mysql_to_unix($question->timestamp);?>">
+						<td class="text-muted"><?= htmlspecialchars($question->question);?></td>
+						<td><a href="<?= base_url("/admin/unanswerquestion/".$question->id);?>" class="btn btn-default btn-sm">Unarchive</a></td>
+						<td class="hidden-xs"><a href="<?= base_url("/admin/deletequestion/".$question->id);?>" class="btn btn-danger btn-sm">Delete</a></td>
+					</tr>
+<?php endif;?>
 <?php endforeach;?>
 				</tbody>
 			</table>

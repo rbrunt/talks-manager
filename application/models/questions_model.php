@@ -37,4 +37,14 @@ class Questions_Model extends CI_Model {
 		$this->db->where("id", $questionId)->delete("questions");
 		return true;
 	}
+
+	public function answerQuestion($questionId) {
+		$this->db->where("id", $questionId)->update("questions", array("answered"=>1));
+		return true;
+	}
+
+	public function unAnswerQuestion($questionId) {
+		$this->db->where("id", $questionId)->update("questions", array("answered"=>0));
+		return true;
+	}
 }

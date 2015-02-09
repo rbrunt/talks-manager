@@ -544,4 +544,35 @@ class Admin extends Talks_Controller {
 		}
 	}
 
+	public function unanswerquestion($questionId) {
+		$this->load->model("questions_model");
+		$this->load->library("pusher");
+
+		$question = $this->questions_model->getQuestionById($questionId);
+		if ($question) {
+
+			$this->questions_model->unAnswerQuestion($questionId);
+			$this->pusher->trigger('talk-'.$question->talkid, 'questionUnAnswered', $question);
+			//$this->session->set_flashdata("alert", array("success"=>"Question Unanswered."));
+			redirect("/admin/displayquestions/".$question->talkid);	
+		} else {
+			show_404();	
+		}
+	}
+
+	public function answerquestion($questionId) {
+		$this->load->model("questions_model");
+		$this->load->library("pusher");
+
+		$question = $this->questions_model->getQuestionById($questionId);
+		if ($question) {
+			$this->questions_model->answerQuestion($questionId);
+			$this->pusher->trigger('talk-'.$question->talkid, 'questionAnswered', $question);
+			//$this->session->set_flashdata("alert", array("success"=>"Question Answered."));
+			redirect("/admin/displayquestions/".$question->talkid);			
+		} else {
+			show_404();	
+		}
+	}
+
 }

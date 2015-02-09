@@ -32,8 +32,8 @@
 				<tbody id="answered-question-list">
 <?php foreach($talk->questions as $question): ?>
 	<?php if ($question->answered==true):?>
-					<tr id="question-<?=$question->id;?>" data-timestamp="<?=mysql_to_unix($question->timestamp);?>">
-						<td class="text-muted"><?= htmlspecialchars($question->question);?></td>
+					<tr id="question-<?=$question->id;?>" data-timestamp="<?=mysql_to_unix($question->timestamp);?>" class="text-muted">
+						<td><?= htmlspecialchars($question->question);?></td>
 						<td><a href="<?= base_url("/admin/unanswerquestion/".$question->id);?>" class="btn btn-default btn-sm">Unarchive</a></td>
 						<td class="hidden-xs"><a href="<?= base_url("/admin/deletequestion/".$question->id);?>" class="btn btn-danger btn-sm">Delete</a></td>
 					</tr>

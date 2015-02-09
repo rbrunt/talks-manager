@@ -95,6 +95,18 @@
 			}
 		});
 
+		channel.bind('questionAnswered', function(data) {
+			$("#question-"+data.id).detach().appendTo("#answered-question-list");
+			$("#question-"+data.id).addClass("text-muted");
+			$("#question-"+data.id+" .btn-default").text("Unarchive");
+		});
+
+		channel.bind('questionUnAnswered', function(data) {
+			$("#question-"+data.id).detach().appendTo("#question-list");
+			$("#question-"+data.id).removeClass("text-muted");
+			$("#question-"+data.id+" .btn-default").text("Archive");
+		});
+
 		channel.bind('questionDeleted', function(data) {
 			$("#question-"+data.id).remove();
 		});

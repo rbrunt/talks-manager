@@ -87,7 +87,7 @@
 			if($("#question-list").length==0) {
 				window.location.reload(); // Reload the page if we've just received the first question.
 			} else {
-				$("#question-list").append('<tr id="question-'+data.id+'" data-timestamp="'+data.timestamp+'"><td>' + escapeHtml(data.question) + '</td><td><a href="'+base_url+'admin/deletequestion/'+data.id+'" class="btn btn-danger btn-sm">Delete</a></td></tr>');
+				$("#question-list").append('<tr id="question-'+data.id+'" data-timestamp="'+data.timestamp+'"><td>' + escapeHtml(data.question) + '</td><td><a href="'+base_url+'admin/answerquestion/'+data.id+'" class="btn btn-default btn-sm">Archive</a></td><td class="hidden-xs"><a href="'+base_url+'admin/deletequestion/'+data.id+'" class="btn btn-danger btn-sm">Delete</a></td></tr>');
 				$("#no-questions-text").remove();
 				if(navigator.vibrate) { // Vibrate phone to indicate that a new question has been received.
 					navigator.vibrate([200,200,200]); // on-off-on
